@@ -28,6 +28,10 @@ replay_pid*
 .env
 *.env.local
 
+# Extratos e dados financeiros locais
+transactions.json
+*.pdf
+
 # Frontend
 node_modules/
 dist/
