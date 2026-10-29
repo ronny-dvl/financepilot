@@ -36,3 +36,6 @@ build/
 # IDEs
 .idea/
 .vscode/
+
+# Dados financeiros gerados localmente
+transactions.json
