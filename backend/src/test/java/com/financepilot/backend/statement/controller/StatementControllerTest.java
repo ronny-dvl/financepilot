@@ -1,7 +1,6 @@
 
-package com.financepilot.backend.statement;
+package com.financepilot.backend.statement.controller;
 
-import com.financepilot.backend.statement.controller.StatementController;
 import com.financepilot.backend.statement.dto.FinancialSummaryResponse;
 import com.financepilot.backend.statement.dto.StatementTextResponse;
 import com.financepilot.backend.statement.dto.TransactionResponse;
