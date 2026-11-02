@@ -1,9 +1,12 @@
 
 package com.financepilot.backend.statement.controller;
 
+import com.financepilot.backend.statement.dto.CategorySummaryResponse;
 import com.financepilot.backend.statement.dto.FinancialSummaryResponse;
 import com.financepilot.backend.statement.dto.StatementTextResponse;
 import com.financepilot.backend.statement.dto.TransactionResponse;
+
+import com.financepilot.backend.statement.service.CategorySummaryService;
 import com.financepilot.backend.statement.service.FinancialSummaryService;
 import com.financepilot.backend.statement.service.PdfExtractionService;
 import com.financepilot.backend.statement.service.TransactionProcessingService;
@@ -22,15 +25,18 @@ public class StatementController {
     private final PdfExtractionService pdfExtractionService;
     private final TransactionProcessingService transactionProcessingService;
     private final FinancialSummaryService financialSummaryService;
+    private final CategorySummaryService categorySummaryService;
 
     public StatementController(
             PdfExtractionService pdfExtractionService,
             TransactionProcessingService transactionProcessingService,
-            FinancialSummaryService financialSummaryService
+            FinancialSummaryService financialSummaryService,
+            CategorySummaryService categorySummaryService
     ) {
         this.pdfExtractionService = pdfExtractionService;
         this.transactionProcessingService = transactionProcessingService;
         this.financialSummaryService = financialSummaryService;
+        this.categorySummaryService = categorySummaryService;
     }
 
     @PostMapping(
@@ -71,6 +77,22 @@ public class StatementController {
 
         FinancialSummaryResponse summary =
                 financialSummaryService.calculate(transactions);
+
+        return ResponseEntity.ok(summary);
+    }
+
+    @PostMapping(
+            value = "/summary/categories",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    )
+    public ResponseEntity<CategorySummaryResponse> getCategorySummary(
+            @RequestParam("file") MultipartFile file
+    ) {
+        List<TransactionResponse> transactions =
+                transactionProcessingService.process(file);
+
+        CategorySummaryResponse summary =
+                categorySummaryService.calculate(transactions);
 
         return ResponseEntity.ok(summary);
     }
