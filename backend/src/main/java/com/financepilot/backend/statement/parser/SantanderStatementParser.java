@@ -46,7 +46,6 @@ public class SantanderStatementParser implements BankStatementParser {
         String normalized = text.toUpperCase(Locale.ROOT);
 
         return normalized.contains("DETALHE DOS MOVIMENTOS")
-                && normalized.contains("PIX ENVIADO")
                 && normalized.contains("DATA DESCRIÇÃO VALOR SALDO");
     }
 
