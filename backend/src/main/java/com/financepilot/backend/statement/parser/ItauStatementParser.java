@@ -9,11 +9,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Component
-public class ItauStatementParser {
+public class ItauStatementParser implements BankStatementParser {
 
     private static final DateTimeFormatter DATE_FORMAT =
             DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -26,6 +27,22 @@ public class ItauStatementParser {
     private static final Pattern TRAILING_DATE =
             Pattern.compile("(?:\\s*\\d{2}/\\d{2}|\\d{4})$");
 
+    // Identifica se o extrato pertence ao Itaú
+    @Override
+    public boolean supports(String text) {
+
+        if (text == null || text.isBlank()) {
+            return false;
+        }
+
+        String normalized = text.toUpperCase(Locale.ROOT);
+
+        return normalized.contains("ITAÚ")
+                || normalized.contains("ITAU");
+    }
+
+    // Extrai as transações do extrato Itaú
+    @Override
     public List<TransactionResponse> parse(String text) {
 
         List<TransactionResponse> transactions = new ArrayList<>();
@@ -38,14 +55,16 @@ public class ItauStatementParser {
                 continue;
             }
 
-            Matcher matcher = TRANSACTION_PATTERN.matcher(trimmedLine);
+            Matcher matcher =
+                    TRANSACTION_PATTERN.matcher(trimmedLine);
 
             if (!matcher.matches()) {
                 continue;
             }
 
             LocalDate date = LocalDate.parse(
-                    matcher.group(1), DATE_FORMAT
+                    matcher.group(1),
+                    DATE_FORMAT
             );
 
             String description = matcher.group(2).trim();

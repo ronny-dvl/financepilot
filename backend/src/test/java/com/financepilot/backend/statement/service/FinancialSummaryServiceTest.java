@@ -1,9 +1,8 @@
 
-package com.financepilot.backend.statement;
+package com.financepilot.backend.statement.service;
 
 import com.financepilot.backend.statement.dto.FinancialSummaryResponse;
 import com.financepilot.backend.statement.dto.TransactionResponse;
-import com.financepilot.backend.statement.service.FinancialSummaryService;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

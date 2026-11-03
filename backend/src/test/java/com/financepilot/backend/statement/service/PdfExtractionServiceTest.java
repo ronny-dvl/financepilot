@@ -1,9 +1,8 @@
 
-package com.financepilot.backend.statement;
+package com.financepilot.backend.statement.service;
 
 import com.financepilot.backend.statement.dto.StatementTextResponse;
 import com.financepilot.backend.statement.exception.InvalidPdfException;
-import com.financepilot.backend.statement.service.PdfExtractionService;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
