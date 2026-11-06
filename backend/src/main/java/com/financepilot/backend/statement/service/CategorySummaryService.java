@@ -30,6 +30,7 @@ public class CategorySummaryService {
 
         for (TransactionResponse transaction : transactions) {
 
+            // 1. Ignora entradas e valores inválidos
             if (transaction.amount() == null
                     || transaction.amount().signum() >= 0) {
                 continue;
@@ -37,20 +38,28 @@ public class CategorySummaryService {
 
             BigDecimal amount = transaction.amount().abs();
 
+            // 2. Toda saída compõe o fluxo de saída
             totalOutflow = totalOutflow.add(amount);
 
-            if (transaction.nature() == TransactionNature.TRANSFER) {
+            TransactionNature nature = transaction.nature();
+            TransactionCategory category = transaction.category();
+
+            // 3. Transferências internas confirmadas
+            if (nature == TransactionNature.TRANSFER) {
                 transferOutflow = transferOutflow.add(amount);
                 continue;
             }
 
-            if (transaction.nature() == TransactionNature.REFUND) {
+            // 4. Estornos não são tratados como despesas
+            if (nature == TransactionNature.REFUND) {
                 continue;
             }
 
-            if (transaction.category() == null
-                    || transaction.category() == TransactionCategory.OUTROS
-                    || transaction.requiresReview()) {
+            // 5. Operações sem classificação confiável
+            if (category == null
+                    || category == TransactionCategory.OUTROS
+                    || transaction.requiresReview()
+                    || nature == TransactionNature.UNKNOWN) {
 
                 uncategorizedOutflow =
                         uncategorizedOutflow.add(amount);
@@ -58,13 +67,24 @@ public class CategorySummaryService {
                 continue;
             }
 
-            categorizedExpenses = categorizedExpenses.add(amount);
+            // 6. Despesas categorizadas
+            if (nature == TransactionNature.EXPENSE) {
 
-            expensesByCategory.merge(
-                    transaction.category(),
-                    amount,
-                    BigDecimal::add
-            );
+                categorizedExpenses =
+                        categorizedExpenses.add(amount);
+
+                expensesByCategory.merge(
+                        category,
+                        amount,
+                        BigDecimal::add
+                );
+
+            } else {
+
+                // Outras saídas não confirmadas como despesas
+                uncategorizedOutflow =
+                        uncategorizedOutflow.add(amount);
+            }
         }
 
         return new CategorySummaryResponse(

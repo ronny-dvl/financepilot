@@ -2,6 +2,7 @@
 package com.financepilot.backend.statement.dto;
 
 import com.financepilot.backend.statement.domain.CategorizationSource;
+import com.financepilot.backend.statement.domain.PaymentMethod;
 import com.financepilot.backend.statement.domain.TransactionCategory;
 import com.financepilot.backend.statement.domain.TransactionNature;
 
@@ -16,9 +17,11 @@ public record TransactionResponse(
         TransactionCategory category,
         CategorizationSource source,
         boolean requiresReview,
-        TransactionNature nature
+        TransactionNature nature,
+        PaymentMethod paymentMethod
 ) {
 
+    // Construtor utilizado pelos parsers bancários
     public TransactionResponse(
             LocalDate date,
             String description,
@@ -30,10 +33,12 @@ public record TransactionResponse(
                 TransactionCategory.OUTROS,
                 CategorizationSource.UNKNOWN,
                 true,
-                TransactionNature.UNKNOWN
+                TransactionNature.UNKNOWN,
+                PaymentMethod.UNKNOWN
         );
     }
 
+    // Construtor com categorização
     public TransactionResponse(
             LocalDate date,
             String description,
@@ -46,7 +51,27 @@ public record TransactionResponse(
         this(
                 date, description, amount, type,
                 category, source, requiresReview,
-                TransactionNature.UNKNOWN
+                TransactionNature.UNKNOWN,
+                PaymentMethod.UNKNOWN
+        );
+    }
+
+    // Construtor de compatibilidade com a versão anterior
+    public TransactionResponse(
+            LocalDate date,
+            String description,
+            BigDecimal amount,
+            String type,
+            TransactionCategory category,
+            CategorizationSource source,
+            boolean requiresReview,
+            TransactionNature nature
+    ) {
+        this(
+                date, description, amount, type,
+                category, source, requiresReview,
+                nature,
+                PaymentMethod.UNKNOWN
         );
     }
 }

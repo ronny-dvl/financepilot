@@ -2,6 +2,7 @@
 package com.financepilot.backend.statement.controller;
 
 import com.financepilot.backend.statement.domain.CategorizationSource;
+import com.financepilot.backend.statement.domain.PaymentMethod;
 import com.financepilot.backend.statement.domain.TransactionCategory;
 import com.financepilot.backend.statement.domain.TransactionNature;
 
@@ -86,7 +87,12 @@ class StatementControllerTest {
                 LocalDate.of(2026, 10, 26),
                 "PIX QRS SUPERMERCAD",
                 new BigDecimal("-28.91"),
-                "EXPENSE"
+                "EXPENSE",
+                TransactionCategory.ALIMENTACAO,
+                CategorizationSource.KEYWORD_RULE,
+                false,
+                TransactionNature.EXPENSE,
+                PaymentMethod.PIX
         );
 
         when(transactionProcessingService.process(any()))
@@ -104,11 +110,17 @@ class StatementControllerTest {
                 .andExpect(jsonPath("$[0].type")
                         .value("EXPENSE"))
                 .andExpect(jsonPath("$[0].category")
-                        .value("OUTROS"))
+                        .value("ALIMENTACAO"))
+                .andExpect(jsonPath("$[0].source")
+                        .value("KEYWORD_RULE"))
                 .andExpect(jsonPath("$[0].nature")
-                        .value("UNKNOWN"))
+                        .value("EXPENSE"))
+                .andExpect(jsonPath("$[0].paymentMethod")
+                        .value("PIX"))
                 .andExpect(jsonPath("$[0].requiresReview")
-                        .value(true));
+                        .value(false));
+
+        verify(transactionProcessingService).process(any());
     }
 
     @Test
@@ -173,7 +185,8 @@ class StatementControllerTest {
                         TransactionCategory.TRANSPORTE,
                         CategorizationSource.KEYWORD_RULE,
                         false,
-                        TransactionNature.UNKNOWN
+                        TransactionNature.UNKNOWN,
+                        PaymentMethod.UNKNOWN
                 ),
                 new TransactionResponse(
                         LocalDate.of(2026, 10, 26),
@@ -183,7 +196,8 @@ class StatementControllerTest {
                         TransactionCategory.ALIMENTACAO,
                         CategorizationSource.KEYWORD_RULE,
                         false,
-                        TransactionNature.UNKNOWN
+                        TransactionNature.UNKNOWN,
+                        PaymentMethod.UNKNOWN
                 ),
                 new TransactionResponse(
                         LocalDate.of(2026, 10, 26),
@@ -193,7 +207,8 @@ class StatementControllerTest {
                         TransactionCategory.OUTROS,
                         CategorizationSource.UNKNOWN,
                         true,
-                        TransactionNature.TRANSFER
+                        TransactionNature.TRANSFER,
+                        PaymentMethod.PIX
                 )
         );
 
