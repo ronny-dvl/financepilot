@@ -1,31 +1,62 @@
 
 package com.financepilot.backend.statement.service;
 
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
+
 import com.financepilot.backend.statement.domain.CategorizationSource;
 import com.financepilot.backend.statement.domain.TransactionCategory;
 import com.financepilot.backend.statement.dto.CategorizationResult;
+import com.financepilot.backend.statement.dto.CategoryRule;
+
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.text.Normalizer;
-import java.util.LinkedHashMap;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 @Service
 public class TransactionCategorizationService {
 
-    private final Map<String, TransactionCategory> rules =
-            new LinkedHashMap<>();
+    private final List<CategoryRule> rules;
 
-    public TransactionCategorizationService() {
-        rules.put("UBER", TransactionCategory.TRANSPORTE);
-        rules.put("99APP", TransactionCategory.TRANSPORTE);
-        rules.put("NETFLIX", TransactionCategory.ASSINATURAS);
-        rules.put("SPOTIFY", TransactionCategory.ASSINATURAS);
-        rules.put("IFOOD", TransactionCategory.ALIMENTACAO);
-        rules.put("SUPERMERCADO", TransactionCategory.ALIMENTACAO);
-        rules.put("ATACADAO", TransactionCategory.ALIMENTACAO);
-        rules.put("FARMACIA", TransactionCategory.SAUDE);
+    public TransactionCategorizationService(
+            ObjectMapper objectMapper
+    ) {
+        try {
+            ClassPathResource resource =
+                    new ClassPathResource("category-rules.json");
+
+            List<CategoryRule> loadedRules;
+
+            try (var inputStream = resource.getInputStream()) {
+                loadedRules = objectMapper.readValue(
+                        inputStream,
+                        new TypeReference<List<CategoryRule>>() {}
+                );
+            }
+
+            this.rules = loadedRules.stream()
+                    .sorted(
+                            Comparator
+                                    .comparingInt(CategoryRule::priority)
+                                    .reversed()
+                                    .thenComparing(
+                                            rule -> rule.keyword().length(),
+                                            Comparator.reverseOrder()
+                                    )
+                    )
+                    .toList();
+
+        } catch (IOException e) {
+            throw new IllegalStateException(
+                    "Erro ao carregar category-rules.json",
+                    e
+            );
+        }
     }
 
     public CategorizationResult categorize(String description) {
@@ -36,13 +67,17 @@ public class TransactionCategorizationService {
 
         String normalized = normalize(description);
 
-        for (Map.Entry<String, TransactionCategory> rule : rules.entrySet()) {
+        for (CategoryRule rule : rules) {
 
-            String keyword = normalize(rule.getKey());
+            String keyword = normalize(rule.keyword());
 
-            if ((" " + normalized + " ").contains(" " + keyword + " ")) {
+            if (matches(
+                    normalized,
+                    keyword,
+                    rule.matchType()
+            )) {
                 return new CategorizationResult(
-                        rule.getValue(),
+                        rule.category(),
                         CategorizationSource.KEYWORD_RULE,
                         false
                 );
@@ -52,13 +87,41 @@ public class TransactionCategorizationService {
         return unknown();
     }
 
-    private String normalize(String description) {
+    private boolean matches(
+            String description,
+            String keyword,
+            String matchType
+    ) {
 
-        String normalized = Normalizer.normalize(
-                description, Normalizer.Form.NFD
-        );
+        return switch (matchType.toUpperCase(Locale.ROOT)) {
 
-        return normalized
+            case "WORD", "PHRASE" ->
+                    (" " + description + " ")
+                            .contains(" " + keyword + " ");
+
+            case "PREFIX" -> {
+                boolean found = false;
+
+                for (String word : description.split(" ")) {
+                    if (word.startsWith(keyword)) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                yield found;
+            }
+
+            default -> false;
+        };
+    }
+
+    private String normalize(String text) {
+
+        return Normalizer.normalize(
+                        text,
+                        Normalizer.Form.NFD
+                )
                 .replaceAll("\\p{M}", "")
                 .toUpperCase(Locale.ROOT)
                 .replaceAll("[^A-Z0-9]+", " ")
@@ -66,6 +129,7 @@ public class TransactionCategorizationService {
     }
 
     private CategorizationResult unknown() {
+
         return new CategorizationResult(
                 TransactionCategory.OUTROS,
                 CategorizationSource.UNKNOWN,

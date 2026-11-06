@@ -1,0 +1,87 @@
+
+[
+  {
+    "keyword": "MERCADO LIVRE",
+    "category": "COMPRAS",
+    "matchType": "PHRASE",
+    "priority": 200
+  },
+  {
+    "keyword": "UBER",
+    "category": "TRANSPORTE",
+    "matchType": "WORD",
+    "priority": 100
+  },
+  {
+    "keyword": "99APP",
+    "category": "TRANSPORTE",
+    "matchType": "WORD",
+    "priority": 100
+  },
+  {
+    "keyword": "NETFLIX",
+    "category": "ASSINATURAS",
+    "matchType": "WORD",
+    "priority": 100
+  },
+  {
+    "keyword": "SPOTIFY",
+    "category": "ASSINATURAS",
+    "matchType": "WORD",
+    "priority": 100
+  },
+  {
+    "keyword": "IFOOD",
+    "category": "ALIMENTACAO",
+    "matchType": "WORD",
+    "priority": 100
+  },
+  {
+    "keyword": "KEETA DELIVERY",
+    "category": "ALIMENTACAO",
+    "matchType": "PHRASE",
+    "priority": 100
+  },
+  {
+    "keyword": "99 FOOD",
+    "category": "ALIMENTACAO",
+    "matchType": "PHRASE",
+    "priority": 100
+  },
+  {
+    "keyword": "SUPERMERCADO",
+    "category": "ALIMENTACAO",
+    "matchType": "WORD",
+    "priority": 100
+  },
+  {
+    "keyword": "MERCADINHO",
+    "category": "ALIMENTACAO",
+    "matchType": "WORD",
+    "priority": 100
+  },
+  {
+    "keyword": "ATACADAO",
+    "category": "ALIMENTACAO",
+    "matchType": "WORD",
+    "priority": 100
+  },
+  {
+    "keyword": "FARMACIA",
+    "category": "SAUDE",
+    "matchType": "WORD",
+    "priority": 100
+  },
+  {
+    "keyword": "DROGARIA",
+    "category": "SAUDE",
+    "matchType": "WORD",
+    "priority": 100
+  },
+  {
+    "keyword": "FARMA",
+    "category": "SAUDE",
+    "matchType": "WORD",
+    "priority": 90
+  }
+]

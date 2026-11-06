@@ -5,13 +5,14 @@ import com.financepilot.backend.statement.domain.CategorizationSource;
 import com.financepilot.backend.statement.domain.TransactionCategory;
 import com.financepilot.backend.statement.dto.CategorizationResult;
 import org.junit.jupiter.api.Test;
+import tools.jackson.databind.ObjectMapper;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TransactionCategorizationServiceTest {
 
     private final TransactionCategorizationService service =
-            new TransactionCategorizationService();
+            new TransactionCategorizationService(new ObjectMapper());
 
     @Test
     void shouldCategorizeUberAsTransport() {
@@ -78,6 +79,35 @@ class TransactionCategorizationServiceTest {
 
         CategorizationResult result =
                 service.categorize("   ");
+
+        assertEquals(TransactionCategory.OUTROS, result.category());
+        assertTrue(result.requiresReview());
+    }
+
+    @Test
+    void shouldCategorizeMercadinhoAsFood() {
+        CategorizationResult result = service.categorize(
+                "Pix enviado - Mercadinho Ilha Bela"
+        );
+
+        assertEquals(TransactionCategory.ALIMENTACAO, result.category());
+        assertFalse(result.requiresReview());
+    }
+
+    @Test
+    void shouldPrioritizeMercadoLivreAsShopping() {
+        CategorizationResult result = service.categorize(
+                "Pix enviado - Mercado Livre"
+        );
+
+        assertEquals(TransactionCategory.COMPRAS, result.category());
+    }
+
+    @Test
+    void shouldNotMatchUberInsideUberaba() {
+        CategorizationResult result = service.categorize(
+                "Pix enviado - Uberaba Turismo"
+        );
 
         assertEquals(TransactionCategory.OUTROS, result.category());
         assertTrue(result.requiresReview());
