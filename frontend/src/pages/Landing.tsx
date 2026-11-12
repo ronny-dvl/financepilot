@@ -3,6 +3,10 @@ import Header from "../components/Header/Header";
 import Hero from "../components/Hero/Hero";
 import Steps from "../components/Steps/Steps";
 import Benefits from "../components/Benefits/Benefits";
+import DashboardPreview from "../components/DashboardPreview/DashboardPreview";
+import WhyFinancePilot from "../components/WhyFinancePilot/WhyFinancePilot";
+import FinalCTA from "../components/FinalCTA/FinalCTA";
+import Footer from "../components/Footer/Footer";
 import AuthOverlay from "../components/AuthOverlay";
 import styles from "./Landing.module.css";
 
@@ -21,7 +25,10 @@ export default function Landing() {
 
       <Steps onCtaClick={abrir} />
       <Benefits />
-      {/* próximas seções entram aqui (ids: porque) */}
+      <DashboardPreview />
+      <WhyFinancePilot />
+      <FinalCTA onCtaClick={abrir} />
+      <Footer />
 
       <AuthOverlay open={open} onClose={() => setOpen(false)} />
     </>
