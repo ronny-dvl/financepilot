@@ -29,7 +29,6 @@ export default function Landing() {
       <WhyFinancePilot />
       <FinalCTA onCtaClick={abrir} />
       <Footer />
-      {/* próximas seções entram aqui (ids: porque) */}
 
       <AuthOverlay open={open} onClose={() => setOpen(false)} />
     </>
