@@ -1,0 +1,129 @@
+/* Footer do FinancePilot */
+.footer {
+  background-color: #12110f;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: clamp(24px, 3vw, 36px) clamp(24px, 6vw, 100px);
+  width: 100%;
+  position: relative;
+}
+
+.inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Bloco da marca / logo e frase */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 1.8vw, 22px);
+  flex-wrap: wrap;
+}
+
+.logoLink {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.logoLink:hover {
+  opacity: 0.85;
+}
+
+.logoSvg {
+  width: auto;
+  height: clamp(22px, 2.2vw, 26px);
+  display: block;
+}
+
+.tagline {
+  margin: 0;
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: clamp(0.85rem, 0.95vw, 14px);
+  line-height: 1.4;
+  color: #71717a;
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  padding-left: clamp(14px, 1.8vw, 22px);
+}
+
+/* Bloco de links e copyright */
+.meta {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 2.2vw, 28px);
+  flex-wrap: wrap;
+}
+
+.githubLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #a1a1aa;
+  text-decoration: none;
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: clamp(0.85rem, 0.95vw, 14px);
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
+}
+
+.githubLink:hover {
+  color: #ffffff;
+}
+
+.githubIcon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.copyright {
+  margin: 0;
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: clamp(0.82rem, 0.92vw, 13.5px);
+  color: #52525b;
+  letter-spacing: -0.01em;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .brand {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .tagline {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .meta {
+    width: 100%;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+}
+
+@media (max-width: 440px) {
+  .meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
