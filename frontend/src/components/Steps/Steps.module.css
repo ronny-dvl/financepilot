@@ -1,0 +1,99 @@
+.section {
+  background: #fafaf9;
+  padding: clamp(48px, 7vw, 110px) 24px clamp(48px, 5.5vw, 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin: 0 0 clamp(32px, 4.2vw, 60px);
+  text-align: center;
+  font-weight: 400;
+  font-size: clamp(2rem, 3.61vw, 52px);
+  line-height: 1.09;
+  letter-spacing: -0.11em;
+  color: #000000;
+}
+.title span { color: var(--orange-500); font-weight: 500; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 415px));
+  gap: clamp(16px, 3.4vw, 48px);
+  justify-content: center;
+  width: 100%;
+}
+
+/* cada card é um "container": tudo dentro escala em cqw (1cqw = 1% da largura do card).
+   Em 415px de largura: 50px de fonte = 12.05cqw, 16px = 3.86cqw */
+.card {
+  container-type: inline-size;
+  display: grid;
+  aspect-ratio: 415 / 319;
+  border-radius: clamp(14px, 1.4vw, 20px);
+  background: #ffffff;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+.inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 13cqw 7.9cqw 6.5cqw;
+}
+
+.icon { display: block; height: auto; }
+
+.card h3 {
+  margin: 0;
+  font-weight: 400;
+  font-size: 12.05cqw;
+  line-height: 12.53cqw;
+  letter-spacing: -0.0576em;
+  color: #000000;
+}
+.card p {
+  margin: 1cqw 0 0;
+  font-weight: 400;
+  font-size: 3.86cqw;
+  line-height: 5.61cqw;
+  letter-spacing: 0;
+  color: #6f6f78;
+}
+@media (min-width: 901px) {
+  .card:nth-child(1) p,
+  .card:nth-child(2) p,
+  .card:nth-child(3) p {
+    white-space: nowrap;
+    font-size: 3.3cqw;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+}
+
+.dark {
+  background:
+    radial-gradient(ellipse 85% 95% at 52% 62%, rgba(146, 106, 66, 1) 0%, rgba(68, 57, 48, 0) 70%),
+    #12110f;
+}
+.dark h3 { color: #ffffff; }
+
+.cta {
+  margin-top: clamp(24px, 3vw, 43px);
+  background: var(--orange-500);
+  color: #ffffff;
+  border: 0;
+  border-radius: 999px;
+  padding: clamp(12px, 1.3vw, 18.5px) clamp(18px, 1.9vw, 27px);
+  font: 600 clamp(0.9rem, 1.39vw, 20px) var(--font);
+  letter-spacing: -0.02em;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(249, 115, 22, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.cta:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(249, 115, 22, 0.5); }
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: minmax(0, 415px); }
+}
