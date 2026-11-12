@@ -1,0 +1,97 @@
+/* Seção Por que usar o FinancePilot */
+.section {
+  background: #fafaf9;
+  padding: clamp(24px, 3vw, 48px) 24px clamp(150px, 15vw, 220px);
+  position: relative;
+  overflow: hidden;
+}
+
+.inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: clamp(44px, 5vw, 68px);
+}
+
+.title {
+  margin: 0 0 clamp(10px, 1.2vw, 16px);
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: clamp(2rem, 3.6vw, 52px);
+  line-height: 1.15;
+  letter-spacing: -0.05em;
+  color: #12110f;
+}
+
+.subtitle {
+  margin: 0;
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: clamp(1rem, 1.5vw, 24px);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: #8c8c8c;
+}
+
+.orangeText {
+  color: var(--orange-500);
+  font-weight: 500;
+}
+
+.grid {
+  width: fit-content;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: max-content max-content;
+  column-gap: clamp(40px, 5vw, 80px);
+  row-gap: clamp(24px, 3.2vw, 44px);
+  margin: 0 auto;
+}
+
+.item {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(10px, 1.2vw, 14px);
+  text-align: left;
+}
+
+.itemNumber {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: clamp(22px, 2.5vw, 36px);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--orange-500);
+  flex-shrink: 0;
+}
+
+.itemText {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: clamp(22px, 2.5vw, 36px);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: #12110f;
+  margin: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    width: 100%;
+    max-width: 600px;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 22px;
+  }
+
+  .itemText {
+    white-space: normal;
+  }
+}
