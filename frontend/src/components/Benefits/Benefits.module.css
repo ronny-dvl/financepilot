@@ -1,0 +1,177 @@
+/* Seção 3 - Benefícios / Personagens Motion */
+.section {
+  background: #ffeee3;
+  padding: clamp(56px, 6.5vw, 104px) 24px clamp(64px, 7vw, 112px);
+  position: relative;
+  overflow: hidden;
+}
+
+.inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Cabeçalho centralizado */
+.title {
+  margin: 0 0 clamp(40px, 4.8vw, 76px);
+  text-align: center;
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: clamp(1.85rem, 3.2vw, 46px);
+  line-height: 1.15;
+  letter-spacing: -0.06em;
+  color: #12110f;
+}
+
+.highlight {
+  font-weight: 500;
+  background: linear-gradient(90deg, #f97316 10%, #ff9e59 65%, #ffd2b3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Conteúdo principal em duas colunas */
+.content {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(32px, 5vw, 88px);
+}
+
+/* Coluna esquerda: Anel dos 6 personagens */
+.orbitArea {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 1 / 0.95;
+  margin: 0 auto;
+  container-type: inline-size;
+}
+
+.charWrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(86px, 10.2vw, 148px);
+  height: clamp(86px, 10.2vw, 148px);
+  margin-left: calc(-0.5 * clamp(86px, 10.2vw, 148px));
+  margin-top: calc(-0.5 * clamp(86px, 10.2vw, 148px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.charImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  user-select: none;
+}
+
+/* Coluna direita: Cards verticais */
+.cardsList {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 1.8vw, 24px);
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: clamp(20px, 2vw, 28px);
+  padding: clamp(20px, 2.3vw, 32px) clamp(22px, 2.5vw, 36px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 0 10px 32px rgba(230, 160, 130, 0.12), 0 2px 8px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(230, 160, 130, 0.18), 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.cardText {
+  flex: 1;
+}
+
+.cardTitle {
+  margin: 0 0 clamp(6px, 0.7vw, 10px);
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: clamp(1.1rem, 1.45vw, 21px);
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  color: #18181b;
+}
+
+.cardDescription {
+  margin: 0;
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: clamp(0.85rem, 1.02vw, 15px);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: #71717a;
+}
+
+/* Ícone em badge circular */
+.badge {
+  width: clamp(44px, 4vw, 54px);
+  height: clamp(44px, 4vw, 54px);
+  border-radius: 50%;
+  background: #ffe3d1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--orange-500);
+}
+
+.badge svg {
+  width: 52%;
+  height: 52%;
+  stroke: var(--orange-500);
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 900px) {
+  .content {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .orbitArea {
+    max-width: 420px;
+  }
+
+  .cardsList {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 40px 16px 56px;
+  }
+
+  .orbitArea {
+    max-width: 340px;
+  }
+
+  .charWrapper {
+    width: clamp(72px, 18vw, 86px);
+    height: clamp(72px, 18vw, 86px);
+  }
+}

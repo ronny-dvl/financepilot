@@ -43,3 +43,16 @@ build/
 
 # Dados financeiros gerados localmente
 transactions.json
+
+# Frontend
+**/node_modules/
+**/dist/
+**/*.tsbuildinfo
+
+# Development references
+frontend/references/
+
+# Environment variables
+**/.env
+**/.env.local
+**/.env.*.local

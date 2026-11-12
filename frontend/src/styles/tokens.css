@@ -1,0 +1,11 @@
+/* Valores estimados pelo print: ajuste com o Dev Mode do Figma */
+:root {
+  --header-h: clamp(64px, 6vw, 90px);
+  --orange-300: #ffa766;
+  --orange-500: #f97316;
+  --orange-700: #b45309;
+  --text: #000000;
+  --text-muted: #939393;
+  --bg-page: #f3f3f3;
+  --font: "Work Sans", system-ui, sans-serif;
+}
