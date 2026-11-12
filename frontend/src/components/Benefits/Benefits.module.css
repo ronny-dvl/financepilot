@@ -3,7 +3,9 @@
   background: #ffeee3;
   padding: clamp(56px, 6.5vw, 104px) 24px clamp(64px, 7vw, 112px);
   position: relative;
+  z-index: 0;
   overflow: hidden;
+  scroll-margin-top: -60px;
 }
 
 .inner {
