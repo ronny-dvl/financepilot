@@ -1,32 +1,41 @@
-import { useState } from "react";
-import { useDropzone } from "react-dropzone";
+
 import { Link } from "react-router-dom";
-import styles from "./Pages.module.css";
+import { ArrowLeft } from "lucide-react";
+import PdfUpload from "../components/PdfUpload/PdfUpload";
+import styles from "./Analisar.module.css";
 
 export default function Analisar() {
-  const [arquivo, setArquivo] = useState<File | null>(null);
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: { "application/pdf": [".pdf"] },
-    maxFiles: 1,
-    onDrop: (files) => {
-      setArquivo(files[0] ?? null);
-      // TODO: enviar para o backend: POST /api/extrato (multipart/form-data)
-    },
-  });
-
   return (
-    <main className={styles.center}>
-      <h1>Anexe seu extrato</h1>
-      <div {...getRootProps()} className={`${styles.dropzone} ${isDragActive ? styles.active : ""}`}>
-        <input {...getInputProps()} />
-        {arquivo
-          ? `Arquivo selecionado: ${arquivo.name}`
-          : isDragActive
-          ? "Solte o PDF aqui"
-          : "Arraste seu extrato em PDF ou clique para escolher"}
+    <main className={styles.page}>
+      <div className={styles.container}>
+        <Link to="/" className={styles.back}>
+          <ArrowLeft size={18} />
+          Voltar
+        </Link>
+
+        <div className={styles.content}>
+          <div className={styles.heading}>
+            <span className={styles.eyebrow}>
+              FINANCEPILOT
+            </span>
+
+            <h1>
+              Entenda para onde seu{" "}
+              <span>dinheiro está indo.</span>
+            </h1>
+
+            <p>
+              Envie seu extrato bancário em PDF e
+              transforme suas movimentações em
+              informações claras sobre suas finanças.
+            </p>
+          </div>
+
+          <div className={styles.uploadArea}>
+            <PdfUpload />
+          </div>
+        </div>
       </div>
-      <Link to="/" className={styles.link}>Voltar</Link>
     </main>
   );
 }
