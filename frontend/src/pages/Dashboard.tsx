@@ -1,20 +1,24 @@
 
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useStatement } from "../contexts/StatementContext";
+import type { TransactionCategory } from "../types/statement";
 import styles from "./Pages.module.css";
 
-type FinancialSummary = {
-  totalIncome: number;
-  totalExpenses: number;
-  netBalance: number;
-  transactionCount: number;
+const categoryLabels: Record<TransactionCategory, string> = {
+  ALIMENTACAO: "Alimentação",
+  TRANSPORTE: "Transporte",
+  SAUDE: "Saúde",
+  ASSINATURAS: "Assinaturas",
+  MORADIA: "Moradia",
+  EDUCACAO: "Educação",
+  LAZER: "Lazer",
+  COMPRAS: "Compras",
+  TRANSFERENCIAS: "Transferências",
+  OUTROS: "Outros",
 };
 
 export default function Dashboard() {
-  const location = useLocation();
-
-  const summary = (
-    location.state as { summary?: FinancialSummary } | null
-  )?.summary;
+  const { analysis } = useStatement();
 
   const formatCurrency = (value: number) =>
     new Intl.NumberFormat("pt-BR", {
@@ -22,7 +26,7 @@ export default function Dashboard() {
       currency: "BRL",
     }).format(value);
 
-  if (!summary) {
+  if (!analysis) {
     return (
       <main className={styles.center}>
         <h1>Nenhum extrato analisado</h1>
@@ -31,6 +35,8 @@ export default function Dashboard() {
       </main>
     );
   }
+
+  const { summary, transactions, categorySummary } = analysis;
 
   return (
     <main className={styles.center}>
@@ -59,6 +65,56 @@ export default function Dashboard() {
           <h3>Transações</h3>
           <p>{summary.transactionCount}</p>
         </div>
+      </section>
+
+      <section aria-labelledby="categories-heading">
+        <h2 id="categories-heading">Categorias</h2>
+        <dl>
+          <dt>Total de saídas</dt>
+          <dd>{formatCurrency(categorySummary.totalOutflow)}</dd>
+          <dt>Despesas categorizadas</dt>
+          <dd>{formatCurrency(categorySummary.categorizedExpenses)}</dd>
+          <dt>Saídas não categorizadas</dt>
+          <dd>{formatCurrency(categorySummary.uncategorizedOutflow)}</dd>
+          <dt>Transferências entre contas próprias</dt>
+          <dd>{formatCurrency(categorySummary.transferOutflow)}</dd>
+        </dl>
+        {Object.keys(categorySummary.expensesByCategory).length === 0 ? (
+          <p>Nenhuma despesa categorizada neste extrato.</p>
+        ) : (
+          <dl>
+            {Object.entries(categoryLabels).map(([category, label]) => {
+              const amount = categorySummary.expensesByCategory[category as TransactionCategory];
+              return amount === undefined ? null : (
+                <div key={category}>
+                  <dt>{label}</dt>
+                  <dd>{formatCurrency(amount)}</dd>
+                </div>
+              );
+            })}
+          </dl>
+        )}
+      </section>
+
+      <section aria-labelledby="transactions-heading">
+        <h2 id="transactions-heading">Transações</h2>
+        {transactions.length === 0 ? (
+          <p>Nenhuma transação reconhecida neste extrato.</p>
+        ) : (
+          <ul>
+            {transactions.map((transaction, index) => (
+              <li key={index}>
+                <time dateTime={transaction.date}>
+                  {transaction.date.split("-").reverse().join("/")}
+                </time>
+                {" — "}{transaction.description}
+                {" — "}{formatCurrency(transaction.amount)}
+                {" — "}{categoryLabels[transaction.category]}
+                {transaction.requiresReview && " (Requer revisão)"}
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
 
       <Link to="/analisar">Analisar outro extrato</Link>

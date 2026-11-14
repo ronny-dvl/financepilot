@@ -27,7 +27,8 @@ import {
 
 } from "lucide-react";
 
-import { getFinancialSummary } from "../../services/statementApi";
+import { analyzeStatement } from "../../services/statementApi";
+import { useStatement } from "../../contexts/StatementContext";
 
 import styles from "./PdfUpload.module.css";
 
@@ -39,6 +40,7 @@ type AnimationPhase = "idle" | "sucking" | "selected";
 
 export default function PdfUpload() {
   const navigate = useNavigate();
+  const { setAnalysis } = useStatement();
 
   const [file, setFile] = useState<File | null>(null);
 
@@ -232,13 +234,13 @@ export default function PdfUpload() {
 
     try {
 
-      const summary = await getFinancialSummary(file);
+      const analysis = await analyzeStatement(file);
 
-      navigate("/dashboard", { state: { summary } });
+      setAnalysis(analysis);
+      navigate("/dashboard");
 
     } catch (err) {
 
-      console.error("Erro ao analisar extrato:", err);
 
       setError(
 

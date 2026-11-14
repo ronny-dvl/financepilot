@@ -1,12 +1,14 @@
+import type { FinancialSummaryResponse, StatementAnalysisResponse } from "../types/statement";
+
 const API_URL =
   import.meta.env.VITE_API_URL ?? "http://localhost:8080";
 
-export async function getFinancialSummary(file: File) {
+async function postStatement<T>(path: string, file: File): Promise<T> {
   const formData = new FormData();
   formData.append("file", file);
 
   const response = await fetch(
-    `${API_URL}/api/statements/summary`,
+    `${API_URL}/api/statements${path}`,
     {
       method: "POST",
       body: formData,
@@ -15,9 +17,19 @@ export async function getFinancialSummary(file: File) {
 
   if (!response.ok) {
     throw new Error(
-      "Não foi possível analisar o extrato. Tente novamente."
+      response.status === 413
+        ? "O arquivo ultrapassa o limite de 10 MB."
+        : "Não foi possível analisar o extrato. Tente novamente."
     );
   }
 
-  return response.json();
+  return response.json() as Promise<T>;
+}
+
+export function analyzeStatement(file: File): Promise<StatementAnalysisResponse> {
+  return postStatement<StatementAnalysisResponse>("/analyze", file);
+}
+
+export function getFinancialSummary(file: File): Promise<FinancialSummaryResponse> {
+  return postStatement<FinancialSummaryResponse>("/summary", file);
 }
