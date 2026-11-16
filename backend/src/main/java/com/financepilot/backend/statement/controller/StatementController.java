@@ -47,13 +47,14 @@ public class StatementController {
     public ResponseEntity<StatementAnalysisResponse> analyze(
             @RequestParam("file") MultipartFile file
     ) {
-        List<TransactionResponse> transactions =
-                transactionProcessingService.process(file);
+        var statement = transactionProcessingService.processStatement(file);
+        List<TransactionResponse> transactions = statement.transactions();
 
         return ResponseEntity.ok(new StatementAnalysisResponse(
                 financialSummaryService.calculate(transactions),
                 transactions,
-                categorySummaryService.calculate(transactions)
+                categorySummaryService.calculate(transactions),
+                statement.holderName()
         ));
     }
 

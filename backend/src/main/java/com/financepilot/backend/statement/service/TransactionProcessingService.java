@@ -39,6 +39,17 @@ public class TransactionProcessingService {
     }
 
     public List<TransactionResponse> process(MultipartFile file) {
+        return processStatement(file).transactions();
+    }
+
+    public record ProcessedStatement(List<TransactionResponse> transactions, String holderName) {
+        @Override
+        public String toString() {
+            return "ProcessedStatement[transactionCount=" + transactions.size() + "]";
+        }
+    }
+
+    public ProcessedStatement processStatement(MultipartFile file) {
 
         // 1. Extrai o texto do PDF
         StatementTextResponse response =
@@ -81,7 +92,7 @@ public class TransactionProcessingService {
         }
 
         // 4. Enriquece as transações
-        return transactions.stream()
+        List<TransactionResponse> enrichedTransactions = transactions.stream()
                 .map(transaction -> {
 
                     String description = transaction.description();
@@ -115,5 +126,7 @@ public class TransactionProcessingService {
                     );
                 })
                 .toList();
+
+        return new ProcessedStatement(enrichedTransactions, parser.extractHolderName(text).orElse(null));
     }
 }

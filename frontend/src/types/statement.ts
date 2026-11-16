@@ -42,6 +42,7 @@ export type CategorySummaryResponse = {
 };
 
 export type StatementAnalysisResponse = {
+  holderName?: string | null;
   summary: FinancialSummaryResponse;
   transactions: TransactionResponse[];
   categorySummary: CategorySummaryResponse;

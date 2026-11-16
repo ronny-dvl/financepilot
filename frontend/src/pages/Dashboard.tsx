@@ -70,6 +70,10 @@ export default function Dashboard() {
   };
   const weeklyMax = Math.max(0, ...weeks.flatMap(week => [week.income, week.outflow])) || 1;
   const categoryMax = Math.max(0, ...categories.map(([, amount]) => amount)) || 1;
+  const firstName = analysis?.holderName?.trim().split(/\s+/)[0]
+    ?.toLocaleLowerCase("pt-BR")
+    .replace(/(^|[-'’])(\p{L})/gu, (_, separator: string, letter: string) =>
+      separator + letter.toLocaleUpperCase("pt-BR"));
 
   return (
     <div className={styles.page}>
@@ -101,7 +105,7 @@ export default function Dashboard() {
         ) : (
           <>
             <div className={styles.intro}>
-              <h1 className={styles.srOnly}>Seu painel financeiro</h1>
+              <h1>Olá{firstName ? <>, <span>{firstName}</span></> : null}!</h1>
               {dates.length > 0 && (
                 <div className={styles.period}>
                   <CalendarDays size={18} aria-hidden="true" />
@@ -137,7 +141,7 @@ export default function Dashboard() {
             <Panel id="categories-heading">
               <div className={styles.panelHeading}>
                 <div className={styles.titleGroup}><span className={styles.sectionIcon}><Layers size={21} aria-hidden="true" /></span>
-                  <div><h2 id="categories-heading">Gastos por categoria</h2><p>Do maior para o menor, com a classificação do seu extrato.</p></div>
+                  <div><h2 id="categories-heading">Gastos por categoria</h2></div>
                 </div>
                 <div className={styles.headingTotal}><span>Despesas categorizadas</span><strong>{currency(analysis.categorySummary.categorizedExpenses)}</strong></div>
               </div>
@@ -157,7 +161,6 @@ export default function Dashboard() {
                 <div><span>Saídas não categorizadas</span><strong>{currency(analysis.categorySummary.uncategorizedOutflow)}</strong></div>
                 <div><span>Transferências entre contas próprias</span><strong>{currency(analysis.categorySummary.transferOutflow)}</strong></div>
               </div>
-              <p className={styles.smallNote}>As barras comparam despesas categorizadas. Transferências e saídas pendentes de classificação não compõem essas barras.</p>
             </Panel>
 
             <Panel id="pix-heading">
@@ -177,7 +180,7 @@ export default function Dashboard() {
             <Panel id="cashflow-heading">
               <div className={styles.panelHeading}><div className={styles.titleGroup}>
                 <span className={styles.sectionIcon}><ChartColumn size={21} aria-hidden="true" /></span>
-                <div><h2 id="cashflow-heading">Entradas e saídas por semana</h2><p>Entradas e saídas por semana, de segunda a domingo.</p></div>
+                <div><h2 id="cashflow-heading">Entradas e saídas por semana</h2><p>De segunda a domingo</p></div>
               </div>
                 <div className={styles.legend}><span><i className={styles.incomeSwatch} />Entradas</span><span><i className={styles.outflowSwatch} />Saídas</span></div>
               </div>
@@ -199,7 +202,6 @@ export default function Dashboard() {
                       ))}
                     </div>
                   </div>
-                  <p className={styles.smallNote}>Escala única em R$. Apenas semanas com movimentações reconhecidas são exibidas; a primeira e a última podem estar incompletas. Saídas incluem transferências.</p>
                 </>
               )}
             </Panel>
