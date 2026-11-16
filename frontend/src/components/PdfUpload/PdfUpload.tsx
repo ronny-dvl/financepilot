@@ -36,6 +36,8 @@ import styles from "./PdfUpload.module.css";
 const MAX_SIZE = 10 * 1024 * 1024;
 
 const SUCTION_DURATION = 650;
+// Allow Render's free instance to wake up before processing the PDF.
+const ANALYSIS_TIMEOUT_MS = 180_000;
 
 type AnimationPhase = "idle" | "sucking" | "selected";
 
@@ -258,7 +260,7 @@ export default function PdfUpload() {
 
     const controller = new AbortController();
     requestRef.current = controller;
-    const timeout = setTimeout(() => controller.abort(), 60_000);
+    const timeout = setTimeout(() => controller.abort(), ANALYSIS_TIMEOUT_MS);
     navigatedRef.current = false;
     setAnalysisStep(1);
 
