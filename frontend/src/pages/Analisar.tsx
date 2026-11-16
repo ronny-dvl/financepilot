@@ -2,16 +2,20 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import PdfUpload from "../components/PdfUpload/PdfUpload";
+import ThemeSelector from "../components/ThemeSelector/ThemeSelector";
 import styles from "./Analisar.module.css";
 
 export default function Analisar() {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
-        <Link to="/" className={styles.back}>
-          <ArrowLeft size={18} />
-          Voltar
-        </Link>
+        <header className={styles.topbar}>
+          <Link to="/" className={styles.back}>
+            <ArrowLeft size={18} />
+            Voltar
+          </Link>
+          <ThemeSelector />
+        </header>
 
         <div className={styles.content}>
           <div className={styles.heading}>

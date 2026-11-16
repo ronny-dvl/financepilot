@@ -3,6 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (() => {
+        let preference = "system";
+        try { preference = localStorage.getItem("financepilot.theme") || "system"; } catch {}
+        const dark = preference === "dark" ||
+          (preference !== "light" && preference !== "dark" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.dataset.theme = dark ? "dark" : "light";
+        document.documentElement.style.colorScheme = dark ? "dark" : "light";
+      })();
+    </script>
+    <style>html { background: #fafaf9; } html[data-theme="dark"] { background: #171717; }</style>
     <title>FinancePilot – Pare de quebrar a cabeça com suas finanças</title>
     <meta name="description" content="Transforme seu extrato bancário em gráficos, análises e insights sobre seus gastos." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -1,6 +1,6 @@
 /* Seção de Prévia do Dashboard */
 .section {
-  background: #ffeee3;
+  background: var(--fp-color-ffeee3);
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -148,12 +148,12 @@
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(255, 238, 227, 0) 0%,
-    rgba(255, 238, 227, 0.08) 25%,
-    rgba(255, 238, 227, 0.28) 45%,
-    rgba(255, 245, 238, 0.6) 70%,
-    rgba(255, 252, 250, 0.88) 90%,
-    #fafaf9 100%
+    rgba(var(--fp-preview-rgb), 0) 0%,
+    rgba(var(--fp-preview-rgb), 0.08) 25%,
+    rgba(var(--fp-preview-rgb), 0.28) 45%,
+    rgba(var(--fp-preview-mid-rgb), 0.6) 70%,
+    rgba(var(--fp-preview-end-rgb), 0.88) 90%,
+    var(--fp-color-fafaf9) 100%
   );
 }
 
@@ -162,10 +162,10 @@
   .gradientFade {
     background: linear-gradient(
       to bottom,
-      rgba(255, 238, 227, 0) 0%,
-      rgba(255, 238, 227, 0.5) 35%,
-      rgba(255, 245, 238, 0.85) 65%,
-      #fafaf9 100%
+      rgba(var(--fp-preview-rgb), 0) 0%,
+      rgba(var(--fp-preview-rgb), 0.5) 35%,
+      rgba(var(--fp-preview-mid-rgb), 0.85) 65%,
+      var(--fp-color-fafaf9) 100%
     );
   }
 }
@@ -183,5 +183,5 @@
 .transitionSpacer {
   width: 100%;
   height: 0;
-  background: #fafaf9;
+  background: var(--fp-color-fafaf9);
 }

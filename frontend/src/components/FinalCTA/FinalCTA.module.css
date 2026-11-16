@@ -1,6 +1,6 @@
 /* Seção Final CTA */
 .section {
-  background: #fafaf9;
+  background: var(--fp-color-fafaf9);
   padding: 0;
   position: relative;
   overflow: hidden;
@@ -97,7 +97,7 @@
 
 .primaryBtn {
   background: var(--orange-500);
-  color: #ffffff;
+  color: var(--fp-on-accent);
   border: 0;
   border-radius: 999px;
   padding: clamp(12px, 1.25vw, 17px) clamp(22px, 2vw, 30px);

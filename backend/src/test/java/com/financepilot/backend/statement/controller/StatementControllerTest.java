@@ -10,6 +10,7 @@ import com.financepilot.backend.statement.dto.CategorySummaryResponse;
 import com.financepilot.backend.statement.dto.FinancialSummaryResponse;
 import com.financepilot.backend.statement.dto.StatementTextResponse;
 import com.financepilot.backend.statement.dto.TransactionResponse;
+import com.financepilot.backend.statement.exception.InvalidPdfException;
 
 import com.financepilot.backend.statement.service.CategorySummaryService;
 import com.financepilot.backend.statement.service.FinancialSummaryService;
@@ -31,6 +32,9 @@ import java.util.Map;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -251,6 +255,87 @@ class StatementControllerTest {
 
         verify(transactionProcessingService).process(any());
         verify(categorySummaryService).calculate(transactions);
+    }
+
+    @Test
+    void shouldAnalyzePdfWithOneProcessingPass() throws Exception {
+        List<TransactionResponse> transactions = List.of(
+                new TransactionResponse(LocalDate.of(2026, 10, 26),
+                        "COMPRA EXEMPLO", new BigDecimal("-25.00"), "EXPENSE",
+                        TransactionCategory.TRANSPORTE, CategorizationSource.KEYWORD_RULE,
+                        false, TransactionNature.EXPENSE, PaymentMethod.DEBIT_CARD),
+                new TransactionResponse(LocalDate.of(2026, 10, 26),
+                        "CREDITO DE SALARIO", new BigDecimal("100.00"), "INCOME")
+        );
+        when(transactionProcessingService.process(any())).thenReturn(transactions);
+        when(financialSummaryService.calculate(transactions))
+                .thenReturn(new FinancialSummaryService().calculate(transactions));
+        when(categorySummaryService.calculate(transactions))
+                .thenReturn(new CategorySummaryService().calculate(transactions));
+
+        mockMvc.perform(multipart("/api/statements/analyze").file(createMockPdf()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.summary.totalIncome").value(100))
+                .andExpect(jsonPath("$.summary.totalExpenses").value(25))
+                .andExpect(jsonPath("$.summary.netBalance").value(75))
+                .andExpect(jsonPath("$.summary.transactionCount").value(2))
+                .andExpect(jsonPath("$.transactions.length()").value(2))
+                .andExpect(jsonPath("$.transactions[0].date").value("2026-10-26"))
+                .andExpect(jsonPath("$.transactions[0].amount").value(-25))
+                .andExpect(jsonPath("$.transactions[0].category").value("TRANSPORTE"))
+                .andExpect(jsonPath("$.transactions[0].source").value("KEYWORD_RULE"))
+                .andExpect(jsonPath("$.transactions[0].requiresReview").value(false))
+                .andExpect(jsonPath("$.transactions[0].nature").value("EXPENSE"))
+                .andExpect(jsonPath("$.transactions[0].paymentMethod").value("DEBIT_CARD"))
+                .andExpect(jsonPath("$.categorySummary.totalOutflow").value(25))
+                .andExpect(jsonPath("$.categorySummary.categorizedExpenses").value(25))
+                .andExpect(jsonPath("$.categorySummary.uncategorizedOutflow").value(0))
+                .andExpect(jsonPath("$.categorySummary.transferOutflow").value(0))
+                .andExpect(jsonPath("$.categorySummary.expensesByCategory.TRANSPORTE").value(25));
+
+        verify(transactionProcessingService, times(1)).process(any());
+        verify(financialSummaryService).calculate(transactions);
+        verify(categorySummaryService).calculate(transactions);
+        verifyNoMoreInteractions(transactionProcessingService,
+                financialSummaryService, categorySummaryService);
+        verifyNoInteractions(pdfExtractionService);
+    }
+
+    @Test
+    void shouldAnalyzeStatementWithoutTransactions() throws Exception {
+        List<TransactionResponse> transactions = List.of();
+        when(transactionProcessingService.process(any())).thenReturn(transactions);
+        when(financialSummaryService.calculate(transactions))
+                .thenReturn(new FinancialSummaryService().calculate(transactions));
+        when(categorySummaryService.calculate(transactions))
+                .thenReturn(new CategorySummaryService().calculate(transactions));
+
+        mockMvc.perform(multipart("/api/statements/analyze").file(createMockPdf()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.summary.transactionCount").value(0))
+                .andExpect(jsonPath("$.summary.netBalance").value(0))
+                .andExpect(jsonPath("$.transactions").isEmpty())
+                .andExpect(jsonPath("$.categorySummary.expensesByCategory").isEmpty());
+        verify(transactionProcessingService, times(1)).process(any());
+    }
+
+    @Test
+    void shouldRejectInvalidPdfDuringAnalysis() throws Exception {
+        when(transactionProcessingService.process(any()))
+                .thenThrow(new InvalidPdfException("O arquivo não é um PDF válido."));
+
+        mockMvc.perform(multipart("/api/statements/analyze").file(createMockPdf()))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.error").value("O arquivo não é um PDF válido."));
+        verifyNoInteractions(financialSummaryService, categorySummaryService);
+    }
+
+    @Test
+    void shouldRequireFileForAnalysis() throws Exception {
+        mockMvc.perform(multipart("/api/statements/analyze"))
+                .andExpect(status().isBadRequest());
+        verifyNoInteractions(transactionProcessingService,
+                financialSummaryService, categorySummaryService);
     }
 
     private MockMultipartFile createMockPdf() {

@@ -1,7 +1,7 @@
 .heroWrap {
   position: relative;
   z-index: 1;
-  background: #ffffff;
+  background: var(--fp-color-ffffff);
   border-radius: 0 0 50px 50px;
   box-shadow: 0 12px 64px rgba(0, 0, 0, 0.1);
 }

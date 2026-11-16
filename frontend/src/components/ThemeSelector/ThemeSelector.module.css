@@ -1,0 +1,5 @@
+.control { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--fp-border); border-radius: 999px; background: var(--fp-surface); color: var(--fp-text); padding: 8px 10px; flex-shrink: 0; }
+.control select { background: var(--fp-surface); color: inherit; border: 0; font: 500 12px var(--font); cursor: pointer; min-height: 26px; max-width: 90px; }
+.control:focus-within { outline: 2px solid var(--fp-accent-text); outline-offset: 3px; }
+.control select:focus-visible { outline: none; }
+@media (max-width: 380px) { .control { gap: 3px; padding: 5px 8px; } }

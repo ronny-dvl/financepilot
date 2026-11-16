@@ -8,7 +8,7 @@ html {
 body {
   margin: 0;
   font-family: var(--font);
-  background: #fafaf9;
+  background: var(--fp-color-fafaf9);
   color: var(--text);
 }
 

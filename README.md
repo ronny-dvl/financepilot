@@ -133,6 +133,21 @@ Abra o endereço local informado pelo servidor de desenvolvimento. A integraçã
 
 ## Documentação da API
 
+### `POST /api/statements/analyze`
+
+Recebe um PDF por `multipart/form-data`, no campo `file`, processa o extrato uma única vez e retorna:
+
+- `summary`: entradas, saídas, saldo líquido e quantidade de transações.
+- `transactions`: transações com categoria, natureza, meio de pagamento e indicação de revisão.
+- `categorySummary`: saídas totais, despesas categorizadas, saídas não categorizadas, transferências e valores por categoria.
+
+O frontend utiliza essa rota e compartilha o resultado pelo `StatementContext`. O dashboard não refaz o upload nem recalcula os resumos. Os resultados ficam apenas em memória: recarregar a página exige uma nova análise. Os endpoints individuais continuam disponíveis.
+
+```bash
+curl -X POST http://localhost:8080/api/statements/analyze \
+  -F "file=@extrato.pdf"
+```
+
 ### `POST /api/statements/upload`
 
 Recebe um arquivo PDF por `multipart/form-data` e retorna informações sobre o texto extraído.

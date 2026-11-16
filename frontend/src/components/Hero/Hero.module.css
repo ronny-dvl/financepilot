@@ -14,7 +14,7 @@
   font-size: clamp(2.2rem, 5.55vw, 80px);
   line-height: 1.09;
   letter-spacing: -0.11em;
-  color: #000000;
+  color: var(--fp-color-000000);
   margin: 0 0 20px;
 }
 .text em { font-style: normal; color: var(--orange-500); }
@@ -24,14 +24,14 @@
   font-size: clamp(1rem, 1.53vw, 22px);
   line-height: 0.98;
   letter-spacing: -0.08em;
-  color: #939393;
+  color: var(--fp-color-939393);
   margin: 0 0 32px;
   max-width: 900px;
 }
 
 .cta {
   background: var(--orange-500);
-  color: #ffffff;
+  color: var(--fp-on-accent);
   border: 0;
   border-radius: 999px;
   padding: clamp(12px, 1.3vw, 18.5px) clamp(18px, 1.9vw, 27px);

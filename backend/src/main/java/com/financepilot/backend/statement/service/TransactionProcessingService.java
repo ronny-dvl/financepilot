@@ -7,11 +7,13 @@ import com.financepilot.backend.statement.dto.CategorizationResult;
 import com.financepilot.backend.statement.dto.StatementTextResponse;
 import com.financepilot.backend.statement.dto.TransactionResponse;
 import com.financepilot.backend.statement.parser.BankStatementParser;
+import com.financepilot.backend.statement.exception.InvalidStatementException;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.time.DateTimeException;
 
 @Service
 public class TransactionProcessingService {
@@ -48,13 +50,35 @@ public class TransactionProcessingService {
         BankStatementParser parser = parsers.stream()
                 .filter(candidate -> candidate.supports(text))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Banco não reconhecido ou extrato não suportado."
+                .orElseThrow(() -> new InvalidStatementException(
+                        "Não reconhecemos um extrato bancário neste PDF. Envie um extrato Itaú ou Santander em um formato compatível."
                 ));
 
         // 3. Extrai as transações
-        List<TransactionResponse> transactions =
-                parser.parse(text);
+        List<TransactionResponse> transactions;
+        try {
+            transactions = parser.parse(text);
+        } catch (IllegalArgumentException | DateTimeException e) {
+            throw new InvalidStatementException(
+                    "Não foi possível interpretar as movimentações deste PDF. Envie um extrato Itaú ou Santander em um formato compatível."
+            );
+        }
+
+        // A bank marker alone is insufficient: require structured movements from its parser.
+        if (transactions == null || transactions.isEmpty()
+                || transactions.stream().anyMatch(transaction ->
+                        transaction == null
+                                || transaction.date() == null
+                                || transaction.description() == null
+                                || transaction.description().isBlank()
+                                || transaction.amount() == null
+                                || !("INCOME".equals(transaction.type())
+                                    || "EXPENSE".equals(transaction.type())))
+                || transactions.stream().noneMatch(transaction -> transaction.amount().signum() != 0)) {
+            throw new InvalidStatementException(
+                    "Não encontramos transações válidas neste PDF. Envie um extrato Itaú ou Santander com movimentações em um formato compatível."
+            );
+        }
 
         // 4. Enriquece as transações
         return transactions.stream()

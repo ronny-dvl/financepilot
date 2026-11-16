@@ -19,9 +19,9 @@
   min-height: 330px;
   padding: 40px 28px;
 
-  border: 2px dashed #d6d3d1;
+  border: 2px dashed var(--fp-color-d6d3d1);
   border-radius: 24px;
-  background: #ffffff;
+  background: var(--fp-color-ffffff);
 
   transition:
     border-color 0.25s ease,
@@ -31,7 +31,7 @@
 
 .dropzone[data-dragging="true"] {
   border-color: #f97316;
-  background: #fff7ed;
+  background: var(--fp-color-fff7ed);
 
   box-shadow: 0 12px 40px rgba(249, 115, 22, 0.09);
 
@@ -60,7 +60,7 @@
   margin-bottom: 10px;
 
   border-radius: 20px;
-  background: #fff0e5;
+  background: var(--fp-color-fff0e5);
   color: #f97316;
 }
 
@@ -71,13 +71,13 @@
   font-weight: 600;
   line-height: 1.3;
 
-  color: #171717;
+  color: var(--fp-color-171717);
 }
 
 .emptyState p {
   margin: 0;
   font-size: 15px;
-  color: #78716c;
+  color: var(--fp-color-78716c);
 }
 
 /* Botão de seleção */
@@ -90,7 +90,7 @@
   border-radius: 12px;
 
   background: #f97316;
-  color: #ffffff;
+  color: var(--fp-on-accent);
 
   font: inherit;
   font-size: 14px;
@@ -113,7 +113,7 @@
 }
 
 .helper {
-  color: #a8a29e;
+  color: var(--fp-color-a8a29e);
   font-size: 12px;
 }
 
@@ -137,10 +137,10 @@
   margin-left: -46px;
   margin-top: -55px;
 
-  border: 1px solid #fed7aa;
+  border: 1px solid var(--fp-color-fed7aa);
   border-radius: 16px;
 
-  background: #fff7ed;
+  background: var(--fp-color-fff7ed);
   color: #f97316;
 
   box-shadow:
@@ -161,7 +161,7 @@
 
 .dropzone[data-sucking="true"] {
   border-color: #f97316;
-  background: #fff7ed;
+  background: var(--fp-color-fff7ed);
 
   animation: uploadGulp 650ms ease-in-out;
 }
@@ -179,10 +179,10 @@
 
   padding: 20px;
 
-  border: 1px solid #e7e5e4;
+  border: 1px solid var(--fp-color-e7e5e4);
   border-radius: 16px;
 
-  background: #fafaf9;
+  background: var(--fp-color-fafaf9);
 }
 
 .fileIcon {
@@ -196,7 +196,7 @@
 
   border-radius: 14px;
 
-  background: #ffedd5;
+  background: var(--fp-color-ffedd5);
   color: #f97316;
 }
 
@@ -212,7 +212,7 @@
 .fileInfo strong {
   overflow: hidden;
 
-  color: #171717;
+  color: var(--fp-color-171717);
   font-size: 14px;
   font-weight: 600;
 
@@ -221,14 +221,14 @@
 }
 
 .fileInfo span {
-  color: #78716c;
+  color: var(--fp-color-78716c);
   font-size: 13px;
 }
 
 .check {
   display: flex;
   flex-shrink: 0;
-  color: #16a34a;
+  color: var(--fp-color-16a34a);
 }
 
 /* Remover arquivo */
@@ -244,7 +244,7 @@
   border-radius: 8px;
 
   background: transparent;
-  color: #78716c;
+  color: var(--fp-color-78716c);
 
   cursor: pointer;
 
@@ -254,8 +254,8 @@
 }
 
 .removeButton:hover {
-  background: #e7e5e4;
-  color: #171717;
+  background: var(--fp-color-e7e5e4);
+  color: var(--fp-color-171717);
 }
 
 /* Botões após seleção */
@@ -277,7 +277,7 @@
   border-radius: 14px;
 
   background: #f97316;
-  color: #ffffff;
+  color: var(--fp-on-accent);
 
   font: inherit;
   font-size: 16px;
@@ -306,7 +306,7 @@
   border: none;
   background: transparent;
 
-  color: #78716c;
+  color: var(--fp-color-78716c);
 
   font: inherit;
   font-size: 14px;
@@ -329,7 +329,7 @@
 
   margin-top: 16px;
 
-  color: #dc2626;
+  color: var(--fp-color-dc2626);
   font-size: 14px;
   text-align: center;
 }
