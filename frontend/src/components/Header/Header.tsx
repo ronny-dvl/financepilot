@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Header.module.css";
 import logo from "../../assets/logo.svg";
+import ThemeSelector from "../ThemeSelector/ThemeSelector";
 
 type Props = { onCtaClick: () => void };
 
@@ -27,6 +28,7 @@ export default function Header({ onCtaClick }: Props) {
           <a href="#porque">Por que usar o FinancePilot?</a>
         </nav>
 
+        <ThemeSelector />
         <button className={styles.cta} onClick={onCtaClick}>
           Analisar meu extrato
         </button>

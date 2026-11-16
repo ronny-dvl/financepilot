@@ -8,12 +8,13 @@
   transition: background 0.25s, box-shadow 0.25s;
 }
 .scrolled {
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--fp-header-glass);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.07);
 }
 .bar {
+  gap: 16px;
   max-width: 1440px;
   height: 100%;
   margin: 0 auto;
@@ -37,7 +38,7 @@
 
 .cta {
   background: var(--orange-500);
-  color: #fff;
+  color: var(--fp-on-accent);
   border: 0;
   border-radius: 999px;
   padding: clamp(10px, 1vw, 14px) clamp(18px, 1.95vw, 28px);
@@ -55,3 +56,5 @@
   .nav { display: none; }
   .bar { padding: 0 20px; }
 }
+@media (min-width: 821px) and (max-width: 1200px) { .nav { gap: 14px; } .bar { padding: 0 24px; } }
+@media (max-width: 520px) { .cta { font-size: 11px; padding: 8px; max-width: 90px; } .bar { padding: 0 12px; gap: 8px; } .logo img { max-width: 90px; height: auto; } }
