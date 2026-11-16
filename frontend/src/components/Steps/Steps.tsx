@@ -8,7 +8,7 @@ type Props = { onCtaClick: () => void };
 const cards = [
   { icon: arrow, w: 68, title: ["Envie seu", "extrato"], text: "Selecione seu extrato bancário em PDF." },
   { icon: trend, w: 79, title: ["Análise", "automática"], text: "O FinancePilot identifica suas movimentações." },
-  { icon: grid, w: 59, title: ["Explore seus", "gastos"], text: "Visualize gráficos, resumos e destinatários.", dark: true },
+  { icon: grid, w: 59, title: ["Explore seus", "gastos"], text: "Visualize gráficos, resumos e destinatários." },
 ];
 
 export default function Steps({ onCtaClick }: Props) {
@@ -20,7 +20,7 @@ export default function Steps({ onCtaClick }: Props) {
 
       <div className={styles.grid}>
         {cards.map((c) => (
-          <article key={c.title.join(" ")} className={`${styles.card} ${c.dark ? styles.dark : ""}`}>
+          <article key={c.title.join(" ")} className={styles.card}>
             <div className={styles.inner}>
               {/* largura do ícone em cqw = largura do asset / 415 */}
               <img src={c.icon} alt="" className={styles.icon} style={{ width: `${(c.w / 415) * 100}cqw` }} />

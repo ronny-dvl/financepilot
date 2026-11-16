@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import styles from "./FinalCTA.module.css";
 
@@ -12,6 +12,7 @@ type Props = {
 
 export default function FinalCTA({ onCtaClick }: Props) {
   const navigate = useNavigate();
+  const reducedMotion = useReducedMotion();
 
   const handleCta = () => {
     if (onCtaClick) {
@@ -22,7 +23,7 @@ export default function FinalCTA({ onCtaClick }: Props) {
   };
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
   };
 
   return (
@@ -30,7 +31,7 @@ export default function FinalCTA({ onCtaClick }: Props) {
       <div className={styles.container}>
         <motion.div
           className={styles.card}
-          initial={{ opacity: 0, y: 32 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: "easeOut" }}
@@ -73,7 +74,7 @@ export default function FinalCTA({ onCtaClick }: Props) {
                 {/* Bot 1: char-1.svg (Superior Esquerdo) */}
                 <motion.div
                   className={`${styles.botWrapper} ${styles.bot1}`}
-                  animate={{
+                  animate={reducedMotion ? { x: 0, y: 0, rotate: -5 } : {
                     y: [-4, 5, -4],
                     x: [-2, 3, -2],
                     rotate: [-5, 0, -5],
@@ -95,7 +96,7 @@ export default function FinalCTA({ onCtaClick }: Props) {
                 {/* Bot 2: char-5.svg (Superior Direito) */}
                 <motion.div
                   className={`${styles.botWrapper} ${styles.bot2}`}
-                  animate={{
+                  animate={reducedMotion ? { x: 0, y: 0, rotate: 12 } : {
                     y: [4, -5, 4],
                     x: [3, -2, 3],
                     rotate: [12, 16, 12],
@@ -118,7 +119,7 @@ export default function FinalCTA({ onCtaClick }: Props) {
                 {/* Bot 3: char-3.svg (Inferior) */}
                 <motion.div
                   className={`${styles.botWrapper} ${styles.bot3}`}
-                  animate={{
+                  animate={reducedMotion ? { x: 0, y: 0, rotate: -11 } : {
                     y: [-5, 4, -5],
                     x: [2, -3, 2],
                     rotate: [-11, -7, -11],

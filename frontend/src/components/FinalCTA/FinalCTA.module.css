@@ -214,6 +214,9 @@
 
 /* Responsividade */
 @media (max-width: 900px) {
+  .section { scroll-margin-top: calc(var(--header-offset, var(--header-h)) + 16px); }
+  .title { white-space: normal; scroll-margin-top: calc(var(--header-offset, var(--header-h)) + 24px); }
+  .actions { scroll-margin-top: calc(var(--header-offset, var(--header-h)) + 24px); }
   .content {
     grid-template-columns: 1fr;
     gap: 48px;
@@ -234,14 +237,20 @@
   }
 
   .botsCluster {
-    max-width: 320px;
+    max-width: 300px;
+    aspect-ratio: 1.15;
   }
+  .botWrapper { width: 42%; height: auto; aspect-ratio: 1; }
+  .bot1 { top: 8%; left: 8%; }
+  .bot2 { top: 12%; right: 6%; }
+  .bot3 { bottom: 4%; left: 32%; right: auto; }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .card {
-    padding: 36px 20px;
+    padding: calc(var(--header-offset, var(--header-h)) + 20px) 20px 36px;
   }
+  .content { gap: 32px; }
 
   .actions {
     flex-direction: column;
@@ -255,10 +264,13 @@
   }
 
   .botsCluster {
-    max-width: 270px;
+    max-width: 252px;
   }
 
   .title {
   white-space: normal;
   }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ambientGlow { animation: none; }
 }
