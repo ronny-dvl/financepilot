@@ -11,6 +11,13 @@ import java.util.Map;
 @RestControllerAdvice
 public class StatementExceptionHandler {
 
+    @ExceptionHandler(InvalidStatementException.class)
+    public ResponseEntity<Map<String, String>> handleInvalidStatement(
+            InvalidStatementException e) {
+        return ResponseEntity.status(422)
+                .body(Map.of("error", e.getMessage()));
+    }
+
     @ExceptionHandler(InvalidPdfException.class)
     public ResponseEntity<Map<String, String>> handleInvalidPdf(
             InvalidPdfException e) {

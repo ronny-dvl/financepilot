@@ -29,6 +29,7 @@ import {
 
 import { analyzeStatement } from "../../services/statementApi";
 import { useStatement } from "../../contexts/StatementContext";
+import AnalysisTransition, { type AnalysisStep } from "../AnalysisTransition/AnalysisTransition";
 
 import styles from "./PdfUpload.module.css";
 
@@ -51,8 +52,32 @@ export default function PdfUpload() {
   const [phase, setPhase] = useState<AnimationPhase>("idle");
 
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-
   const reduceMotion = useReducedMotion();
+  const [analysisStep, setAnalysisStep] = useState<AnalysisStep | null>(null);
+  const requestRef = useRef<AbortController | null>(null);
+  const mountedRef = useRef(false);
+  const navigatedRef = useRef(false);
+
+  const goToDashboard = useCallback(() => {
+    if (navigatedRef.current) return;
+    navigatedRef.current = true;
+    navigate("/dashboard");
+  }, [navigate]);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => { mountedRef.current = false; requestRef.current?.abort(); };
+  }, []);
+
+  useEffect(() => {
+    if (analysisStep !== 2 && analysisStep !== 3) return;
+    if (reduceMotion) { goToDashboard(); return; }
+    const timer = setTimeout(() => {
+      if (analysisStep === 2) setAnalysisStep(3);
+      else goToDashboard();
+    }, analysisStep === 2 ? 650 : 750);
+    return () => clearTimeout(timer);
+  }, [analysisStep, reduceMotion, goToDashboard]);
 
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -87,10 +112,12 @@ export default function PdfUpload() {
       setFile(selected);
 
       setError("");
+      setAnalysisStep(null);
 
       if (reduceMotion) {
 
         setPhase("selected");
+        setAnalysisStep(0);
 
         return;
 
@@ -101,6 +128,7 @@ export default function PdfUpload() {
       timerRef.current = setTimeout(() => {
 
         setPhase("selected");
+        setAnalysisStep(0);
 
         timerRef.current = null;
 
@@ -224,9 +252,15 @@ export default function PdfUpload() {
 
   };
 
-  const handleAnalyze = async () => {
+  const handleAnalyze = useCallback(async () => {
 
-    if (!file || isAnalyzing) return;
+    if (!file || isAnalyzing || requestRef.current) return;
+
+    const controller = new AbortController();
+    requestRef.current = controller;
+    const timeout = setTimeout(() => controller.abort(), 60_000);
+    navigatedRef.current = false;
+    setAnalysisStep(1);
 
     setIsAnalyzing(true);
 
@@ -234,17 +268,24 @@ export default function PdfUpload() {
 
     try {
 
-      const analysis = await analyzeStatement(file);
+      const analysis = await analyzeStatement(file, controller.signal);
+
+      if (!mountedRef.current || requestRef.current !== controller) return;
 
       setAnalysis(analysis);
-      navigate("/dashboard");
+      setAnalysisStep(2);
 
     } catch (err) {
-
+      if (!mountedRef.current || requestRef.current !== controller) return;
+      setAnalysisStep(null);
 
       setError(
 
-        err instanceof Error
+        controller.signal.aborted
+
+          ? "A análise demorou mais que o esperado. Tente novamente."
+
+          : err instanceof Error
 
           ? err.message
 
@@ -255,18 +296,38 @@ export default function PdfUpload() {
       setShake((value) => value + 1);
 
     } finally {
-
-      setIsAnalyzing(false);
+      clearTimeout(timeout);
+      if (mountedRef.current && requestRef.current === controller) {
+        requestRef.current = null;
+        setIsAnalyzing(false);
+      }
 
     }
 
-  };
+  }, [file, isAnalyzing, setAnalysis]);
+
+  useEffect(() => {
+    if (analysisStep !== 0 || !file) return;
+    const timer = setTimeout(() => { void handleAnalyze(); }, reduceMotion ? 0 : 450);
+    return () => clearTimeout(timer);
+  }, [analysisStep, file, handleAnalyze, reduceMotion]);
 
   const isSucking = phase === "sucking";
+
+  const returnToUpload = () => {
+    requestRef.current?.abort();
+    requestRef.current = null;
+    setIsAnalyzing(false);
+    setAnalysisStep(null);
+  };
 
   return (
 
     <div className={styles.container}>
+      {analysisStep !== null && (
+        <AnalysisTransition step={analysisStep}
+          onBack={analysisStep >= 2 ? goToDashboard : returnToUpload} />
+      )}
 
       <motion.div
 
