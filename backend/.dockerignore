@@ -1,0 +1,33 @@
+# Only production sources and Maven Wrapper inputs enter the build context.
+**
+!pom.xml
+!mvnw
+!.mvn/
+!.mvn/wrapper/
+!.mvn/wrapper/maven-wrapper.properties
+!src/
+!src/main/
+!src/main/**
+
+# Never include local statements, generated data, credentials, or build outputs.
+**/target/
+**/src/test/
+**/*.[pP][dD][fF]
+**/transactions.json
+**/.env
+**/.env.*
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+**/*.jks
+**/*.log
+**/*.tmp
+**/*.temp
+**/*~
+**/.idea/
+**/.vscode/
+**/*.iml
+**/.git/
+**/.DS_Store
+**/Thumbs.db

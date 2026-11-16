@@ -1,7 +1,7 @@
 import type { FinancialSummaryResponse, StatementAnalysisResponse } from "../types/statement";
 
 const API_URL =
-  import.meta.env.VITE_API_URL ?? "http://localhost:8080";
+  (import.meta.env.VITE_API_URL?.trim() || "http://localhost:8080").replace(/\/+$/, "");
 
 async function postStatement<T>(path: string, file: File, signal?: AbortSignal): Promise<T> {
   const formData = new FormData();
