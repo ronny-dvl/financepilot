@@ -72,13 +72,6 @@
   }
 }
 
-.dark {
-  background:
-    radial-gradient(ellipse 85% 95% at 52% 62%, rgba(146, 106, 66, 1) 0%, rgba(68, 57, 48, 0) 70%),
-    #12110f;
-}
-.dark h3 { color: #ffffff; }
-
 .cta {
   margin-top: clamp(24px, 3vw, 43px);
   background: var(--orange-500);

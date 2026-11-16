@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -47,6 +48,21 @@ public class SantanderStatementParser implements BankStatementParser {
 
         return normalized.contains("DETALHE DOS MOVIMENTOS")
                 && normalized.contains("DATA DESCRIÇÃO VALOR SALDO");
+    }
+
+    @Override
+    public Optional<String> extractHolderName(String text) {
+        if (!supports(text)) return Optional.empty();
+        List<String> lines = HolderNameSupport.headerLines(text);
+        List<String> candidates = new ArrayList<>();
+        Pattern titular = Pattern.compile("(?iu)^TITULAR\\h*:\\h*(.*)$");
+        for (int i = 0; i < lines.size(); i++) {
+            Matcher match = titular.matcher(lines.get(i));
+            if (!match.matches()) continue;
+            if (!match.group(1).isBlank()) candidates.add(match.group(1));
+            else if (i + 1 < lines.size()) candidates.add(lines.get(i + 1));
+        }
+        return HolderNameSupport.uniqueName(candidates);
     }
 
     @Override

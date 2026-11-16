@@ -2,4 +2,14 @@
 .control select { background: var(--fp-surface); color: inherit; border: 0; font: 500 12px var(--font); cursor: pointer; min-height: 26px; max-width: 90px; }
 .control:focus-within { outline: 2px solid var(--fp-accent-text); outline-offset: 3px; }
 .control select:focus-visible { outline: none; }
+.lightIcon, .darkIcon { display: none; }
 @media (max-width: 380px) { .control { gap: 3px; padding: 5px 8px; } }
+@media (max-width: 600px) {
+  .control { position: relative; width: 44px; height: 44px; padding: 0; gap: 0; justify-content: center; border-radius: 50%; }
+  .desktopIcon { display: none; }
+  .lightIcon { display: block; pointer-events: none; }
+  :global([data-theme="dark"]) .lightIcon { display: none; }
+  :global([data-theme="dark"]) .darkIcon { display: block; pointer-events: none; }
+  /* Keep the native three-option picker and keyboard interaction over the icon. */
+  .control select { position: absolute; inset: 0; width: 100%; height: 100%; min-height: 0; max-width: none; opacity: 0; border-radius: inherit; }
+}

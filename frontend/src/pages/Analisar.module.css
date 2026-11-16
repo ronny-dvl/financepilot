@@ -87,6 +87,9 @@
   }
 
   .heading {
+    width: 100%;
+    min-width: 0;
+    padding-left: 0;
     max-width: 650px;
     margin: 0 auto;
     text-align: center;

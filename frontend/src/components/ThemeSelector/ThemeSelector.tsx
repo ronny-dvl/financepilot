@@ -7,7 +7,9 @@ export default function ThemeSelector() {
   const Icon = preference === "system" ? Monitor : preference === "dark" ? Moon : Sun;
   return (
     <label className={styles.control}>
-      <Icon size={16} aria-hidden="true" />
+      <Icon className={styles.desktopIcon} size={16} aria-hidden="true" />
+      <Sun className={styles.lightIcon} size={18} aria-hidden="true" />
+      <Moon className={styles.darkIcon} size={18} aria-hidden="true" />
       <select aria-label="Tema de aparência" value={preference}
         onChange={event => setPreference(event.target.value as ThemePreference)}>
         <option value="light">Claro</option>

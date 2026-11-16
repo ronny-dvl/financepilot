@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,7 +42,50 @@ public class ItauStatementParser implements BankStatementParser {
                 || normalized.contains("ITAU");
     }
 
-    // Extrai as transações do extrato Itaú
+    // Extrai somente a identificação do titular no cabeçalho da conta.
+    @Override
+    public Optional<String> extractHolderName(String text) {
+        if (!supports(text)) return Optional.empty();
+        List<String> lines = HolderNameSupport.headerLines(text);
+        List<String> candidates = new ArrayList<>();
+        Pattern nameField = Pattern.compile(
+                "(?iu)^(?:NOME(?: DO TITULAR| DO CLIENTE)?|TITULAR)\\h*:\\h*(.*)$"
+        );
+        Pattern accountHeader = Pattern.compile(
+                "(?iu)^(.*?)\\bAG[ÊE]NCIA\\h*:?\\h*\\d[\\d.\\-]*\\h+"
+                        + "CONTA(?:\\h+CORRENTE)?\\h*:?\\h*\\d[\\d.\\-]*\\h*$"
+        );
+        Pattern agencyField = Pattern.compile("(?iu)^AG[ÊE]NCIA\\h*:?\\h*\\d[\\d.\\-]*\\h*$");
+        Pattern accountField = Pattern.compile("(?iu)^CONTA(?:\\h+CORRENTE)?\\h*:?\\h*\\d[\\d.\\-]*\\h*$");
+        boolean hasAccountHeader = lines.stream().anyMatch(line -> accountHeader.matcher(line).matches())
+                || (lines.stream().anyMatch(line -> agencyField.matcher(line).matches())
+                    && lines.stream().anyMatch(line -> accountField.matcher(line).matches()));
+        if (!hasAccountHeader) return Optional.empty();
+
+        for (int i = 0; i < lines.size(); i++) {
+            Matcher labeled = nameField.matcher(lines.get(i));
+            if (labeled.matches()) {
+                if (!labeled.group(1).isBlank()) candidates.add(labeled.group(1));
+                else if (i + 1 < lines.size()) candidates.add(lines.get(i + 1));
+            }
+            Matcher account = accountHeader.matcher(lines.get(i));
+            if (account.matches()) {
+                if (!account.group(1).isBlank()) candidates.add(account.group(1));
+                else if (i > 0 && !nameField.matcher(lines.get(i - 1)).matches()) {
+                    // Unlabelled names are accepted only immediately beside the account header.
+                    candidates.add(lines.get(i - 1));
+                }
+            }
+            if (i > 0 && i + 1 < lines.size()
+                    && agencyField.matcher(lines.get(i)).matches()
+                    && accountField.matcher(lines.get(i + 1)).matches()) {
+                candidates.add(lines.get(i - 1));
+            }
+        }
+        return HolderNameSupport.uniqueName(candidates);
+    }
+
+    // Extrai as transações do extrato Itaú.
     @Override
     public List<TransactionResponse> parse(String text) {
 

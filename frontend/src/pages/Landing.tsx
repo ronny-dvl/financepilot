@@ -16,9 +16,9 @@ export default function Landing() {
 
   return (
     <>
+      <Header onCtaClick={abrir} />
       <div className={styles.heroWrap}>
         <div className={styles.inner}>
-          <Header onCtaClick={abrir} />
           <Hero onCtaClick={abrir} />
         </div>
       </div>
