@@ -16,6 +16,7 @@ import com.financepilot.backend.statement.service.CategorySummaryService;
 import com.financepilot.backend.statement.service.FinancialSummaryService;
 import com.financepilot.backend.statement.service.PdfExtractionService;
 import com.financepilot.backend.statement.service.TransactionProcessingService;
+import com.financepilot.backend.statement.service.TransactionProcessingService.ProcessedStatement;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verifyNoInteractions;
@@ -267,7 +269,8 @@ class StatementControllerTest {
                 new TransactionResponse(LocalDate.of(2026, 10, 26),
                         "CREDITO DE SALARIO", new BigDecimal("100.00"), "INCOME")
         );
-        when(transactionProcessingService.process(any())).thenReturn(transactions);
+        when(transactionProcessingService.processStatement(any()))
+                .thenReturn(new ProcessedStatement(transactions, "Ana Exemplo"));
         when(financialSummaryService.calculate(transactions))
                 .thenReturn(new FinancialSummaryService().calculate(transactions));
         when(categorySummaryService.calculate(transactions))
@@ -275,6 +278,7 @@ class StatementControllerTest {
 
         mockMvc.perform(multipart("/api/statements/analyze").file(createMockPdf()))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.holderName").value("Ana Exemplo"))
                 .andExpect(jsonPath("$.summary.totalIncome").value(100))
                 .andExpect(jsonPath("$.summary.totalExpenses").value(25))
                 .andExpect(jsonPath("$.summary.netBalance").value(75))
@@ -293,7 +297,7 @@ class StatementControllerTest {
                 .andExpect(jsonPath("$.categorySummary.transferOutflow").value(0))
                 .andExpect(jsonPath("$.categorySummary.expensesByCategory.TRANSPORTE").value(25));
 
-        verify(transactionProcessingService, times(1)).process(any());
+        verify(transactionProcessingService, times(1)).processStatement(any());
         verify(financialSummaryService).calculate(transactions);
         verify(categorySummaryService).calculate(transactions);
         verifyNoMoreInteractions(transactionProcessingService,
@@ -304,7 +308,8 @@ class StatementControllerTest {
     @Test
     void shouldAnalyzeStatementWithoutTransactions() throws Exception {
         List<TransactionResponse> transactions = List.of();
-        when(transactionProcessingService.process(any())).thenReturn(transactions);
+        when(transactionProcessingService.processStatement(any()))
+                .thenReturn(new ProcessedStatement(transactions, null));
         when(financialSummaryService.calculate(transactions))
                 .thenReturn(new FinancialSummaryService().calculate(transactions));
         when(categorySummaryService.calculate(transactions))
@@ -312,22 +317,30 @@ class StatementControllerTest {
 
         mockMvc.perform(multipart("/api/statements/analyze").file(createMockPdf()))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.holderName").value(nullValue()))
                 .andExpect(jsonPath("$.summary.transactionCount").value(0))
                 .andExpect(jsonPath("$.summary.netBalance").value(0))
                 .andExpect(jsonPath("$.transactions").isEmpty())
                 .andExpect(jsonPath("$.categorySummary.expensesByCategory").isEmpty());
-        verify(transactionProcessingService, times(1)).process(any());
+        verify(transactionProcessingService, times(1)).processStatement(any());
+        verify(financialSummaryService).calculate(transactions);
+        verify(categorySummaryService).calculate(transactions);
+        verifyNoMoreInteractions(transactionProcessingService,
+                financialSummaryService, categorySummaryService);
+        verifyNoInteractions(pdfExtractionService);
     }
 
     @Test
     void shouldRejectInvalidPdfDuringAnalysis() throws Exception {
-        when(transactionProcessingService.process(any()))
+        when(transactionProcessingService.processStatement(any()))
                 .thenThrow(new InvalidPdfException("O arquivo não é um PDF válido."));
 
         mockMvc.perform(multipart("/api/statements/analyze").file(createMockPdf()))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.error").value("O arquivo não é um PDF válido."));
-        verifyNoInteractions(financialSummaryService, categorySummaryService);
+        verify(transactionProcessingService, times(1)).processStatement(any());
+        verifyNoMoreInteractions(transactionProcessingService);
+        verifyNoInteractions(financialSummaryService, categorySummaryService, pdfExtractionService);
     }
 
     @Test
