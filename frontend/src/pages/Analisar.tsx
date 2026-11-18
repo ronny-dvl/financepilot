@@ -1,11 +1,18 @@
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import PdfUpload from "../components/PdfUpload/PdfUpload";
 import ThemeSelector from "../components/ThemeSelector/ThemeSelector";
+import AuthOverlay from "../components/AuthOverlay";
+import { useStatement } from "../contexts/StatementContext";
 import styles from "./Analisar.module.css";
 
 export default function Analisar() {
+  const { guestFirstName } = useStatement();
+  const navigate = useNavigate();
+  if (!guestFirstName) {
+    return <main className={styles.page}><AuthOverlay open onClose={() => navigate("/")} /></main>;
+  }
   return (
     <main className={styles.page}>
       <div className={styles.container}>

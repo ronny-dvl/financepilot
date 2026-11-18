@@ -1,8 +1,9 @@
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff, Wallet, X } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ArrowLeft, Eye, EyeOff, Wallet, X } from "lucide-react";
+import { useStatement } from "../contexts/StatementContext";
 import styles from "./AuthOverlay.module.css";
 
 type Props = {
@@ -10,9 +11,19 @@ type Props = {
   onClose: () => void;
 };
 
+const emptyForm = { nome: "", sobrenome: "", email: "", senha: "" };
+const validName = (value: string) => value.trim().length >= 2 && value.trim().length <= 80
+  && /^[\p{L}\p{M}]+(?:[ '’\-][\p{L}\p{M}]+)*$/u.test(value.trim());
+
 export default function AuthOverlay({ open, onClose }: Props) {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const reduceMotion = useReducedMotion();
+  const { setGuestFirstName } = useStatement();
+  const [step, setStep] = useState<"choice" | "register" | "guest">("choice");
+  const [guestError, setGuestError] = useState("");
+  const modalRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   const [form, setForm] = useState({
     nome: "",
@@ -24,16 +35,42 @@ export default function AuthOverlay({ open, onClose }: Props) {
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
+    if (open) return;
+    setStep("choice");
+    setForm(emptyForm);
+    setGuestError("");
+    setShowPassword(false);
+  }, [open]);
+
+  useEffect(() => { if (open) titleRef.current?.focus(); }, [open, step]);
+
+  useEffect(() => {
     if (!open) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
+      if (event.key !== "Tab") return;
+      const focusable = modalRef.current?.querySelectorAll<HTMLElement>(
+        'button:not(:disabled), input:not(:disabled), select:not(:disabled), a[href], [tabindex="0"]'
+      );
+      if (!focusable?.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === titleRef.current)) {
+        event.preventDefault(); last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault(); first.focus();
+      }
     };
 
     window.addEventListener("keydown", onKeyDown);
 
     return () => {
       window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
     };
   }, [open, onClose]);
 
@@ -53,9 +90,27 @@ export default function AuthOverlay({ open, onClose }: Props) {
     // Não simular cadastro enquanto a API não estiver pronta.
   };
 
-  const entrarComoVisitante = () => {
-    onClose();
-    navigate("/analisar");
+  const changeStep = (next: "choice" | "register" | "guest") => {
+    setForm(emptyForm);
+    setGuestError("");
+    setShowPassword(false);
+    setStep(next);
+  };
+
+  const entrarComoConvidado = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const nome = form.nome.trim().replace(/\s+/g, " ");
+    const sobrenome = form.sobrenome.trim().replace(/\s+/g, " ");
+    if (!validName(nome) || !validName(sobrenome)) {
+      setGuestError("Informe nome e sobrenome válidos, com pelo menos duas letras, sem números ou símbolos.");
+      document.getElementById(!validName(nome) ? "guest-nome" : "guest-sobrenome")?.focus();
+      return;
+    }
+    // Only the first name is kept in React memory; the surname is discarded.
+    setGuestFirstName(nome.split(" ")[0]);
+    setForm(emptyForm);
+    if (pathname !== "/analisar") onClose();
+    navigate("/analisar", { replace: pathname === "/analisar" });
   };
 
   return (
@@ -70,6 +125,7 @@ export default function AuthOverlay({ open, onClose }: Props) {
           onClick={onClose}
         >
           <motion.div
+            ref={modalRef}
             className={styles.modal}
             role="dialog"
             aria-modal="true"
@@ -111,11 +167,28 @@ export default function AuthOverlay({ open, onClose }: Props) {
               </button>
             </div>
 
-            <h2 id="auth-title" className={styles.title}>
-              Comece a entender suas finanças.
+            {step !== "choice" && <button type="button" className={styles.back} onClick={() => changeStep("choice")}><ArrowLeft size={16} aria-hidden="true" /> Voltar</button>}
+
+            <h2 ref={titleRef} tabIndex={-1} id="auth-title" className={styles.title}>
+              {step === "choice" ? "Como deseja começar?" : step === "guest" ? "Como podemos chamar você?" : "Comece a entender suas finanças."}
             </h2>
 
-            <form className={styles.form} onSubmit={criarConta}>
+            {step === "choice" && <div className={styles.form}>
+              <button type="button" className={styles.primary} onClick={() => changeStep("register")}>Criar conta <span aria-hidden="true">→</span></button>
+              <div className={styles.guestRow}><button type="button" className={styles.guest} onClick={() => changeStep("guest")}>Entrar como convidado</button></div>
+            </div>}
+
+            {step === "guest" && <form className={styles.form} onSubmit={entrarComoConvidado}>
+              <div className={styles.nameRow}>
+                <div className={styles.field}><label htmlFor="guest-nome">Nome</label><input id="guest-nome" autoComplete="given-name" placeholder="Seu nome" value={form.nome} onChange={updateField("nome")} required minLength={2} maxLength={80} aria-invalid={!!guestError && !validName(form.nome.trim().replace(/\s+/g, " "))} aria-describedby={guestError ? "guest-error" : undefined} /></div>
+                <div className={styles.field}><label htmlFor="guest-sobrenome">Sobrenome</label><input id="guest-sobrenome" autoComplete="family-name" placeholder="Seu sobrenome" value={form.sobrenome} onChange={updateField("sobrenome")} required minLength={2} maxLength={80} aria-invalid={!!guestError && !validName(form.sobrenome.trim().replace(/\s+/g, " "))} aria-describedby={guestError ? "guest-error" : undefined} /></div>
+              </div>
+              {guestError && <p id="guest-error" className={styles.error} role="alert">{guestError}</p>}
+              <button type="submit" className={styles.primary}>Continuar para o upload <span aria-hidden="true">→</span></button>
+            </form>}
+
+            {step === "register" && <form className={styles.form} onSubmit={criarConta}>
+              <p className={styles.notice}>O cadastro ainda não está disponível. Nenhum dado deste formulário será enviado.</p>
               <div className={styles.nameRow}>
                 <div className={styles.field}>
                   <label htmlFor="auth-nome">Nome</label>
@@ -206,16 +279,13 @@ export default function AuthOverlay({ open, onClose }: Props) {
                 <button
                   type="button"
                   className={styles.guest}
-                  onClick={entrarComoVisitante}
+                  onClick={() => changeStep("guest")}
                 >
-                  Continuar como visitante
+                  Entrar como convidado
                 </button>
               </div>
 
-              <p className={styles.notice}>
-                O cadastro estará disponível em breve.
-              </p>
-            </form>
+            </form>}
           </motion.div>
         </motion.div>
       )}

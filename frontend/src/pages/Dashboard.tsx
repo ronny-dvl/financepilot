@@ -32,7 +32,7 @@ function Panel({ id, children }: { id: string; children: ReactNode }) {
 }
 
 export default function Dashboard() {
-  const { analysis, revealDashboard, markDashboardViewed } = useStatement();
+  const { analysis, revealDashboard, markDashboardViewed, guestFirstName } = useStatement();
   const [reveal] = useState(revealDashboard);
   useEffect(() => { if (analysis) markDashboardViewed(); }, [analysis, markDashboardViewed]);
   const reducedMotion = useReducedMotion();
@@ -70,7 +70,7 @@ export default function Dashboard() {
   };
   const weeklyMax = Math.max(0, ...weeks.flatMap(week => [week.income, week.outflow])) || 1;
   const categoryMax = Math.max(0, ...categories.map(([, amount]) => amount)) || 1;
-  const firstName = analysis?.holderName?.trim().split(/\s+/)[0]
+  const firstName = (guestFirstName || analysis?.holderName)?.trim().split(/\s+/)[0]
     ?.toLocaleLowerCase("pt-BR")
     .replace(/(^|[-'’])(\p{L})/gu, (_, separator: string, letter: string) =>
       separator + letter.toLocaleUpperCase("pt-BR"));
@@ -85,7 +85,7 @@ export default function Dashboard() {
           </Link>
           <span className={styles.headerLabel}>Seu painel financeiro</span>
           <ThemeSelector />
-          <Link to="/analisar" className={styles.primaryButton}>
+          <Link to="/analisar" className={`${styles.primaryButton} ${styles.analyzeAnother}`}>
             <Plus size={17} aria-hidden="true" /> Analisar outro extrato
           </Link>
         </div>
