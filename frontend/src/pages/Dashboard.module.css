@@ -12,6 +12,8 @@
 .headerLabel { color: var(--muted); font-size: 13px; border-left: 1px solid var(--line); padding-left: 24px; }
 .primaryButton { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--fp-button-bg); color: var(--fp-on-accent); border-radius: 999px; padding: 13px 22px; text-decoration: none; font-size: 14px; font-weight: 600; box-shadow: 0 6px 18px #f9731626; transition: transform .2s, background .2s; }
 .primaryButton:hover { transform: translateY(-2px); background: var(--fp-button-hover); }
+.analyzeAnother { background: var(--orange-500); color: var(--fp-on-orange); }
+.analyzeAnother:hover { background: var(--orange-300); }
 .headerInner > .primaryButton { margin-left: auto; }
 .main { width: 100%; min-width: 0; max-width: 1280px; margin: auto; padding: 42px 32px 32px; }
 .intro { display: flex; justify-content: space-between; align-items: center; gap: 28px; margin-bottom: 24px; }
