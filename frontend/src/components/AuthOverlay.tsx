@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ArrowLeft, Eye, EyeOff, Wallet, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Eye, EyeOff, UserRound, Wallet, X } from "lucide-react";
 import { useStatement } from "../contexts/StatementContext";
 import styles from "./AuthOverlay.module.css";
 
@@ -173,9 +173,17 @@ export default function AuthOverlay({ open, onClose }: Props) {
               {step === "choice" ? "Como deseja começar?" : step === "guest" ? "Como podemos chamar você?" : "Comece a entender suas finanças."}
             </h2>
 
-            {step === "choice" && <div className={styles.form}>
-              <button type="button" className={styles.primary} onClick={() => changeStep("register")}>Criar conta <span aria-hidden="true">→</span></button>
-              <div className={styles.guestRow}><button type="button" className={styles.guest} onClick={() => changeStep("guest")}>Entrar como convidado</button></div>
+            {step === "choice" && <div className={`${styles.form} ${styles.choiceButtons}`}>
+              <button type="button" className={`${styles.primary} ${styles.choiceButton} ${styles.choicePrimary}`} onClick={() => changeStep("register")}>
+                <span aria-hidden="true" />
+                <span>Criar conta</span>
+                <ArrowRight size={18} aria-hidden="true" />
+              </button>
+              <button type="button" className={`${styles.primary} ${styles.choiceButton} ${styles.secondaryChoice}`} onClick={() => changeStep("guest")}>
+                <UserRound size={18} aria-hidden="true" />
+                <span>Continuar como convidado</span>
+                <ArrowRight size={18} aria-hidden="true" />
+              </button>
             </div>}
 
             {step === "guest" && <form className={styles.form} onSubmit={entrarComoConvidado}>
