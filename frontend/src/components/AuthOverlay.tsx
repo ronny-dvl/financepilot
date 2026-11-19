@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Eye, EyeOff, UserRound, Wallet, X } from "lucide-react";
 import { useStatement } from "../contexts/StatementContext";
+import { useBackendReadiness } from "../contexts/BackendReadinessContext";
 import styles from "./AuthOverlay.module.css";
 
 type Props = {
@@ -20,6 +21,15 @@ export default function AuthOverlay({ open, onClose }: Props) {
   const { pathname } = useLocation();
   const reduceMotion = useReducedMotion();
   const { setGuestFirstName } = useStatement();
+  const { ensureReady, cancel } = useBackendReadiness();
+  const continuingToUpload = useRef(false);
+
+  useEffect(() => {
+    if (!open) return;
+    continuingToUpload.current = false;
+    ensureReady();
+    return () => { if (!continuingToUpload.current) cancel(); };
+  }, [open, ensureReady, cancel]);
   const [step, setStep] = useState<"choice" | "register" | "guest">("choice");
   const [guestError, setGuestError] = useState("");
   const modalRef = useRef<HTMLDivElement>(null);
@@ -107,6 +117,7 @@ export default function AuthOverlay({ open, onClose }: Props) {
       return;
     }
     // Only the first name is kept in React memory; the surname is discarded.
+    continuingToUpload.current = true;
     setGuestFirstName(nome.split(" ")[0]);
     setForm(emptyForm);
     if (pathname !== "/analisar") onClose();

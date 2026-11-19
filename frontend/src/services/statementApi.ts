@@ -3,6 +3,15 @@ import type { FinancialSummaryResponse, StatementAnalysisResponse } from "../typ
 const API_URL =
   (import.meta.env.VITE_API_URL?.trim() || "http://localhost:8080").replace(/\/+$/, "");
 
+export async function checkBackendHealth(signal: AbortSignal): Promise<void> {
+  const response = await fetch(`${API_URL}/api/health`, { signal, cache: "no-store" });
+  if (!response.ok) throw new Error("Servidor indisponível.");
+  const body: unknown = await response.json();
+  if (!body || typeof body !== "object" || !("status" in body) || body.status !== "ok") {
+    throw new Error("Servidor ainda não está pronto.");
+  }
+}
+
 async function postStatement<T>(path: string, file: File, signal?: AbortSignal): Promise<T> {
   const formData = new FormData();
   formData.append("file", file);
