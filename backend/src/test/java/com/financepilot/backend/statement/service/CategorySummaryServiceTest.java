@@ -232,6 +232,38 @@ class CategorySummaryServiceTest {
         assertTrue(result.expensesByCategory().isEmpty());
     }
 
+    @Test
+    void shouldAccountForNegativeRefundExactlyOnceWithoutConsumption() {
+        var result = service.calculate(List.of(
+                transaction("-30.00", TransactionCategory.TRANSPORTE, TransactionNature.REFUND, false)));
+        assertAmount("30.00", result.totalOutflow());
+        assertAmount("30.00", result.uncategorizedOutflow());
+        assertAmount("0", result.categorizedExpenses());
+        assertAmount("0", result.transferOutflow());
+        assertTrue(result.expensesByCategory().isEmpty());
+    }
+
+    @Test
+    void shouldReconcileEveryOutflowUsingExactDecimalAmounts() {
+        var result = service.calculate(List.of(
+                transaction("-0.10", TransactionCategory.TRANSPORTE, TransactionNature.EXPENSE, false),
+                transaction("-0.20", TransactionCategory.TRANSPORTE, TransactionNature.EXPENSE, false),
+                transaction("-0.07", TransactionCategory.OUTROS, TransactionNature.UNKNOWN, true),
+                transaction("-0.11", TransactionCategory.TRANSFERENCIAS, TransactionNature.TRANSFER, false),
+                transaction("-0.13", TransactionCategory.TRANSPORTE, TransactionNature.REFUND, false),
+                transaction("0.05", TransactionCategory.TRANSPORTE, TransactionNature.REFUND, false),
+                transaction("100.00", TransactionCategory.TRANSPORTE, TransactionNature.EXPENSE, false)));
+        assertAmount("0.61", result.totalOutflow());
+        assertAmount("0.30", result.categorizedExpenses());
+        assertAmount("0.20", result.uncategorizedOutflow());
+        assertAmount("0.11", result.transferOutflow());
+        assertAmount("0.30", result.expensesByCategory().get(TransactionCategory.TRANSPORTE));
+        assertEquals(0, result.totalOutflow().compareTo(result.categorizedExpenses()
+                .add(result.uncategorizedOutflow()).add(result.transferOutflow())));
+        assertEquals(0, result.categorizedExpenses().compareTo(result.expensesByCategory().values()
+                .stream().reduce(BigDecimal.ZERO, BigDecimal::add)));
+    }
+
     private TransactionResponse transaction(
             String amount,
             TransactionCategory category,

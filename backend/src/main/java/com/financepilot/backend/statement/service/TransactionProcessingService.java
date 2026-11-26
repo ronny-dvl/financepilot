@@ -105,8 +105,15 @@ public class TransactionProcessingService {
                     TransactionNature nature =
                             natureService.identify(
                                     description,
-                                    category.category()
+                                    category.category(),
+                                    transaction.amount()
                             );
+
+                    // The existing flag also surfaces unresolved financial nature. A negative refund
+                    // uses the residual outflow bucket because the API has no refund-outflow field.
+                    boolean requiresReview = category.requiresReview()
+                            || nature == TransactionNature.UNKNOWN
+                            || (nature == TransactionNature.REFUND && transaction.amount().signum() < 0);
 
                     // Identifica o meio de pagamento
                     PaymentMethod paymentMethod =
@@ -120,7 +127,7 @@ public class TransactionProcessingService {
                             transaction.type(),
                             category.category(),
                             category.source(),
-                            category.requiresReview(),
+                            requiresReview,
                             nature,
                             paymentMethod
                     );
