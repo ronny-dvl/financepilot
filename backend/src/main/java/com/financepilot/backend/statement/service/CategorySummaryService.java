@@ -14,7 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Gross consumption is separate from cash flow: positive movements never offset category expenses.
+ * Gross categorized outflows are separate from cash flow: positive movements never offset them.
+ * Personal transfers are displayed in expensesByCategory by product policy, retaining TRANSFER
+ * nature. categorizedExpenses includes that displayed category; it does not mean purchase-only
+ * consumption. transferOutflow continues to contain own-account transfers, excluding these entries.
  * Every negative movement belongs to exactly one existing component: categorizedExpenses,
  * transferOutflow (confirmed own-account transfers), or uncategorizedOutflow (residual).
  *
@@ -55,6 +58,18 @@ public class CategorySummaryService {
 
             TransactionNature nature = transaction.nature();
             TransactionCategory category = transaction.category();
+
+            // Personal transfers are visible in the category chart but never relabeled as purchases.
+            // Put the amount in one component only; unresolved personal transfers stay residual.
+            if (category == TransactionCategory.TRANSFERENCIAS_PESSOAIS) {
+                if (nature == TransactionNature.TRANSFER && !transaction.requiresReview()) {
+                    categorizedExpenses = categorizedExpenses.add(amount);
+                    expensesByCategory.merge(category, amount, BigDecimal::add);
+                } else {
+                    uncategorizedOutflow = uncategorizedOutflow.add(amount);
+                }
+                continue;
+            }
 
             // 3. Transferências internas confirmadas
             if (nature == TransactionNature.TRANSFER) {

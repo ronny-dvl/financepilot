@@ -12,7 +12,9 @@
     "OFFICIAL_NAME_OR_DESCRIPTOR_DOCUMENTED": "Grafia normalizada presente na fonte, sem comprovar seu uso no banco.",
     "LEGACY_OR_SYNTHETIC_INFERENCE": "Alias do catálogo anterior ou inferência sintética; não observado em extrato.",
     "NOT_OBSERVED": "Nenhum extrato ou fixture real foi usado como evidência bancária.",
-    "REVIEW_ONLY": "Identidade preservada como evidência não conclusiva; concludeAny vazio impede categoria automática."
+    "REVIEW_ONLY": "Identidade preservada como evidência não conclusiva; concludeAny vazio impede categoria automática.",
+    "ACTIVITY_DESCRIPTOR": "Explicit commercial activity, not a verified legal entity or bank descriptor.",
+    "USER_REPORTED_BANK_DESCRIPTOR": "Alias reported by the user; no independent source or real statement fixture is claimed."
   },
   "sources": [
     {
@@ -217,21 +219,21 @@
     }
   ],
   "statistics": {
-    "activeRules": 1210,
-    "aliases": 1493,
-    "distinctNormalizedAliases": 1493,
+    "activeRules": 1257,
+    "aliases": 1659,
+    "distinctNormalizedAliases": 1659,
     "identityOnlyVerified": 16,
-    "commercialIdentityPending": 985,
-    "commercialIdentityNotApplicable": 209,
+    "commercialIdentityPending": 986,
+    "commercialIdentityNotApplicable": 255,
     "bankAliasesActuallyObserved": 0,
-    "bankAliasVerificationPending": 1210,
+    "bankAliasVerificationPending": 1257,
     "reviewOnly": 0
   },
   "categoryCounts": [
     {
       "category": "ALIMENTACAO",
       "rules": 89,
-      "aliases": 121
+      "aliases": 135
     },
     {
       "category": "ASSINATURAS",
@@ -240,43 +242,48 @@
     },
     {
       "category": "BELEZA_CUIDADOS_PESSOAIS",
-      "rules": 53,
-      "aliases": 60
+      "rules": 56,
+      "aliases": 78
+    },
+    {
+      "category": "CASA_UTILIDADES",
+      "rules": 17,
+      "aliases": 36
     },
     {
       "category": "COMPRAS",
-      "rules": 70,
-      "aliases": 92
+      "rules": 52,
+      "aliases": 71
     },
     {
       "category": "CONTAS_ESSENCIAIS",
-      "rules": 68,
-      "aliases": 68
+      "rules": 69,
+      "aliases": 70
     },
     {
       "category": "EDUCACAO",
-      "rules": 93,
-      "aliases": 104
+      "rules": 96,
+      "aliases": 113
     },
     {
       "category": "ESPORTE_BEM_ESTAR",
-      "rules": 36,
-      "aliases": 50
+      "rules": 39,
+      "aliases": 54
     },
     {
       "category": "GAMES",
-      "rules": 36,
-      "aliases": 46
+      "rules": 37,
+      "aliases": 49
     },
     {
       "category": "IMPOSTOS_TRIBUTOS",
-      "rules": 28,
-      "aliases": 41
+      "rules": 29,
+      "aliases": 42
     },
     {
       "category": "INTERNET_TELEFONIA",
-      "rules": 58,
-      "aliases": 60
+      "rules": 60,
+      "aliases": 65
     },
     {
       "category": "INVESTIMENTOS",
@@ -285,8 +292,8 @@
     },
     {
       "category": "LAZER",
-      "rules": 49,
-      "aliases": 53
+      "rules": 52,
+      "aliases": 59
     },
     {
       "category": "MORADIA",
@@ -295,18 +302,18 @@
     },
     {
       "category": "PETS",
-      "rules": 20,
-      "aliases": 26
+      "rules": 22,
+      "aliases": 36
     },
     {
       "category": "SAUDE",
-      "rules": 80,
-      "aliases": 91
+      "rules": 84,
+      "aliases": 105
     },
     {
       "category": "SUPERMERCADO",
-      "rules": 90,
-      "aliases": 112
+      "rules": 92,
+      "aliases": 127
     },
     {
       "category": "TARIFAS_BANCARIAS",
@@ -315,8 +322,8 @@
     },
     {
       "category": "TECNOLOGIA",
-      "rules": 66,
-      "aliases": 87
+      "rules": 68,
+      "aliases": 94
     },
     {
       "category": "TRANSFERENCIAS",
@@ -325,18 +332,18 @@
     },
     {
       "category": "TRANSPORTE",
-      "rules": 85,
-      "aliases": 105
+      "rules": 88,
+      "aliases": 113
     },
     {
       "category": "VESTUARIO",
-      "rules": 94,
-      "aliases": 115
+      "rules": 109,
+      "aliases": 142
     },
     {
       "category": "VIAGENS",
-      "rules": 72,
-      "aliases": 78
+      "rules": 75,
+      "aliases": 86
     }
   ],
   "records": [
@@ -3503,12 +3510,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "RESTAURANTES",
+          "normalized": "RESTAURANTES",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -3543,12 +3558,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "LANCHONETES",
+          "normalized": "LANCHONETES",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -3583,12 +3606,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "PIZZARIAS",
+          "normalized": "PIZZARIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -3623,12 +3654,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "HAMBURGUERIAS",
+          "normalized": "HAMBURGUERIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -3663,12 +3702,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "PASTELARIAS",
+          "normalized": "PASTELARIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -3703,12 +3750,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "SORVETERIAS",
+          "normalized": "SORVETERIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -3743,12 +3798,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "CONFEITARIAS",
+          "normalized": "CONFEITARIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -3783,12 +3846,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "CAFETERIAS",
+          "normalized": "CAFETERIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -3823,12 +3894,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "PANIFICADORAS",
+          "normalized": "PANIFICADORAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -3863,12 +3942,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "PADARIAS",
+          "normalized": "PADARIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -3903,12 +3990,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "CHURRASCARIAS",
+          "normalized": "CHURRASCARIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -3943,12 +4038,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "TEMAKERIAS",
+          "normalized": "TEMAKERIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -3983,12 +4086,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "ESFIHARIAS",
+          "normalized": "ESFIHARIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -4028,7 +4139,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -4068,7 +4180,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -4103,12 +4216,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "MARMITARIAS",
+          "normalized": "MARMITARIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -4148,7 +4269,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -8358,12 +8480,27 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "SALOES DE BELEZA",
+          "normalized": "SALOES DE BELEZA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "SALAO BELEZA",
+          "normalized": "SALAO BELEZA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -8397,12 +8534,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "BARBEARIAS",
+          "normalized": "BARBEARIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -8441,7 +8586,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -8480,7 +8626,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -8514,12 +8661,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "MANICURES",
+          "normalized": "MANICURES",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -8553,12 +8708,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "PEDICURES",
+          "normalized": "PEDICURES",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -8597,7 +8760,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -8636,7 +8800,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -8670,12 +8835,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "PERFUMARIAS",
+          "normalized": "PERFUMARIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -8833,6 +9006,15 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "SHPP BRASIL INSTITUIC",
+          "normalized": "SHPP BRASIL INSTITUIC",
+          "nameEvidence": "USER_REPORTED_BANK_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false,
+          "reportedByUser": true,
+          "limitation": "Reported by user as Shopee; not independently verified and no real statement is stored."
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
@@ -9973,8 +10155,8 @@
     {
       "id": "compras.madeira-madeira",
       "status": "ACTIVE",
-      "category": "COMPRAS",
-      "runtimeFile": "src/main/resources/categorization/compras.json",
+      "category": "CASA_UTILIDADES",
+      "runtimeFile": "src/main/resources/categorization/casa-utilidades.json",
       "evidenceKind": "COMMERCIAL_IDENTITY",
       "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
       "commercialEntity": {
@@ -10004,7 +10186,8 @@
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
         "PREDOMINANT_ACTIVITY_DEFAULT; product and purchase markers are not required",
-        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence"
+        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence",
+        "CATEGORY_ALIGNMENT; home goods or clothing accessories, historical rule ID retained"
       ],
       "limitation": "Identidade comercial e grafias bancárias pendentes; contexto reduz risco, sem comprovar item ou recebedor.",
       "changes": {
@@ -10020,8 +10203,8 @@
     {
       "id": "compras.mobly",
       "status": "ACTIVE",
-      "category": "COMPRAS",
-      "runtimeFile": "src/main/resources/categorization/compras.json",
+      "category": "CASA_UTILIDADES",
+      "runtimeFile": "src/main/resources/categorization/casa-utilidades.json",
       "evidenceKind": "COMMERCIAL_IDENTITY",
       "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
       "commercialEntity": {
@@ -10044,7 +10227,8 @@
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
         "PREDOMINANT_ACTIVITY_DEFAULT; product and purchase markers are not required",
-        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence"
+        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence",
+        "CATEGORY_ALIGNMENT; home goods or clothing accessories, historical rule ID retained"
       ],
       "limitation": "Identidade comercial e grafias bancárias pendentes; contexto reduz risco, sem comprovar item ou recebedor.",
       "changes": {
@@ -10060,8 +10244,8 @@
     {
       "id": "compras.tok-stok",
       "status": "ACTIVE",
-      "category": "COMPRAS",
-      "runtimeFile": "src/main/resources/categorization/compras.json",
+      "category": "CASA_UTILIDADES",
+      "runtimeFile": "src/main/resources/categorization/casa-utilidades.json",
       "evidenceKind": "COMMERCIAL_IDENTITY",
       "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
       "commercialEntity": {
@@ -10091,7 +10275,8 @@
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
         "PREDOMINANT_ACTIVITY_DEFAULT; product and purchase markers are not required",
-        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence"
+        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence",
+        "CATEGORY_ALIGNMENT; home goods or clothing accessories, historical rule ID retained"
       ],
       "limitation": "Identidade comercial e grafias bancárias pendentes; contexto reduz risco, sem comprovar item ou recebedor.",
       "changes": {
@@ -10107,8 +10292,8 @@
     {
       "id": "compras.etna-moveis",
       "status": "ACTIVE",
-      "category": "COMPRAS",
-      "runtimeFile": "src/main/resources/categorization/compras.json",
+      "category": "CASA_UTILIDADES",
+      "runtimeFile": "src/main/resources/categorization/casa-utilidades.json",
       "evidenceKind": "COMMERCIAL_IDENTITY",
       "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
       "commercialEntity": {
@@ -10131,7 +10316,8 @@
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
         "PREDOMINANT_ACTIVITY_DEFAULT; product and purchase markers are not required",
-        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence"
+        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence",
+        "CATEGORY_ALIGNMENT; home goods or clothing accessories, historical rule ID retained"
       ],
       "limitation": "Identidade comercial e grafias bancárias pendentes; contexto reduz risco, sem comprovar item ou recebedor.",
       "changes": {
@@ -10147,8 +10333,8 @@
     {
       "id": "compras.camicado",
       "status": "ACTIVE",
-      "category": "COMPRAS",
-      "runtimeFile": "src/main/resources/categorization/compras.json",
+      "category": "CASA_UTILIDADES",
+      "runtimeFile": "src/main/resources/categorization/casa-utilidades.json",
       "evidenceKind": "COMMERCIAL_IDENTITY",
       "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
       "commercialEntity": {
@@ -10171,7 +10357,8 @@
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
         "PREDOMINANT_ACTIVITY_DEFAULT; product and purchase markers are not required",
-        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence"
+        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence",
+        "CATEGORY_ALIGNMENT; home goods or clothing accessories, historical rule ID retained"
       ],
       "limitation": "Identidade comercial e grafias bancárias pendentes; contexto reduz risco, sem comprovar item ou recebedor.",
       "changes": {
@@ -10187,8 +10374,8 @@
     {
       "id": "compras.westwing",
       "status": "ACTIVE",
-      "category": "COMPRAS",
-      "runtimeFile": "src/main/resources/categorization/compras.json",
+      "category": "CASA_UTILIDADES",
+      "runtimeFile": "src/main/resources/categorization/casa-utilidades.json",
       "evidenceKind": "COMMERCIAL_IDENTITY",
       "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
       "commercialEntity": {
@@ -10211,7 +10398,8 @@
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
         "PREDOMINANT_ACTIVITY_DEFAULT; product and purchase markers are not required",
-        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence"
+        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence",
+        "CATEGORY_ALIGNMENT; home goods or clothing accessories, historical rule ID retained"
       ],
       "limitation": "Identidade comercial e grafias bancárias pendentes; contexto reduz risco, sem comprovar item ou recebedor.",
       "changes": {
@@ -10227,8 +10415,8 @@
     {
       "id": "compras.mmartan",
       "status": "ACTIVE",
-      "category": "COMPRAS",
-      "runtimeFile": "src/main/resources/categorization/compras.json",
+      "category": "CASA_UTILIDADES",
+      "runtimeFile": "src/main/resources/categorization/casa-utilidades.json",
       "evidenceKind": "COMMERCIAL_IDENTITY",
       "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
       "commercialEntity": {
@@ -10258,7 +10446,8 @@
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
         "PREDOMINANT_ACTIVITY_DEFAULT; product and purchase markers are not required",
-        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence"
+        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence",
+        "CATEGORY_ALIGNMENT; home goods or clothing accessories, historical rule ID retained"
       ],
       "limitation": "Identidade comercial e grafias bancárias pendentes; contexto reduz risco, sem comprovar item ou recebedor.",
       "changes": {
@@ -10274,8 +10463,8 @@
     {
       "id": "compras.artex",
       "status": "ACTIVE",
-      "category": "COMPRAS",
-      "runtimeFile": "src/main/resources/categorization/compras.json",
+      "category": "CASA_UTILIDADES",
+      "runtimeFile": "src/main/resources/categorization/casa-utilidades.json",
       "evidenceKind": "COMMERCIAL_IDENTITY",
       "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
       "commercialEntity": {
@@ -10298,7 +10487,8 @@
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
         "PREDOMINANT_ACTIVITY_DEFAULT; product and purchase markers are not required",
-        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence"
+        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence",
+        "CATEGORY_ALIGNMENT; home goods or clothing accessories, historical rule ID retained"
       ],
       "limitation": "Identidade comercial e grafias bancárias pendentes; contexto reduz risco, sem comprovar item ou recebedor.",
       "changes": {
@@ -10314,8 +10504,8 @@
     {
       "id": "compras.santista-enxovais",
       "status": "ACTIVE",
-      "category": "COMPRAS",
-      "runtimeFile": "src/main/resources/categorization/compras.json",
+      "category": "CASA_UTILIDADES",
+      "runtimeFile": "src/main/resources/categorization/casa-utilidades.json",
       "evidenceKind": "COMMERCIAL_IDENTITY",
       "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
       "commercialEntity": {
@@ -10338,7 +10528,8 @@
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
         "PREDOMINANT_ACTIVITY_DEFAULT; product and purchase markers are not required",
-        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence"
+        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence",
+        "CATEGORY_ALIGNMENT; home goods or clothing accessories, historical rule ID retained"
       ],
       "limitation": "Identidade comercial e grafias bancárias pendentes; contexto reduz risco, sem comprovar item ou recebedor.",
       "changes": {
@@ -10354,8 +10545,8 @@
     {
       "id": "compras.casa-riachuelo",
       "status": "ACTIVE",
-      "category": "COMPRAS",
-      "runtimeFile": "src/main/resources/categorization/compras.json",
+      "category": "CASA_UTILIDADES",
+      "runtimeFile": "src/main/resources/categorization/casa-utilidades.json",
       "evidenceKind": "COMMERCIAL_IDENTITY",
       "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
       "commercialEntity": {
@@ -10378,7 +10569,8 @@
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
         "PREDOMINANT_ACTIVITY_DEFAULT; product and purchase markers are not required",
-        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence"
+        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence",
+        "CATEGORY_ALIGNMENT; home goods or clothing accessories, historical rule ID retained"
       ],
       "limitation": "Identidade comercial e grafias bancárias pendentes; contexto reduz risco, sem comprovar item ou recebedor.",
       "changes": {
@@ -11105,8 +11297,8 @@
     {
       "id": "compras.vivara",
       "status": "ACTIVE",
-      "category": "COMPRAS",
-      "runtimeFile": "src/main/resources/categorization/compras.json",
+      "category": "VESTUARIO",
+      "runtimeFile": "src/main/resources/categorization/vestuario.json",
       "evidenceKind": "COMMERCIAL_IDENTITY",
       "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
       "commercialEntity": {
@@ -11129,7 +11321,8 @@
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
         "PREDOMINANT_ACTIVITY_DEFAULT; product and purchase markers are not required",
-        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence"
+        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence",
+        "CATEGORY_ALIGNMENT; home goods or clothing accessories, historical rule ID retained"
       ],
       "limitation": "Identidade comercial e grafias bancárias pendentes; contexto reduz risco, sem comprovar item ou recebedor.",
       "changes": {
@@ -11145,8 +11338,8 @@
     {
       "id": "compras.life-by-vivara",
       "status": "ACTIVE",
-      "category": "COMPRAS",
-      "runtimeFile": "src/main/resources/categorization/compras.json",
+      "category": "VESTUARIO",
+      "runtimeFile": "src/main/resources/categorization/vestuario.json",
       "evidenceKind": "COMMERCIAL_IDENTITY",
       "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
       "commercialEntity": {
@@ -11169,7 +11362,8 @@
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
         "PREDOMINANT_ACTIVITY_DEFAULT; product and purchase markers are not required",
-        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence"
+        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence",
+        "CATEGORY_ALIGNMENT; home goods or clothing accessories, historical rule ID retained"
       ],
       "limitation": "Identidade comercial e grafias bancárias pendentes; contexto reduz risco, sem comprovar item ou recebedor.",
       "changes": {
@@ -11185,8 +11379,8 @@
     {
       "id": "compras.monte-carlo-joias",
       "status": "ACTIVE",
-      "category": "COMPRAS",
-      "runtimeFile": "src/main/resources/categorization/compras.json",
+      "category": "VESTUARIO",
+      "runtimeFile": "src/main/resources/categorization/vestuario.json",
       "evidenceKind": "COMMERCIAL_IDENTITY",
       "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
       "commercialEntity": {
@@ -11209,7 +11403,8 @@
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
         "PREDOMINANT_ACTIVITY_DEFAULT; product and purchase markers are not required",
-        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence"
+        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence",
+        "CATEGORY_ALIGNMENT; home goods or clothing accessories, historical rule ID retained"
       ],
       "limitation": "Identidade comercial e grafias bancárias pendentes; contexto reduz risco, sem comprovar item ou recebedor.",
       "changes": {
@@ -11225,8 +11420,8 @@
     {
       "id": "compras.rommanel",
       "status": "ACTIVE",
-      "category": "COMPRAS",
-      "runtimeFile": "src/main/resources/categorization/compras.json",
+      "category": "VESTUARIO",
+      "runtimeFile": "src/main/resources/categorization/vestuario.json",
       "evidenceKind": "COMMERCIAL_IDENTITY",
       "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
       "commercialEntity": {
@@ -11249,7 +11444,8 @@
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
         "PREDOMINANT_ACTIVITY_DEFAULT; product and purchase markers are not required",
-        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence"
+        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence",
+        "CATEGORY_ALIGNMENT; home goods or clothing accessories, historical rule ID retained"
       ],
       "limitation": "Identidade comercial e grafias bancárias pendentes; contexto reduz risco, sem comprovar item ou recebedor.",
       "changes": {
@@ -11265,8 +11461,8 @@
     {
       "id": "compras.morana",
       "status": "ACTIVE",
-      "category": "COMPRAS",
-      "runtimeFile": "src/main/resources/categorization/compras.json",
+      "category": "VESTUARIO",
+      "runtimeFile": "src/main/resources/categorization/vestuario.json",
       "evidenceKind": "COMMERCIAL_IDENTITY",
       "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
       "commercialEntity": {
@@ -11289,15 +11485,16 @@
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
         "PREDOMINANT_ACTIVITY_DEFAULT; product and purchase markers are not required",
-        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence"
+        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence",
+        "CATEGORY_ALIGNMENT; home goods or clothing accessories, historical rule ID retained"
       ],
       "limitation": "Identidade comercial e grafias bancárias pendentes; contexto reduz risco, sem comprovar item ou recebedor."
     },
     {
       "id": "compras.pandora-joias",
       "status": "ACTIVE",
-      "category": "COMPRAS",
-      "runtimeFile": "src/main/resources/categorization/compras.json",
+      "category": "VESTUARIO",
+      "runtimeFile": "src/main/resources/categorization/vestuario.json",
       "evidenceKind": "COMMERCIAL_IDENTITY",
       "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
       "commercialEntity": {
@@ -11320,7 +11517,8 @@
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
         "PREDOMINANT_ACTIVITY_DEFAULT; product and purchase markers are not required",
-        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence"
+        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence",
+        "CATEGORY_ALIGNMENT; home goods or clothing accessories, historical rule ID retained"
       ],
       "limitation": "Identidade comercial e grafias bancárias pendentes; contexto reduz risco, sem comprovar item ou recebedor.",
       "changes": {
@@ -11336,8 +11534,8 @@
     {
       "id": "compras.swarovski",
       "status": "ACTIVE",
-      "category": "COMPRAS",
-      "runtimeFile": "src/main/resources/categorization/compras.json",
+      "category": "VESTUARIO",
+      "runtimeFile": "src/main/resources/categorization/vestuario.json",
       "evidenceKind": "COMMERCIAL_IDENTITY",
       "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
       "commercialEntity": {
@@ -11360,7 +11558,8 @@
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
         "PREDOMINANT_ACTIVITY_DEFAULT; product and purchase markers are not required",
-        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence"
+        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence",
+        "CATEGORY_ALIGNMENT; home goods or clothing accessories, historical rule ID retained"
       ],
       "limitation": "Identidade comercial e grafias bancárias pendentes; contexto reduz risco, sem comprovar item ou recebedor.",
       "changes": {
@@ -11376,8 +11575,8 @@
     {
       "id": "compras.chilli-beans",
       "status": "ACTIVE",
-      "category": "COMPRAS",
-      "runtimeFile": "src/main/resources/categorization/compras.json",
+      "category": "VESTUARIO",
+      "runtimeFile": "src/main/resources/categorization/vestuario.json",
       "evidenceKind": "COMMERCIAL_IDENTITY",
       "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
       "commercialEntity": {
@@ -11407,7 +11606,8 @@
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
         "PREDOMINANT_ACTIVITY_DEFAULT; product and purchase markers are not required",
-        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence"
+        "PERSONAL_PIX_PAYEE_GUARD; name before alias or explicit CPF requires commercial evidence",
+        "CATEGORY_ALIGNMENT; home goods or clothing accessories, historical rule ID retained"
       ],
       "limitation": "Identidade comercial e grafias bancárias pendentes; contexto reduz risco, sem comprovar item ou recebedor.",
       "changes": {
@@ -14162,7 +14362,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -14241,7 +14442,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -14280,7 +14482,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -14319,7 +14522,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -17627,7 +17831,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -17666,7 +17871,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -17705,7 +17911,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -17739,12 +17946,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "CURSOS DE IDIOMAS",
+          "normalized": "CURSOS DE IDIOMAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -17778,12 +17993,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "CURSOS PREPARATORIOS",
+          "normalized": "CURSOS PREPARATORIOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -17817,12 +18040,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "CURSOS TECNICOS",
+          "normalized": "CURSOS TECNICOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -17861,7 +18092,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -19092,7 +19324,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -19131,7 +19364,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -19170,7 +19404,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -19209,7 +19444,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -19248,7 +19484,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -19287,7 +19524,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -19326,7 +19564,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -19365,7 +19604,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -23753,7 +23993,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -23832,7 +24073,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -25103,7 +25345,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -26573,7 +26816,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -26612,7 +26856,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -26651,7 +26896,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -26690,7 +26936,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -26729,7 +26976,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -27365,7 +27613,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -27785,7 +28034,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -27852,12 +28102,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "CLINICAS VETERINARIAS",
+          "normalized": "CLINICAS VETERINARIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -27893,12 +28151,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "HOSPITAIS VETERINARIOS",
+          "normalized": "HOSPITAIS VETERINARIOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -27972,12 +28238,27 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "PET SHOPS",
+          "normalized": "PET SHOPS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "PETSHOPS",
+          "normalized": "PETSHOPS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -28018,7 +28299,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -28059,7 +28341,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -28126,12 +28409,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "FARMACIAS",
+          "normalized": "FARMACIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -28166,12 +28457,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "DROGARIAS",
+          "normalized": "DROGARIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -28211,7 +28510,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -30768,7 +31068,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -30807,7 +31108,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -30846,7 +31148,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -30885,7 +31188,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -30924,7 +31228,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -30963,7 +31268,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -31002,7 +31308,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -31081,7 +31388,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -31120,7 +31428,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -31194,12 +31503,34 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "SUPERMERCADOS",
+          "normalized": "SUPERMERCADOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "SUPERMERC",
+          "normalized": "SUPERMERC",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "SUPERMERCAD",
+          "normalized": "SUPERMERCAD",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -31234,12 +31565,27 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "MERCADINHOS",
+          "normalized": "MERCADINHOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "MERCADINH",
+          "normalized": "MERCADINH",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -32507,12 +32853,27 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "HORTIFRUTIS",
+          "normalized": "HORTIFRUTIS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "HORTIFRUT",
+          "normalized": "HORTIFRUT",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -34352,12 +34713,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "HIPERMERCADOS",
+          "normalized": "HIPERMERCADOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -34396,7 +34765,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -34430,12 +34800,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "MERCEARIAS",
+          "normalized": "MERCEARIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -34469,12 +34847,20 @@
           "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
           "bankEvidence": "NOT_OBSERVED",
           "officialBillingDescriptor": false
+        },
+        {
+          "value": "SACOLÕES",
+          "normalized": "SACOLOES",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
         }
       ],
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -34513,7 +34899,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -37853,7 +38240,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -37892,7 +38280,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -37931,7 +38320,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -37970,7 +38360,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -38009,7 +38400,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -38048,7 +38440,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -41182,7 +41575,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -41223,7 +41617,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -41264,7 +41659,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -41424,7 +41820,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -41471,7 +41868,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -47721,7 +48119,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -47760,7 +48159,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -47799,7 +48199,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -47838,7 +48239,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -47877,7 +48279,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -47916,7 +48319,8 @@
       "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
       "reviewedAt": "2026-11-26",
       "decisionReasons": [
-        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence"
+        "GENERIC_ACTIVITY_FALLBACK; specific merchant evidence takes precedence",
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
       ],
       "limitation": "Expressão semântica/financeira, não identidade comercial; não homologada em todos os layouts bancários.",
       "changes": {
@@ -47966,6 +48370,1970 @@
           "NEW_OFFICIALLY_DOCUMENTED_NAME"
         ]
       }
+    },
+    {
+      "id": "beleza-cuidados-pessoais.cosmeticos",
+      "status": "ACTIVE",
+      "category": "BELEZA_CUIDADOS_PESSOAIS",
+      "runtimeFile": "src/main/resources/categorization/beleza-cuidados-pessoais.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "COSMETICO",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "COSMETICO",
+          "normalized": "COSMETICO",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "COSMETICOS",
+          "normalized": "COSMETICOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "COSMETICA",
+          "normalized": "COSMETICA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "COSMETICAS",
+          "normalized": "COSMETICAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "beleza-cuidados-pessoais.maquiagem",
+      "status": "ACTIVE",
+      "category": "BELEZA_CUIDADOS_PESSOAIS",
+      "runtimeFile": "src/main/resources/categorization/beleza-cuidados-pessoais.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "MAQUIAGEM",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "MAQUIAGEM",
+          "normalized": "MAQUIAGEM",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "MAQUIAGENS",
+          "normalized": "MAQUIAGENS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "beleza-cuidados-pessoais.estetica",
+      "status": "ACTIVE",
+      "category": "BELEZA_CUIDADOS_PESSOAIS",
+      "runtimeFile": "src/main/resources/categorization/beleza-cuidados-pessoais.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "ESTETICA",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "ESTETICA",
+          "normalized": "ESTETICA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "CLINICA ESTETICA",
+          "normalized": "CLINICA ESTETICA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "CLINICA DE ESTETICA",
+          "normalized": "CLINICA DE ESTETICA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "CLINICAS DE ESTETICA",
+          "normalized": "CLINICAS DE ESTETICA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ESTETICAS",
+          "normalized": "ESTETICAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "CLINICAS ESTETICAS",
+          "normalized": "CLINICAS ESTETICAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "casa-utilidades.utilidades-domesticas",
+      "status": "ACTIVE",
+      "category": "CASA_UTILIDADES",
+      "runtimeFile": "src/main/resources/categorization/casa-utilidades.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "UTILIDADES DOMESTICAS",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "UTILIDADES DOMESTICAS",
+          "normalized": "UTILIDADES DOMESTICAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "UTILIDADE DOMESTICA",
+          "normalized": "UTILIDADE DOMESTICA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "UTILIDADES DOMEST",
+          "normalized": "UTILIDADES DOMEST",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "UTILIDADE DOMEST",
+          "normalized": "UTILIDADE DOMEST",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "casa-utilidades.armarinhos",
+      "status": "ACTIVE",
+      "category": "CASA_UTILIDADES",
+      "runtimeFile": "src/main/resources/categorization/casa-utilidades.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "ARMARINHO",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "ARMARINHO",
+          "normalized": "ARMARINHO",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ARMARINHOS",
+          "normalized": "ARMARINHOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "casa-utilidades.bazar",
+      "status": "ACTIVE",
+      "category": "CASA_UTILIDADES",
+      "runtimeFile": "src/main/resources/categorization/casa-utilidades.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "BAZAR",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "BAZAR",
+          "normalized": "BAZAR",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "BAZARES",
+          "normalized": "BAZARES",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "casa-utilidades.decoracao",
+      "status": "ACTIVE",
+      "category": "CASA_UTILIDADES",
+      "runtimeFile": "src/main/resources/categorization/casa-utilidades.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "DECORACAO",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "DECORACAO",
+          "normalized": "DECORACAO",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "DECORACOES",
+          "normalized": "DECORACOES",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "casa-utilidades.utensilios",
+      "status": "ACTIVE",
+      "category": "CASA_UTILIDADES",
+      "runtimeFile": "src/main/resources/categorization/casa-utilidades.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "UTENSILIO",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "UTENSILIO",
+          "normalized": "UTENSILIO",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "UTENSILIOS",
+          "normalized": "UTENSILIOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "casa-utilidades.moveis",
+      "status": "ACTIVE",
+      "category": "CASA_UTILIDADES",
+      "runtimeFile": "src/main/resources/categorization/casa-utilidades.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "MOVEIS",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "MOVEIS",
+          "normalized": "MOVEIS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "MOBILIARIO",
+          "normalized": "MOBILIARIO",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "LOJA DE MOVEL",
+          "normalized": "LOJA DE MOVEL",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "casa-utilidades.artigos-para-casa",
+      "status": "ACTIVE",
+      "category": "CASA_UTILIDADES",
+      "runtimeFile": "src/main/resources/categorization/casa-utilidades.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "ARTIGOS PARA CASA",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "ARTIGOS PARA CASA",
+          "normalized": "ARTIGOS PARA CASA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ARTIGOS PARA O LAR",
+          "normalized": "ARTIGOS PARA O LAR",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ARTIGO PARA CASA",
+          "normalized": "ARTIGO PARA CASA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ARTIGOS DO LAR",
+          "normalized": "ARTIGOS DO LAR",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ARTIGOS DE CASA",
+          "normalized": "ARTIGOS DE CASA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ACESSORIOS PARA CASA",
+          "normalized": "ACESSORIOS PARA CASA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ACESSORIOS PARA O LAR",
+          "normalized": "ACESSORIOS PARA O LAR",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ACESSORIOS DOMESTICOS",
+          "normalized": "ACESSORIOS DOMESTICOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "contas-essenciais.agua-esgoto",
+      "status": "ACTIVE",
+      "category": "CONTAS_ESSENCIAIS",
+      "runtimeFile": "src/main/resources/categorization/contas-essenciais.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "FORNECIMENTO DE AGUA",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "FORNECIMENTO DE AGUA",
+          "normalized": "FORNECIMENTO DE AGUA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "AGUA E ESGOTO",
+          "normalized": "AGUA E ESGOTO",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "educacao.escola",
+      "status": "ACTIVE",
+      "category": "EDUCACAO",
+      "runtimeFile": "src/main/resources/categorization/educacao.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "ESCOLA",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "ESCOLA",
+          "normalized": "ESCOLA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ESCOLAS",
+          "normalized": "ESCOLAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "educacao.faculdade",
+      "status": "ACTIVE",
+      "category": "EDUCACAO",
+      "runtimeFile": "src/main/resources/categorization/educacao.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "FACULDADE",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "FACULDADE",
+          "normalized": "FACULDADE",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "FACULDADES",
+          "normalized": "FACULDADES",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "educacao.universidade",
+      "status": "ACTIVE",
+      "category": "EDUCACAO",
+      "runtimeFile": "src/main/resources/categorization/educacao.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "UNIVERSIDADE",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "UNIVERSIDADE",
+          "normalized": "UNIVERSIDADE",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "UNIVERSIDADES",
+          "normalized": "UNIVERSIDADES",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "esporte-bem-estar.academia",
+      "status": "ACTIVE",
+      "category": "ESPORTE_BEM_ESTAR",
+      "runtimeFile": "src/main/resources/categorization/esporte-bem-estar.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "ACADEMIA",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "ACADEMIA",
+          "normalized": "ACADEMIA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ACADEMIAS",
+          "normalized": "ACADEMIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "esporte-bem-estar.pilates",
+      "status": "ACTIVE",
+      "category": "ESPORTE_BEM_ESTAR",
+      "runtimeFile": "src/main/resources/categorization/esporte-bem-estar.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "PILATES",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "PILATES",
+          "normalized": "PILATES",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "esporte-bem-estar.yoga",
+      "status": "ACTIVE",
+      "category": "ESPORTE_BEM_ESTAR",
+      "runtimeFile": "src/main/resources/categorization/esporte-bem-estar.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "YOGA",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "YOGA",
+          "normalized": "YOGA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "games.loja-games",
+      "status": "ACTIVE",
+      "category": "GAMES",
+      "runtimeFile": "src/main/resources/categorization/games.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "LOJA DE GAMES",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "LOJA DE GAMES",
+          "normalized": "LOJA DE GAMES",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "LOJA DE JOGOS",
+          "normalized": "LOJA DE JOGOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "JOGOS ELETRONICOS",
+          "normalized": "JOGOS ELETRONICOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "impostos-tributos.iof-adicional",
+      "status": "ACTIVE",
+      "category": "IMPOSTOS_TRIBUTOS",
+      "runtimeFile": "src/main/resources/categorization/impostos-tributos.json",
+      "evidenceKind": "EXPLICIT_FINANCIAL_PURPOSE",
+      "runtimePolicy": "EXPLICIT_FINANCIAL_PURPOSE",
+      "commercialEntity": {
+        "catalogLabel": "IOF ADICIONAL",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "IOF ADICIONAL",
+          "normalized": "IOF ADICIONAL",
+          "nameEvidence": "LEGACY_OR_SYNTHETIC_INFERENCE",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "EXPLICIT_BANK_TAX_DEBIT; IOF ADICIONAL may include an automatic-charge period"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "internet-telefonia.telefonia",
+      "status": "ACTIVE",
+      "category": "INTERNET_TELEFONIA",
+      "runtimeFile": "src/main/resources/categorization/internet-telefonia.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "TELEFONIA",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "TELEFONIA",
+          "normalized": "TELEFONIA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "TELEFONIA MOVEL",
+          "normalized": "TELEFONIA MOVEL",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "TELEFONIA FIXA",
+          "normalized": "TELEFONIA FIXA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "internet-telefonia.banda-larga",
+      "status": "ACTIVE",
+      "category": "INTERNET_TELEFONIA",
+      "runtimeFile": "src/main/resources/categorization/internet-telefonia.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "INTERNET BANDA LARGA",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "INTERNET BANDA LARGA",
+          "normalized": "INTERNET BANDA LARGA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "SERVICO DE INTERNET",
+          "normalized": "SERVICO DE INTERNET",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "lazer.cinema",
+      "status": "ACTIVE",
+      "category": "LAZER",
+      "runtimeFile": "src/main/resources/categorization/lazer.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "CINEMA",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "CINEMA",
+          "normalized": "CINEMA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "CINEMAS",
+          "normalized": "CINEMAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "lazer.teatro",
+      "status": "ACTIVE",
+      "category": "LAZER",
+      "runtimeFile": "src/main/resources/categorization/lazer.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "TEATRO",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "TEATRO",
+          "normalized": "TEATRO",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "TEATROS",
+          "normalized": "TEATROS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "lazer.museu",
+      "status": "ACTIVE",
+      "category": "LAZER",
+      "runtimeFile": "src/main/resources/categorization/lazer.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "MUSEU",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "MUSEU",
+          "normalized": "MUSEU",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "MUSEUS",
+          "normalized": "MUSEUS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "pets.veterinaria",
+      "status": "ACTIVE",
+      "category": "PETS",
+      "runtimeFile": "src/main/resources/categorization/pets.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "VETERINARIA",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "VETERINARIA",
+          "normalized": "VETERINARIA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "VETERINARIO",
+          "normalized": "VETERINARIO",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "VETERINARIAS",
+          "normalized": "VETERINARIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "VETERINARIOS",
+          "normalized": "VETERINARIOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "pets.laboratorio-veterinario",
+      "status": "ACTIVE",
+      "category": "PETS",
+      "runtimeFile": "src/main/resources/categorization/pets.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "LABORATORIO VETERINARIO",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "LABORATORIO VETERINARIO",
+          "normalized": "LABORATORIO VETERINARIO",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "LABORATORIOS VETERINARIOS",
+          "normalized": "LABORATORIOS VETERINARIOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "saude.clinica",
+      "status": "ACTIVE",
+      "category": "SAUDE",
+      "runtimeFile": "src/main/resources/categorization/saude.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "CLINICA",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "CLINICA",
+          "normalized": "CLINICA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "CLINICAS",
+          "normalized": "CLINICAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "saude.laboratorio",
+      "status": "ACTIVE",
+      "category": "SAUDE",
+      "runtimeFile": "src/main/resources/categorization/saude.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "LABORATORIO",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "LABORATORIO",
+          "normalized": "LABORATORIO",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "LABORATORIOS",
+          "normalized": "LABORATORIOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "LABORAT",
+          "normalized": "LABORAT",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "saude.odontologia",
+      "status": "ACTIVE",
+      "category": "SAUDE",
+      "runtimeFile": "src/main/resources/categorization/saude.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "ODONTOLOGIA",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "ODONTOLOGIA",
+          "normalized": "ODONTOLOGIA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ODONTOLOGICO",
+          "normalized": "ODONTOLOGICO",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ODONTOLOGICA",
+          "normalized": "ODONTOLOGICA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ODONTOLOGICOS",
+          "normalized": "ODONTOLOGICOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ODONTOLOGICAS",
+          "normalized": "ODONTOLOGICAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "saude.hospital",
+      "status": "ACTIVE",
+      "category": "SAUDE",
+      "runtimeFile": "src/main/resources/categorization/saude.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "HOSPITAL",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "HOSPITAL",
+          "normalized": "HOSPITAL",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "HOSPITAIS",
+          "normalized": "HOSPITAIS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "supermercado.comercio-alimentos",
+      "status": "ACTIVE",
+      "category": "SUPERMERCADO",
+      "runtimeFile": "src/main/resources/categorization/supermercado.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "COMERCIO DE ALIMENTOS",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "COMERCIO DE ALIMENTOS",
+          "normalized": "COMERCIO DE ALIMENTOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "COMERCIO ALIMENTOS",
+          "normalized": "COMERCIO ALIMENTOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "COM DE ALIMENTOS",
+          "normalized": "COM DE ALIMENTOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "COM ALIMENTOS",
+          "normalized": "COM ALIMENTOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "tecnologia.informatica",
+      "status": "ACTIVE",
+      "category": "TECNOLOGIA",
+      "runtimeFile": "src/main/resources/categorization/tecnologia.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "INFORMATICA",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "INFORMATICA",
+          "normalized": "INFORMATICA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "LABORATORIO DE INFORMATICA",
+          "normalized": "LABORATORIO DE INFORMATICA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "LOJA DE INFORMATICA",
+          "normalized": "LOJA DE INFORMATICA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "tecnologia.acessorios-celular",
+      "status": "ACTIVE",
+      "category": "TECNOLOGIA",
+      "runtimeFile": "src/main/resources/categorization/tecnologia.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "ACESSORIOS PARA CELULAR",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "ACESSORIOS PARA CELULAR",
+          "normalized": "ACESSORIOS PARA CELULAR",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ACESSORIOS DE CELULAR",
+          "normalized": "ACESSORIOS DE CELULAR",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ACESSORIOS CELULAR",
+          "normalized": "ACESSORIOS CELULAR",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ACESSORIOS PARA CELULARES",
+          "normalized": "ACESSORIOS PARA CELULARES",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "transporte.oficina-mecanica",
+      "status": "ACTIVE",
+      "category": "TRANSPORTE",
+      "runtimeFile": "src/main/resources/categorization/transporte.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "OFICINA MECANICA",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "OFICINA MECANICA",
+          "normalized": "OFICINA MECANICA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "OFICINAS MECANICAS",
+          "normalized": "OFICINAS MECANICAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "transporte.autopecas",
+      "status": "ACTIVE",
+      "category": "TRANSPORTE",
+      "runtimeFile": "src/main/resources/categorization/transporte.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "AUTOPECAS",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "AUTOPECAS",
+          "normalized": "AUTOPECAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "AUTO PECAS",
+          "normalized": "AUTO PECAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "AUTOPECA",
+          "normalized": "AUTOPECA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "AUTO PECA",
+          "normalized": "AUTO PECA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "transporte.acessorios-automotivos",
+      "status": "ACTIVE",
+      "category": "TRANSPORTE",
+      "runtimeFile": "src/main/resources/categorization/transporte.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "ACESSORIOS AUTOMOTIVOS",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "ACESSORIOS AUTOMOTIVOS",
+          "normalized": "ACESSORIOS AUTOMOTIVOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ACESSORIO AUTOMOTIVO",
+          "normalized": "ACESSORIO AUTOMOTIVO",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "vestuario.moda",
+      "status": "ACTIVE",
+      "category": "VESTUARIO",
+      "runtimeFile": "src/main/resources/categorization/vestuario.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "MODA",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "MODA",
+          "normalized": "MODA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "MODAS",
+          "normalized": "MODAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "vestuario.roupas",
+      "status": "ACTIVE",
+      "category": "VESTUARIO",
+      "runtimeFile": "src/main/resources/categorization/vestuario.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "ROUPA",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "ROUPA",
+          "normalized": "ROUPA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ROUPAS",
+          "normalized": "ROUPAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "vestuario.confeccoes",
+      "status": "ACTIVE",
+      "category": "VESTUARIO",
+      "runtimeFile": "src/main/resources/categorization/vestuario.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "CONFECCAO",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "CONFECCAO",
+          "normalized": "CONFECCAO",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "CONFECCOES",
+          "normalized": "CONFECCOES",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "CONFEC",
+          "normalized": "CONFEC",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "vestuario.bijuterias",
+      "status": "ACTIVE",
+      "category": "VESTUARIO",
+      "runtimeFile": "src/main/resources/categorization/vestuario.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "BIJOUX",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "BIJOUX",
+          "normalized": "BIJOUX",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "BIJUTERIA",
+          "normalized": "BIJUTERIA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "BIJUTERIAS",
+          "normalized": "BIJUTERIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "vestuario.joalheria",
+      "status": "ACTIVE",
+      "category": "VESTUARIO",
+      "runtimeFile": "src/main/resources/categorization/vestuario.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "JOALHERIA",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "JOALHERIA",
+          "normalized": "JOALHERIA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "JOALHERIAS",
+          "normalized": "JOALHERIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "JOIAS",
+          "normalized": "JOIAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "vestuario.calcados",
+      "status": "ACTIVE",
+      "category": "VESTUARIO",
+      "runtimeFile": "src/main/resources/categorization/vestuario.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "CALCADO",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "CALCADO",
+          "normalized": "CALCADO",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "CALCADOS",
+          "normalized": "CALCADOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "CALCADISTA",
+          "normalized": "CALCADISTA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "vestuario.acessorios",
+      "status": "ACTIVE",
+      "category": "VESTUARIO",
+      "runtimeFile": "src/main/resources/categorization/vestuario.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "ACESSORIO",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "ACESSORIO",
+          "normalized": "ACESSORIO",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "ACESSORIOS",
+          "normalized": "ACESSORIOS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "viagens.agencia-turismo",
+      "status": "ACTIVE",
+      "category": "VIAGENS",
+      "runtimeFile": "src/main/resources/categorization/viagens.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "AGENCIA DE VIAGEM",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "AGENCIA DE VIAGEM",
+          "normalized": "AGENCIA DE VIAGEM",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "AGENCIA DE VIAGENS",
+          "normalized": "AGENCIA DE VIAGENS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "AGENCIAS DE VIAGENS",
+          "normalized": "AGENCIAS DE VIAGENS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "AGENCIA DE TURISMO",
+          "normalized": "AGENCIA DE TURISMO",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "viagens.hotel",
+      "status": "ACTIVE",
+      "category": "VIAGENS",
+      "runtimeFile": "src/main/resources/categorization/viagens.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "HOTEL",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "HOTEL",
+          "normalized": "HOTEL",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "HOTEIS",
+          "normalized": "HOTEIS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "viagens.pousada",
+      "status": "ACTIVE",
+      "category": "VIAGENS",
+      "runtimeFile": "src/main/resources/categorization/viagens.json",
+      "evidenceKind": "ACTIVITY_DESCRIPTOR",
+      "runtimePolicy": "ACTIVITY_DESCRIPTOR",
+      "commercialEntity": {
+        "catalogLabel": "POUSADA",
+        "name": null,
+        "status": "NOT_APPLICABLE",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "POUSADA",
+          "normalized": "POUSADA",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        },
+        {
+          "value": "POUSADAS",
+          "normalized": "POUSADAS",
+          "nameEvidence": "ACTIVITY_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "CLEAR_COMMERCIAL_ACTIVITY; singular, plural and bounded bank abbreviations are accepted in named Pix payees"
+      ],
+      "limitation": "Activity/operation descriptor; no commercial entity or observed bank alias is claimed."
+    },
+    {
+      "id": "supermercado.okeo",
+      "status": "ACTIVE",
+      "category": "SUPERMERCADO",
+      "runtimeFile": "src/main/resources/categorization/supermercado.json",
+      "evidenceKind": "COMMERCIAL_IDENTITY",
+      "runtimePolicy": "PREDOMINANT_ACTIVITY_DEFAULT",
+      "commercialEntity": {
+        "catalogLabel": "OKEO",
+        "name": null,
+        "status": "PENDING",
+        "verifiedAt": null,
+        "sourceIds": []
+      },
+      "aliases": [
+        {
+          "value": "OKEO",
+          "normalized": "OKEO",
+          "nameEvidence": "USER_REPORTED_BANK_DESCRIPTOR",
+          "bankEvidence": "NOT_OBSERVED",
+          "officialBillingDescriptor": false,
+          "reportedByUser": true
+        }
+      ],
+      "bankAliasVerification": "PENDING_NO_OBSERVED_STATEMENT",
+      "reviewedAt": "2026-11-26",
+      "decisionReasons": [
+        "USER_REPORTED_SUPERMARKET_ALIAS; no independent source or real statement fixture is claimed"
+      ],
+      "limitation": "Reported by user as a supermarket; not independently verified."
     }
   ],
   "policyRevision": "PREDOMINANT_ACTIVITY_DEFAULT",
@@ -47986,5 +50354,14 @@
     "bankAliasVerificationPending": 1210,
     "reviewOnly": 37,
     "reviewedExistingUnchanged": 337
-  }
+  },
+  "serviceFallbacks": [
+    {
+      "id": "transferencias-pessoais.nome-provavel",
+      "category": "TRANSFERENCIAS_PESSOAIS",
+      "strategy": "Outgoing Pix plus plausible alphabetic name; only after own-account and commercial recognition, excluding corporate markers and unresolved merchant evidence.",
+      "individualNamesStored": false,
+      "nature": "TRANSFER"
+    }
+  ]
 }

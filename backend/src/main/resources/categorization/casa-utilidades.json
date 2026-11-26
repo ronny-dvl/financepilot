@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "category": "CASA_UTILIDADES",
+  "rules": [
+    {"id":"compras.madeira-madeira","aliases":["MADEIRA MADEIRA","MADEIRAMADEIRA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"compras.mobly","aliases":["MOBLY"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"compras.tok-stok","aliases":["TOK STOK","TOKSTOK"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"compras.etna-moveis","aliases":["ETNA MOVEIS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"compras.camicado","aliases":["CAMICADO"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"compras.westwing","aliases":["WESTWING"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"compras.mmartan","aliases":["MMARTAN","M MARTAN"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"compras.artex","aliases":["ARTEX"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"compras.santista-enxovais","aliases":["SANTISTA ENXOVAIS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"compras.casa-riachuelo","aliases":["CASA RIACHUELO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[],"refines":["vestuario.riachuelo"]},
+    {"id":"casa-utilidades.utilidades-domesticas","aliases":["UTILIDADES DOMESTICAS","UTILIDADE DOMESTICA","UTILIDADES DOMEST","UTILIDADE DOMEST"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"casa-utilidades.armarinhos","aliases":["ARMARINHO","ARMARINHOS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"casa-utilidades.bazar","aliases":["BAZAR","BAZARES"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"casa-utilidades.decoracao","aliases":["DECORACAO","DECORACOES"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"casa-utilidades.utensilios","aliases":["UTENSILIO","UTENSILIOS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"casa-utilidades.moveis","aliases":["MOVEIS","MOBILIARIO","LOJA DE MOVEL"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"casa-utilidades.artigos-para-casa","aliases":["ARTIGOS PARA CASA","ARTIGOS PARA O LAR","ARTIGO PARA CASA","ARTIGOS DO LAR","ARTIGOS DE CASA","ACESSORIOS PARA CASA","ACESSORIOS PARA O LAR","ACESSORIOS DOMESTICOS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[],"refines":["vestuario.acessorios"]}
+  ]
+}

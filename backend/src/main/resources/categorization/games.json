@@ -37,6 +37,7 @@
     {"id":"games.gog-com","aliases":["GOG COM"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"games.humble-bundle","aliases":["HUMBLE BUNDLE","HUMBLEBUNDLE"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"games.netflix-games","aliases":["NETFLIX GAMES"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[],"refines":["assinaturas.netflix"]},
-    {"id":"games.google-play-games","aliases":["GOOGLE PLAY GAMES"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]}
+    {"id":"games.google-play-games","aliases":["GOOGLE PLAY GAMES"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"games.loja-games","aliases":["LOJA DE GAMES","LOJA DE JOGOS","JOGOS ELETRONICOS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]}
   ]
 }

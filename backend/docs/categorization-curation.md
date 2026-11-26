@@ -3,7 +3,8 @@
 ## Política atual
 
 Priorizar cobertura pela atividade predominante do estabelecimento, mantendo
-as 23 categorias, 1.210 regras e 1.493 aliases. Não houve expansão do catálogo.
+25 categorias, 1.257 regras e 1.659 aliases, incluindo descritores comerciais
+locais e Casa e utilidades. IDs antigos foram mantidos nas migrações de categoria.
 
 Foram removidos os includeAny obrigatórios de compra e todos os concludeAny
 dos catálogos, inclusive quarentenas de marketplaces. A capacidade opcional
@@ -25,7 +26,7 @@ Contextos ficam restritos às siglas ambíguas (VIVO/CLARO/TIM com TELEFONIA,
 EDP/LIGHT com ENERGIA) e à indicação de pessoa física em Pix. O matcher
 reconhece o estabelecimento sozinho, mas não usa um sobrenome dentro de um
 favorecido pessoal sem contexto comercial: PIX ENVIADO CARLOS FERRETTO →
-OUTROS/UNKNOWN/requiresReview. Referências numéricas e intermediadores não
+Transferências pessoais, com natureza TRANSFER. Referências numéricas e intermediadores não
 desqualificam um estabelecimento. Evidências comerciais explícitas permitem
 o contexto; não foi criada uma lista de nomes pessoais.
 
@@ -62,7 +63,10 @@ continuar ambígua sem mais contexto. Marcas independentes conflitantes e
 descrições incompreensíveis continuam em OUTROS. Natureza financeira pode
 exigir revisão mesmo quando a categoria comercial é conhecida.
 
-Os cálculos e invariantes da fase 4.1 não foram alterados:
+Os totais financeiros foram preservados.
+As transferências pessoais agora compõem categorizedExpenses e expensesByCategory
+por solicitação do gráfico, mantendo natureza TRANSFER. transferOutflow segue
+separado para contas próprias, sem duplicar a saída. A reconciliação permanece:
 totalOutflow = categorizedExpenses + uncategorizedOutflow + transferOutflow;
 categorizedExpenses = soma(expensesByCategory). Entradas não viram consumo;
 investimentos e transferências próprias ficam fora dele; estornos positivos

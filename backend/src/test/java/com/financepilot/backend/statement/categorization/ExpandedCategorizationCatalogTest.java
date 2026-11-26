@@ -64,11 +64,11 @@ class ExpandedCategorizationCatalogTest {
 
     @ParameterizedTest(name = "Sem contexto obrigatório: {0}")
     @MethodSource("guardedAliases")
-    void shouldNotClassifyPersonalNamesOrAmbiguousTermsWithoutRequiredContext(String description) {
+    void shouldRecognizePersonalPayeesWithoutInferringAnAmbiguousUtilityCategory(String description) {
         var result = SERVICE.categorize(description);
-        assertEquals(TransactionCategory.OUTROS, result.category());
-        assertEquals(CategorizationSource.UNKNOWN, result.source());
-        assertTrue(result.requiresReview());
+        assertEquals(TransactionCategory.TRANSFERENCIAS_PESSOAIS, result.category());
+        assertEquals(CategorizationSource.KEYWORD_RULE, result.source());
+        assertFalse(result.requiresReview());
     }
 
     private static Stream<String> guardedAliases() {
@@ -175,6 +175,13 @@ class ExpandedCategorizationCatalogTest {
             DARF | IMPOSTOS_TRIBUTOS
             PIX TRANSFERENCIA ENTRE MINHAS CONTAS | TRANSFERENCIAS
             TRANSFERENCIA MESMA TITULARIDADE | TRANSFERENCIAS
+            PIX ENVIADO MARIA RENNER | TRANSFERENCIAS_PESSOAIS
+            PIX ENVIADO CARLOS FLEURY | TRANSFERENCIAS_PESSOAIS
+            PIX ENVIADO ANA GRANADO | TRANSFERENCIAS_PESSOAIS
+            PIX ENVIADO JOAO PERINI | TRANSFERENCIAS_PESSOAIS
+            PIX ENVIADO JOAO MADERO | TRANSFERENCIAS_PESSOAIS
+            PIX ENVIADO ANA CLARO | TRANSFERENCIAS_PESSOAIS
+            PIX ENVIADO MARIA SILVA | TRANSFERENCIAS_PESSOAIS
             """)
     void shouldClassifySyntheticBankDescriptions(String description, TransactionCategory expected) {
         var result = SERVICE.categorize(description);
@@ -188,9 +195,7 @@ class ExpandedCategorizationCatalogTest {
             "MERCADO PAGO", "MERCADOPAGO", "PAGSEGURO", "PAGBANK", "STRIPE", "PAYPAL",
             "CIELO", "GETNET", "STONE", "REDE", "PICPAY", "HOTMART", "RAPPI",
             "MERCADO PAGO MARIA SILVA", "PAYPAL JOAO SILVA", "PAGSEGURO CLIENTE TESTE",
-            "PIX ENVIADO MARIA RENNER", "PIX ENVIADO CARLOS FLEURY", "PIX ENVIADO ANA GRANADO",
-            "PIX ENVIADO JOAO PERINI", "PIX ENVIADO JOAO MADERO", "PIX ENVIADO ANA CLARO",
-            "PIX ENVIADO MARIA SILVA", "TED JOAO SILVA", "PIX TRANSF JOSE",
+            "TED JOAO SILVA",
             "NUBANK", "ITAU", "SANTANDER", "BRADESCO", "BANCO DO BRASIL", "INTER",
             "XP", "RICO", "CLEAR", "INSS", "SALARIO INSS", "APLICACAO", "RESGATE",
             "AMAZON", "AMZN", "APPLE", "GOOGLE", "MICROSOFT", "99", "EATS",
@@ -240,8 +245,8 @@ class ExpandedCategorizationCatalogTest {
     }
 
     @Test
-    void shouldCoverEveryClassifiableCategoryAndReserveOthersForFallback() {
-        assertEquals(EnumSet.complementOf(EnumSet.of(TransactionCategory.OUTROS)),
+    void shouldCoverCommercialCategoriesAndReservePersonalNamesForTheServiceFallback() {
+        assertEquals(EnumSet.complementOf(EnumSet.of(TransactionCategory.OUTROS, TransactionCategory.TRANSFERENCIAS_PESSOAIS)),
                 CATALOG.rules().stream().map(CompiledCatalog.CompiledRule::category).collect(Collectors.toSet()));
     }
 

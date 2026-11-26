@@ -69,6 +69,7 @@
     {"id":"contas-essenciais.gas-de-cozinha","aliases":["GAS DE COZINHA"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"contas-essenciais.botijao-de-gas","aliases":["BOTIJAO DE GAS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"contas-essenciais.light","aliases":["LIGHT"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[{"matchType":"WORD","value":"ENERGIA"}],"exclude":[]},
-    {"id":"contas-essenciais.edp","aliases":["EDP"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[{"matchType":"WORD","value":"ENERGIA"}],"exclude":[]}
+    {"id":"contas-essenciais.edp","aliases":["EDP"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[{"matchType":"WORD","value":"ENERGIA"}],"exclude":[]},
+    {"id":"contas-essenciais.agua-esgoto","aliases":["FORNECIMENTO DE AGUA","AGUA E ESGOTO"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]}
   ]
 }

@@ -67,6 +67,8 @@
     {"id":"tecnologia.reparo-de-celular","aliases":["REPARO DE CELULAR"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"tecnologia.hospedagem-de-site","aliases":["HOSPEDAGEM DE SITE"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"tecnologia.registro-de-dominio","aliases":["REGISTRO DE DOMINIO"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"tecnologia.certificado-digital","aliases":["CERTIFICADO DIGITAL"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]}
+    {"id":"tecnologia.certificado-digital","aliases":["CERTIFICADO DIGITAL"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"tecnologia.informatica","aliases":["INFORMATICA","LABORATORIO DE INFORMATICA","LOJA DE INFORMATICA"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[],"refines":["saude.laboratorio"]},
+    {"id":"tecnologia.acessorios-celular","aliases":["ACESSORIOS PARA CELULAR","ACESSORIOS DE CELULAR","ACESSORIOS CELULAR","ACESSORIOS PARA CELULARES"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[],"refines":["vestuario.acessorios"]}
   ]
 }

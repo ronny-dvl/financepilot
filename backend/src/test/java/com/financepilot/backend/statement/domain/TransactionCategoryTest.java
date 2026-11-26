@@ -10,13 +10,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TransactionCategoryTest {
     @Test
-    void shouldExposeTwentyThreeIdentifiersPreservingExistingOrder() {
+    void shouldExposeTwentyFiveIdentifiersPreservingExistingOrder() {
         assertEquals(List.of(
                 "ALIMENTACAO", "TRANSPORTE", "SAUDE", "ASSINATURAS", "MORADIA",
                 "EDUCACAO", "LAZER", "COMPRAS", "TRANSFERENCIAS", "OUTROS",
                 "SUPERMERCADO", "CONTAS_ESSENCIAIS", "INTERNET_TELEFONIA", "GAMES",
                 "TECNOLOGIA", "VESTUARIO", "ESPORTE_BEM_ESTAR", "BELEZA_CUIDADOS_PESSOAIS",
-                "PETS", "VIAGENS", "INVESTIMENTOS", "TARIFAS_BANCARIAS", "IMPOSTOS_TRIBUTOS"
+                "PETS", "VIAGENS", "INVESTIMENTOS", "TARIFAS_BANCARIAS", "IMPOSTOS_TRIBUTOS", "CASA_UTILIDADES",
+                "TRANSFERENCIAS_PESSOAIS"
         ), Arrays.stream(TransactionCategory.values()).map(Enum::name).toList());
     }
 

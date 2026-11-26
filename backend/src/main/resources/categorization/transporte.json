@@ -86,6 +86,9 @@
     {"id":"transporte.recarga-transporte","aliases":["RECARGA TRANSPORTE"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"transporte.pagamento-pedagio","aliases":["PAGAMENTO PEDAGIO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"transporte.corrida-taxi","aliases":["CORRIDA TAXI"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"transporte.estacionament","aliases":["ESTACIONAMENTO","ESTACIONAMENTOS"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]}
+    {"id":"transporte.estacionament","aliases":["ESTACIONAMENTO","ESTACIONAMENTOS"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"transporte.oficina-mecanica","aliases":["OFICINA MECANICA","OFICINAS MECANICAS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"transporte.autopecas","aliases":["AUTOPECAS","AUTO PECAS","AUTOPECA","AUTO PECA"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"transporte.acessorios-automotivos","aliases":["ACESSORIOS AUTOMOTIVOS","ACESSORIO AUTOMOTIVO"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[],"refines":["vestuario.acessorios"]}
   ]
 }

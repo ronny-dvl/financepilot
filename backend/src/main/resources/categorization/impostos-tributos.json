@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "category": "IMPOSTOS_TRIBUTOS",
   "rules": [
     {"id":"impostos-tributos.pagamento-darf","aliases":["PAGAMENTO DARF","PGTO DARF","PG DARF"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
@@ -29,6 +29,7 @@
     {"id":"impostos-tributos.iof-standalone","aliases":["IOF"],"priority":250,"matchType":"EXACT","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"impostos-tributos.iptu-standalone","aliases":["IPTU"],"priority":250,"matchType":"EXACT","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"impostos-tributos.ipva-standalone","aliases":["IPVA"],"priority":250,"matchType":"EXACT","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"impostos-tributos.darf-standalone","aliases":["DARF"],"priority":250,"matchType":"EXACT","specificity":"SPECIFIC","include":[],"exclude":[]}
+    {"id":"impostos-tributos.darf-standalone","aliases":["DARF"],"priority":250,"matchType":"EXACT","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.iof-adicional","aliases":["IOF ADICIONAL"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]}
   ]
 }

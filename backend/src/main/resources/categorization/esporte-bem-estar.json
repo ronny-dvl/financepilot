@@ -35,8 +35,11 @@
     {"id":"esporte-bem-estar.estudio-pilates","aliases":["ESTUDIO PILATES"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"esporte-bem-estar.aula-de-pilates","aliases":["AULA DE PILATES"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"esporte-bem-estar.aula-de-natacao","aliases":["AULA DE NATACAO"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"esporte-bem-estar.escola-de-natacao","aliases":["ESCOLA DE NATACAO"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"esporte-bem-estar.escola-de-natacao","aliases":["ESCOLA DE NATACAO"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[],"refines":["educacao.escola"]},
     {"id":"esporte-bem-estar.personal-trainer","aliases":["PERSONAL TRAINER"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"esporte-bem-estar.aula-de-yoga","aliases":["AULA DE YOGA"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]}
+    {"id":"esporte-bem-estar.aula-de-yoga","aliases":["AULA DE YOGA"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"esporte-bem-estar.academia","aliases":["ACADEMIA","ACADEMIAS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"esporte-bem-estar.pilates","aliases":["PILATES"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"esporte-bem-estar.yoga","aliases":["YOGA"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]}
   ]
 }

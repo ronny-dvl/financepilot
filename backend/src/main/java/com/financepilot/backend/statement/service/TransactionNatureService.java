@@ -40,6 +40,8 @@ public class TransactionNatureService {
         }
         TransactionNature nature = identifyOperation(normalize(description), category, amount.signum() < 0);
         if ((amount.signum() > 0 && nature == TransactionNature.EXPENSE)
+                || (amount.signum() > 0 && category == TransactionCategory.TRANSFERENCIAS_PESSOAIS
+                    && nature == TransactionNature.TRANSFER)
                 || (amount.signum() < 0 && nature == TransactionNature.INCOME)) {
             return TransactionNature.UNKNOWN;
         }
@@ -49,7 +51,8 @@ public class TransactionNatureService {
     private TransactionNature identifyOperation(String normalized, TransactionCategory category,
             boolean confirmedDebit) {
         boolean consumptionCategory = category != TransactionCategory.INVESTIMENTOS
-                && category != TransactionCategory.TRANSFERENCIAS;
+                && category != TransactionCategory.TRANSFERENCIAS
+                && category != TransactionCategory.TRANSFERENCIAS_PESSOAIS;
 
         if (containsAnyPhrase(normalized, "AGENDADO", "AGENDADA", "PENDENTE", "CANCELADO", "CANCELADA",
                 "ESTORNADO", "ESTORNADA", "NAO PAGO", "NAO PAGA", "A PAGAR")) {
@@ -72,6 +75,11 @@ public class TransactionNatureService {
         if (startsWithAnyPhrase(normalized, "CREDITO DE SALARIO", "PAGAMENTO DE SALARIO")) {
 
             return TransactionNature.INCOME;
+        }
+
+        if (category == TransactionCategory.TRANSFERENCIAS_PESSOAIS
+                && startsWithAnyPhrase(normalized, "PIX ENVIADO", "PIX TRANSF", "PIX QRS")) {
+            return TransactionNature.TRANSFER;
         }
 
         // 3. Compras e pagamentos explícitos
@@ -108,6 +116,13 @@ public class TransactionNatureService {
             if (category == TransactionCategory.TARIFAS_BANCARIAS && startsWithAnyPhrase(normalized,
                     "TAR", "TARIFA", "ANUID", "ANUIDADE", "CESTA DE SERVICOS BANCARIOS",
                     "PACOTE DE SERVICOS BANCARIOS", "COMISSAO DE PERMANENCIA")) {
+                return TransactionNature.EXPENSE;
+            }
+            // Bank tax debits need no purchase marker. Recognition by the catalog and the
+            // negative amount are both required; scheduled/refunded/own-account operations
+            // have already been handled above.
+            if (category == TransactionCategory.IMPOSTOS_TRIBUTOS && startsWithAnyPhrase(normalized,
+                    "IOF", "IPVA", "IPTU", "DARF", "DAS", "GPS INSS", "GUIA DE TRIBUTOS")) {
                 return TransactionNature.EXPENSE;
             }
         }

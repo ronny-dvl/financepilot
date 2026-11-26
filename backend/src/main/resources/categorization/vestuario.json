@@ -95,6 +95,21 @@
     {"id":"vestuario.renner","aliases":["RENNER"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"vestuario.hering","aliases":["HERING"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"vestuario.marisa","aliases":["MARISA"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"vestuario.lojas-torra","aliases":["LOJAS TORRA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]}
+    {"id":"vestuario.lojas-torra","aliases":["LOJAS TORRA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"compras.vivara","aliases":["VIVARA"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"compras.life-by-vivara","aliases":["LIFE BY VIVARA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"compras.monte-carlo-joias","aliases":["MONTE CARLO JOIAS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"compras.rommanel","aliases":["ROMMANEL"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"compras.morana","aliases":["MORANA"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"compras.pandora-joias","aliases":["PANDORA JOIAS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"compras.swarovski","aliases":["SWAROVSKI"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"compras.chilli-beans","aliases":["CHILLI BEANS","CHILLIBEANS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"vestuario.moda","aliases":["MODA","MODAS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"vestuario.roupas","aliases":["ROUPA","ROUPAS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"vestuario.confeccoes","aliases":["CONFECCAO","CONFECCOES","CONFEC"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"vestuario.bijuterias","aliases":["BIJOUX","BIJUTERIA","BIJUTERIAS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"vestuario.joalheria","aliases":["JOALHERIA","JOALHERIAS","JOIAS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"vestuario.calcados","aliases":["CALCADO","CALCADOS","CALCADISTA"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"vestuario.acessorios","aliases":["ACESSORIO","ACESSORIOS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]}
   ]
 }

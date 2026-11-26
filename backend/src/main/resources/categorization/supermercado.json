@@ -2,8 +2,8 @@
   "version": 2,
   "category": "SUPERMERCADO",
   "rules": [
-    {"id":"alimentacao.supermercado","aliases":["SUPERMERCADO"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"alimentacao.mercadinho","aliases":["MERCADINHO"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"alimentacao.supermercado","aliases":["SUPERMERCADO","SUPERMERCADOS","SUPERMERC","SUPERMERCAD"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"alimentacao.mercadinho","aliases":["MERCADINHO","MERCADINHOS","MERCADINH"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"alimentacao.atacadao","aliases":["ATACADAO"],"priority":100,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"supermercado.carrefour","aliases":["CARREFOUR"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"supermercado.assai-atacadista","aliases":["ASSAI ATACADISTA","ASSAI"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
@@ -35,7 +35,7 @@
     {"id":"supermercado.hirota-food","aliases":["HIROTA FOOD","HIROTA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"supermercado.oba-hortifruti","aliases":["OBA HORTIFRUTI","OBAHORTIFRUTI"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"supermercado.hortifruti-natural-da-terra","aliases":["HORTIFRUTI NATURAL DA TERRA","NATURAL DA TERRA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"supermercado.hortifruti","aliases":["HORTIFRUTI"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"supermercado.hortifruti","aliases":["HORTIFRUTI","HORTIFRUTIS","HORTIFRUT"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"supermercado.sonda-supermercados","aliases":["SONDA SUPERMERCADOS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"supermercado.barbosa-supermercados","aliases":["BARBOSA SUPERMERCADOS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"supermercado.nagumo","aliases":["NAGUMO"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
@@ -85,12 +85,14 @@
     {"id":"supermercado.superprix","aliases":["SUPERPRIX"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"supermercado.rede-economia-supermercados","aliases":["REDE ECONOMIA SUPERMERCADOS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"supermercado.dom-atacadista","aliases":["DOM ATACADISTA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"supermercado.hipermercado","aliases":["HIPERMERCADO"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"supermercado.hipermercado","aliases":["HIPERMERCADO","HIPERMERCADOS"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"supermercado.atacarejo","aliases":["ATACAREJO"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"supermercado.mercearia","aliases":["MERCEARIA"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"supermercado.sacolao","aliases":["SACOLAO"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"supermercado.mercearia","aliases":["MERCEARIA","MERCEARIAS"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"supermercado.sacolao","aliases":["SACOLAO","SACOLÕES"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"supermercado.feira-livre","aliases":["FEIRA LIVRE"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"supermercado.st-marche","aliases":["ST MARCHE"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"supermercado.pague-menos","aliases":["SUPERMERCADOS PAGUE MENOS","PAGUE MENOS SUPERMERCADOS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]}
+    {"id":"supermercado.pague-menos","aliases":["SUPERMERCADOS PAGUE MENOS","PAGUE MENOS SUPERMERCADOS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"supermercado.comercio-alimentos","aliases":["COMERCIO DE ALIMENTOS","COMERCIO ALIMENTOS","COM DE ALIMENTOS","COM ALIMENTOS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"supermercado.okeo","aliases":["OKEO"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]}
   ]
 }

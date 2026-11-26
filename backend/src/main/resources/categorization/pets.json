@@ -13,14 +13,16 @@
     {"id":"pets.petz-seres","aliases":["PETZ SERES"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"pets.seres-veterinaria","aliases":["SERES VETERINARIA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"pets.wevets","aliases":["WEVETS"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"pets.hospital-vet-popular","aliases":["HOSPITAL VET POPULAR"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"pets.hospital-vet-popular","aliases":["HOSPITAL VET POPULAR"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[],"refines":["saude.hospital"]},
     {"id":"pets.hospital-veterinario-sena-madureira","aliases":["HOSPITAL VETERINARIO SENA MADUREIRA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"pets.clinica-veterinaria","aliases":["CLINICA VETERINARIA"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"pets.hospital-veterinario","aliases":["HOSPITAL VETERINARIO"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"pets.clinica-veterinaria","aliases":["CLINICA VETERINARIA","CLINICAS VETERINARIAS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[],"refines":["saude.clinica"]},
+    {"id":"pets.hospital-veterinario","aliases":["HOSPITAL VETERINARIO","HOSPITAIS VETERINARIOS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[],"refines":["saude.hospital"]},
     {"id":"pets.consulta-veterinaria","aliases":["CONSULTA VETERINARIA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"pets.pet-shop","aliases":["PET SHOP","PETSHOP"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"pets.pet-shop","aliases":["PET SHOP","PETSHOP","PET SHOPS","PETSHOPS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"pets.banho-e-tosa","aliases":["BANHO E TOSA"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"pets.racao-animal","aliases":["RACAO ANIMAL"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"pets.plano-de-saude-pet","aliases":["PLANO DE SAUDE PET"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]}
+    {"id":"pets.plano-de-saude-pet","aliases":["PLANO DE SAUDE PET"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"pets.veterinaria","aliases":["VETERINARIA","VETERINARIO","VETERINARIAS","VETERINARIOS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"pets.laboratorio-veterinario","aliases":["LABORATORIO VETERINARIO","LABORATORIOS VETERINARIOS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[],"refines":["saude.laboratorio"]}
   ]
 }

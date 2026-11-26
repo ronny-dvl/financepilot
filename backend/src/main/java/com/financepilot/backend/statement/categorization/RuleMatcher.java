@@ -53,7 +53,10 @@ public final class RuleMatcher {
     }
 
     public List<RuleMatch> match(String description) {
-        String normalized = normalizer.normalize(description);
+        return matchNormalized(normalizer.normalize(description));
+    }
+
+    public List<RuleMatch> matchNormalized(String normalized) {
         if (normalized.isEmpty()) return List.of();
         List<String> words = List.of(normalized.split(" "));
         String padded = " " + normalized + " ";
@@ -118,6 +121,9 @@ public final class RuleMatcher {
     // payee, a name before a merchant surname (or an explicit CPF) needs commercial evidence.
     // Merchant suffixes such as city/branch and bank references remain valid; no name list is used.
     private boolean isPersonalPixPayee(CompiledRule rule, String description, int start) {
+        // An activity descriptor identifies a business segment even after a person's name
+        // (e.g. a local shop named after its owner). Merchant surnames alone still need the guard.
+        if (rule.specificity() == CategoryCatalog.Specificity.GENERIC) return false;
         switch (rule.category()) {
             case INVESTIMENTOS, TRANSFERENCIAS, TARIFAS_BANCARIAS, IMPOSTOS_TRIBUTOS -> { return false; }
             default -> { }

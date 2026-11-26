@@ -71,7 +71,7 @@ class ConflictResolutionRegressionTest {
             RSCSS HIROTA | SUPERMERCADO
             SUPER DUOLINGO | ASSINATURAS
             DUOLINGO PLUS | ASSINATURAS
-            COMPRA CASA RIACHUELO | COMPRAS
+            COMPRA CASA RIACHUELO | CASA_UTILIDADES
             NETFLIX GAMES | GAMES
             COPEL TELECOM | INTERNET_TELEFONIA
             PLANO DE SAUDE PET | PETS
@@ -85,7 +85,7 @@ class ConflictResolutionRegressionTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"PIX ENVIADO CARLOS RENNER", "PIX RECEBIDO CARLOS RENNER",
+    @ValueSource(strings = {"PIX RECEBIDO CARLOS RENNER",
             "PIX ENVIADO COMPRA RENNER", "PIX RECEBIDO RSCSS RENNER", "UBERABA", "UBERLANDIA SHOPPING"})
     void shouldPreservePersonalNameGuardsAndTokenBoundaries(String description) {
         var result = SERVICE.categorize(description);

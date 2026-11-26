@@ -205,6 +205,7 @@ class CategorySummaryServiceTest {
         List<TransactionCategory> categories = Arrays.stream(TransactionCategory.values())
                 .filter(category -> category != TransactionCategory.OUTROS
                         && category != TransactionCategory.TRANSFERENCIAS
+                        && category != TransactionCategory.TRANSFERENCIAS_PESSOAIS
                         && category != TransactionCategory.INVESTIMENTOS)
                 .toList();
         CategorySummaryResponse result = service.calculate(categories.stream()
@@ -262,6 +263,26 @@ class CategorySummaryServiceTest {
                 .add(result.uncategorizedOutflow()).add(result.transferOutflow())));
         assertEquals(0, result.categorizedExpenses().compareTo(result.expensesByCategory().values()
                 .stream().reduce(BigDecimal.ZERO, BigDecimal::add)));
+    }
+
+    @Test
+    void shouldChartPersonalTransfersOnceWithoutTreatingThemAsPurchasesOrOwnAccountTransfers() {
+        var result = service.calculate(List.of(
+                transaction("-10.25", TransactionCategory.TRANSFERENCIAS_PESSOAIS, TransactionNature.TRANSFER, false),
+                transaction("-20.15", TransactionCategory.TRANSFERENCIAS, TransactionNature.TRANSFER, false),
+                transaction("-3.10", TransactionCategory.SUPERMERCADO, TransactionNature.EXPENSE, false),
+                transaction("-5.50", TransactionCategory.TRANSFERENCIAS_PESSOAIS, TransactionNature.UNKNOWN, true),
+                transaction("-2.00", TransactionCategory.TRANSFERENCIAS_PESSOAIS, TransactionNature.REFUND, true),
+                transaction("10.25", TransactionCategory.TRANSFERENCIAS_PESSOAIS, TransactionNature.TRANSFER, false)));
+        assertAmount("41.00", result.totalOutflow());
+        assertAmount("13.35", result.categorizedExpenses());
+        assertAmount("7.50", result.uncategorizedOutflow());
+        assertAmount("20.15", result.transferOutflow());
+        assertEquals(2, result.expensesByCategory().size());
+        assertAmount("10.25", result.expensesByCategory().get(TransactionCategory.TRANSFERENCIAS_PESSOAIS));
+        assertAmount("3.10", result.expensesByCategory().get(TransactionCategory.SUPERMERCADO));
+        assertEquals(0, result.totalOutflow().compareTo(result.categorizedExpenses()
+                .add(result.uncategorizedOutflow()).add(result.transferOutflow())));
     }
 
     private TransactionResponse transaction(

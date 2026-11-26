@@ -73,6 +73,9 @@
     {"id":"viagens.diaria-pousada","aliases":["DIARIA POUSADA"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"viagens.passagem-aerea","aliases":["PASSAGEM AEREA"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"viagens.pacote-de-viagem","aliases":["PACOTE DE VIAGEM"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"viagens.seguro-viagem","aliases":["SEGURO VIAGEM"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]}
+    {"id":"viagens.seguro-viagem","aliases":["SEGURO VIAGEM"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"viagens.agencia-turismo","aliases":["AGENCIA DE VIAGEM","AGENCIA DE VIAGENS","AGENCIAS DE VIAGENS","AGENCIA DE TURISMO"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"viagens.hotel","aliases":["HOTEL","HOTEIS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"viagens.pousada","aliases":["POUSADA","POUSADAS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]}
   ]
 }

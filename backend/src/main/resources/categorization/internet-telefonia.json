@@ -59,6 +59,8 @@
     {"id":"internet-telefonia.provedor-de-internet","aliases":["PROVEDOR DE INTERNET"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"internet-telefonia.vivo","aliases":["VIVO"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[{"matchType":"WORD","value":"TELEFONIA"}],"exclude":[]},
     {"id":"internet-telefonia.claro","aliases":["CLARO"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[{"matchType":"WORD","value":"TELEFONIA"}],"exclude":[]},
-    {"id":"internet-telefonia.tim","aliases":["TIM"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[{"matchType":"WORD","value":"TELEFONIA"}],"exclude":[]}
+    {"id":"internet-telefonia.tim","aliases":["TIM"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[{"matchType":"WORD","value":"TELEFONIA"}],"exclude":[]},
+    {"id":"internet-telefonia.telefonia","aliases":["TELEFONIA","TELEFONIA MOVEL","TELEFONIA FIXA"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"internet-telefonia.banda-larga","aliases":["INTERNET BANDA LARGA","SERVICO DE INTERNET"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]}
   ]
 }

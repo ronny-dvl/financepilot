@@ -45,15 +45,15 @@ class FinancialCategorizationIntegrationTest {
             PGTO IPVA | -200.00 | IMPOSTOS_TRIBUTOS | EXPENSE | false | 200 | 200 | 0 | 0
             MENSALIDADE ESCOLAR | -300.00 | EDUCACAO | EXPENSE | false | 300 | 300 | 0 | 0
             COMPRA UBER | -30.00 | TRANSPORTE | EXPENSE | false | 30 | 30 | 0 | 0
-            PIX QRS UBER MESMA TITULARIDADE | -50.00 | TRANSPORTE | TRANSFER | false | 50 | 0 | 0 | 50
-            PIX QRS UBER MESMA TITULARIDADE | 50.00 | TRANSPORTE | TRANSFER | false | 0 | 0 | 0 | 0
+            PIX QRS UBER MESMA TITULARIDADE | -50.00 | TRANSFERENCIAS | TRANSFER | false | 50 | 0 | 0 | 50
+            PIX QRS UBER MESMA TITULARIDADE | 50.00 | TRANSFERENCIAS | TRANSFER | false | 0 | 0 | 0 | 0
             PIX DEVOLVIDO UBER TRIP | -30.00 | TRANSPORTE | REFUND | true | 30 | 0 | 30 | 0
             PIX DEVOLVIDO UBER TRIP | 30.00 | TRANSPORTE | REFUND | false | 0 | 0 | 0 | 0
             APLIC CDB | -1000.00 | INVESTIMENTOS | UNKNOWN | true | 1000 | 0 | 1000 | 0
             COMPRA DE ACOES AWS | -1000.00 | OUTROS | UNKNOWN | true | 1000 | 0 | 1000 | 0
             COMPRA ASUS DROGASIL | -30.00 | OUTROS | EXPENSE | true | 30 | 0 | 30 | 0
             COMPRA ASUS PETZ | -30.00 | OUTROS | EXPENSE | true | 30 | 0 | 30 | 0
-            PIX QRS UBER MESMA TITULARIDADE ASUS | -50.00 | OUTROS | TRANSFER | true | 50 | 0 | 0 | 50
+            PIX QRS UBER MESMA TITULARIDADE ASUS | -50.00 | TRANSFERENCIAS | TRANSFER | false | 50 | 0 | 0 | 50
             COMPRA 99 FOOD NIKE | -30.00 | OUTROS | EXPENSE | true | 30 | 0 | 30 | 0
             COMPRA 99FOOD NIKE | -30.00 | OUTROS | EXPENSE | true | 30 | 0 | 30 | 0
             COMPRA AMAZONMARKETPLACE AWS | -30.00 | OUTROS | EXPENSE | true | 30 | 0 | 30 | 0
@@ -62,14 +62,14 @@ class FinancialCategorizationIntegrationTest {
             PIX QRS HIROTA FOOD | -30.00 | SUPERMERCADO | EXPENSE | false | 30 | 30 | 0 | 0
             RSCSS RENNER | 30.00 | VESTUARIO | UNKNOWN | true | 0 | 0 | 0 | 0
             RSCSS RENNER AGENDADO | -30.00 | VESTUARIO | UNKNOWN | true | 30 | 0 | 30 | 0
-            PIX ENVIADO CARLOS RENNER | -30.00 | OUTROS | UNKNOWN | true | 30 | 0 | 30 | 0
+            PIX ENVIADO CARLOS RENNER | -30.00 | TRANSFERENCIAS_PESSOAIS | TRANSFER | false | 30 | 30 | 0 | 0
             COMPRA UBER | 30.00 | TRANSPORTE | UNKNOWN | true | 0 | 0 | 0 | 0
             UBER | -30.00 | TRANSPORTE | UNKNOWN | true | 30 | 0 | 30 | 0
             BOLETO SABESP AGENDADO | -100.00 | CONTAS_ESSENCIAIS | UNKNOWN | true | 100 | 0 | 100 | 0
-            PIX ENVIADO JOAO SILVA | -40.00 | OUTROS | UNKNOWN | true | 40 | 0 | 40 | 0
+            PIX ENVIADO JOAO SILVA | -40.00 | TRANSFERENCIAS_PESSOAIS | TRANSFER | false | 40 | 40 | 0 | 0
             COMPRA CLIENTE TESTE | -15.00 | OUTROS | EXPENSE | true | 15 | 0 | 15 | 0
-            PIX ENVIADO CARLOS FERRETTO | -30 | OUTROS | UNKNOWN | true | 30 | 0 | 30 | 0
-            PIX ENVIADO JOAO FUJIOKA | -30 | OUTROS | UNKNOWN | true | 30 | 0 | 30 | 0
+            PIX ENVIADO CARLOS FERRETTO | -30 | TRANSFERENCIAS_PESSOAIS | TRANSFER | false | 30 | 30 | 0 | 0
+            PIX ENVIADO JOAO FUJIOKA | -30 | TRANSFERENCIAS_PESSOAIS | TRANSFER | false | 30 | 30 | 0 | 0
             PAGAMENTO FERRETTO CURSOS ON LINE LTDA | -30 | EDUCACAO | EXPENSE | false | 30 | 30 | 0 | 0
             COMPRA FUJIOKA | -30 | TECNOLOGIA | EXPENSE | false | 30 | 30 | 0 | 0
             COMPRA FUJIOKA NOTEBOOK | -30 | TECNOLOGIA | EXPENSE | false | 30 | 30 | 0 | 0
@@ -83,14 +83,30 @@ class FinancialCategorizationIntegrationTest {
             COMPRA POSTO SHELL GASOLINA | -30 | TRANSPORTE | EXPENSE | false | 30 | 30 | 0 | 0
             PIX DEVOLVIDO UBER | -30 | TRANSPORTE | REFUND | true | 30 | 0 | 30 | 0
             PIX DEVOLVIDO UBER | 30 | TRANSPORTE | REFUND | false | 0 | 0 | 0 | 0
-            PIX QRS APPLE.COM/BILL MESMA TITULARIDADE | -30 | ASSINATURAS | TRANSFER | false | 30 | 0 | 0 | 30
+            PIX QRS APPLE.COM/BILL MESMA TITULARIDADE | -30 | TRANSFERENCIAS | TRANSFER | false | 30 | 0 | 0 | 30
             PIX ENVIADO FERRETTO | -30 | EDUCACAO | EXPENSE | false | 30 | 30 | 0 | 0
             PIX ENVIADO UBER | 30 | TRANSPORTE | UNKNOWN | true | 0 | 0 | 0 | 0
-            PIX ENVIADO UBER MESMA TITULARIDADE | -30 | TRANSPORTE | TRANSFER | false | 30 | 0 | 0 | 30
+            PIX ENVIADO UBER MESMA TITULARIDADE | -30 | TRANSFERENCIAS | TRANSFER | false | 30 | 0 | 0 | 30
             PIX RECEBIDO CARREFOUR | 30 | SUPERMERCADO | UNKNOWN | true | 0 | 0 | 0 | 0
             PIX ENVIADO NETFLIX | -30 | ASSINATURAS | EXPENSE | false | 30 | 30 | 0 | 0
             PIX ENVIADO MERCADO LIVRE | -30 | COMPRAS | EXPENSE | false | 30 | 30 | 0 | 0
             PIX ENVIADO PETZ | -30.15 | PETS | EXPENSE | false | 30.15 | 30.15 | 0 | 0
+            PIX ENVIADO EMP COSMETICOS LTDA | 30.15 | BELEZA_CUIDADOS_PESSOAIS | UNKNOWN | true | 0 | 0 | 0 | 0
+            PIX ENVIADO BMP UTILIDADES DOMEST MESMA TITULARIDADE | -30.15 | TRANSFERENCIAS | TRANSFER | false | 30.15 | 0 | 0 | 30.15
+            PIX DEVOLVIDO BMP UTILIDADES DOMEST | -30.15 | CASA_UTILIDADES | REFUND | true | 30.15 | 0 | 30.15 | 0
+            IOF ADICIONAL AUTOMATICO | 30.15 | IMPOSTOS_TRIBUTOS | UNKNOWN | true | 0 | 0 | 0 | 0
+            PIX ENVIADO MARIA DA SILVA | -10.25 | TRANSFERENCIAS_PESSOAIS | TRANSFER | false | 10.25 | 10.25 | 0 | 0
+            PIX ENVIADO JOAO PEREIRA DOS SA | -10.25 | TRANSFERENCIAS_PESSOAIS | TRANSFER | false | 10.25 | 10.25 | 0 | 0
+            PIX TRANSF VINICIU | -10.25 | TRANSFERENCIAS_PESSOAIS | TRANSFER | false | 10.25 | 10.25 | 0 | 0
+            PIX TRANSF GISELLY | -10.25 | TRANSFERENCIAS_PESSOAIS | TRANSFER | false | 10.25 | 10.25 | 0 | 0
+            PIX TRANSF REGINAL | -10.25 | TRANSFERENCIAS_PESSOAIS | TRANSFER | false | 10.25 | 10.25 | 0 | 0
+            PIX QRS RICARDO DON | -10.25 | TRANSFERENCIAS_PESSOAIS | TRANSFER | false | 10.25 | 10.25 | 0 | 0
+            PIX TRANSF VINICIU | 10.25 | TRANSFERENCIAS_PESSOAIS | UNKNOWN | true | 0 | 0 | 0 | 0
+            PIX RECEBIDO MARIA DA SILVA | 10.25 | OUTROS | UNKNOWN | true | 0 | 0 | 0 | 0
+            PIX QRS RICARDO DON AGENDADO | -10.25 | OUTROS | UNKNOWN | true | 10.25 | 0 | 10.25 | 0
+            PIX TRANSF VINICIU MESMA TITULARIDADE | -10.25 | TRANSFERENCIAS | TRANSFER | false | 10.25 | 0 | 0 | 10.25
+            PIX QRS SUPERMERCAD | -10.25 | SUPERMERCADO | EXPENSE | false | 10.25 | 10.25 | 0 | 0
+            RSCSS OKEO - MI | -10.25 | SUPERMERCADO | EXPENSE | false | 10.25 | 10.25 | 0 | 0
             """)
     void shouldReconcileRealProcessingWithExplicitFinancialExpectations(String description, BigDecimal amount,
             TransactionCategory category, TransactionNature nature, boolean requiresReview,
@@ -120,9 +136,9 @@ class FinancialCategorizationIntegrationTest {
         }
     }
 
-    // Commercial defaults change categories, not the gross-consumption and cash-flow invariants.
+    // Personal transfers join displayed categorized outflows while retaining TRANSFER nature.
     @Test
-    void shouldSeparateCashFlowFromGrossConsumptionWithoutDoubleCounting() throws IOException {
+    void shouldSeparateCashFlowFromCategorizedOutflowsWithoutDoubleCounting() throws IOException {
         var statement = processing.processStatement(itauPdf(
                 "26/11/2026 TAR TED -5,00",
                 "26/11/2026 BOLETO SABESP -100,00",
@@ -144,14 +160,15 @@ class FinancialCategorizationIntegrationTest {
         assertMoney("1755", flow.totalExpenses());
         assertMoney("290", flow.netBalance());
         assertMoney("1755", summary.totalOutflow());
-        assertMoney("635", summary.categorizedExpenses());
-        assertMoney("1070", summary.uncategorizedOutflow());
+        assertMoney("675", summary.categorizedExpenses());
+        assertMoney("1030", summary.uncategorizedOutflow());
         assertMoney("50", summary.transferOutflow());
-        assertEquals(5, summary.expensesByCategory().size());
+        assertEquals(6, summary.expensesByCategory().size());
         assertMoney("5", summary.expensesByCategory().get(TransactionCategory.TARIFAS_BANCARIAS));
         assertMoney("100", summary.expensesByCategory().get(TransactionCategory.CONTAS_ESSENCIAIS));
         assertMoney("200", summary.expensesByCategory().get(TransactionCategory.IMPOSTOS_TRIBUTOS));
         assertMoney("300", summary.expensesByCategory().get(TransactionCategory.EDUCACAO));
+        assertMoney("40", summary.expensesByCategory().get(TransactionCategory.TRANSFERENCIAS_PESSOAIS));
         // The positive refund does not offset the original purchase: policy remains gross consumption.
         assertMoney("30", summary.expensesByCategory().get(TransactionCategory.TRANSPORTE));
         assertReconciled(summary);
@@ -182,20 +199,70 @@ class FinancialCategorizationIntegrationTest {
     }
 
     @Test
-    void shouldKeepSantanderPixToUnqualifiedPersonalNameInResidualOutflow() throws IOException {
+    void shouldChartSantanderPersonalTransfersWithoutTreatingThemAsPurchases() throws IOException {
         var statement = processing.processStatement(pdf(List.of(
                 "SANTANDER", "DETALHE DOS MOVIMENTOS", "DATA DESCRIÇÃO VALOR SALDO",
                 "Pix enviado", "26/11/2026 -R$ 30,00 R$ 100,00", "Carlos Ferretto")));
         var transaction = statement.transactions().getFirst();
-        assertEquals(TransactionCategory.OUTROS, transaction.category());
-        assertEquals(TransactionNature.UNKNOWN, transaction.nature());
-        assertTrue(transaction.requiresReview());
+        assertEquals(TransactionCategory.TRANSFERENCIAS_PESSOAIS, transaction.category());
+        assertEquals(TransactionNature.TRANSFER, transaction.nature());
+        assertFalse(transaction.requiresReview());
         var summary = categorySummary.calculate(statement.transactions());
         assertMoney("30", summary.totalOutflow());
-        assertMoney("0", summary.categorizedExpenses());
-        assertMoney("30", summary.uncategorizedOutflow());
+        assertMoney("30", summary.categorizedExpenses());
+        assertMoney("0", summary.uncategorizedOutflow());
         assertMoney("0", summary.transferOutflow());
+        assertMoney("30", summary.expensesByCategory().get(TransactionCategory.TRANSFERENCIAS_PESSOAIS));
         assertReconciled(summary);
+    }
+
+    // Reported merchant descriptors only; all dates, amounts and balances below are synthetic.
+    @ParameterizedTest
+    @CsvSource(delimiter = '|', textBlock = """
+            Pix enviado | MODA MUNDIAL BRASIL P | VESTUARIO
+            Pix enviado | BYTEDANCE BRASIL TECN | OUTROS
+            Pix enviado | KELLY BIJOUX GUARULHO | VESTUARIO
+            Pix enviado | RICARDO COSMETICOS LT | BELEZA_CUIDADOS_PESSOAIS
+            Pix enviado | ESTHELAR COSMETICOS E | BELEZA_CUIDADOS_PESSOAIS
+            Pix enviado | EMP COSMETICOS LTDA | BELEZA_CUIDADOS_PESSOAIS
+            Pix enviado | BMP UTILIDADES DOMEST | CASA_UTILIDADES
+            Pix enviado | COMERCIO DE ALIMENTOS | SUPERMERCADO
+            Pix enviado | ARMARINHOS FERNANDO L | CASA_UTILIDADES
+            Pix enviado | SHPP BRASIL INSTITUIC | COMPRAS
+            Iof adicional - automatico | PERIODO: 01/08 A 31/08/26 | IMPOSTOS_TRIBUTOS
+            Pix enviado | SEMPREMI BAZAR E PAP | CASA_UTILIDADES
+            Pix enviado | MARIA DA SILVA | TRANSFERENCIAS_PESSOAIS
+            Pix enviado | JOAO PEREIRA DOS SA | TRANSFERENCIAS_PESSOAIS
+            """)
+    void shouldIncludeRecognizableSantanderBusinessOutflowsInTheCategoryChart(
+            String operation, String merchant, TransactionCategory category) throws IOException {
+        var statement = processing.processStatement(pdf(List.of(
+                "SANTANDER", "DETALHE DOS MOVIMENTOS", "DATA DESCRIÇÃO VALOR SALDO",
+                operation, "26/11/2026 -R$ 10,25 R$ 123,45", merchant)));
+        assertEquals(1, statement.transactions().size());
+        var transaction = statement.transactions().getFirst();
+        boolean unknown = category == TransactionCategory.OUTROS;
+        assertEquals(category, transaction.category());
+        assertEquals(unknown ? CategorizationSource.UNKNOWN : CategorizationSource.KEYWORD_RULE, transaction.source());
+        assertEquals(unknown ? TransactionNature.UNKNOWN : category == TransactionCategory.TRANSFERENCIAS_PESSOAIS
+                ? TransactionNature.TRANSFER : TransactionNature.EXPENSE, transaction.nature());
+        assertEquals(unknown, transaction.requiresReview());
+        assertMoney("-10.25", transaction.amount());
+        var summary = categorySummary.calculate(statement.transactions());
+        assertMoney("10.25", summary.totalOutflow());
+        assertMoney(unknown ? "0" : "10.25", summary.categorizedExpenses());
+        assertMoney(unknown ? "10.25" : "0", summary.uncategorizedOutflow());
+        assertMoney("0", summary.transferOutflow());
+        if (unknown) assertTrue(summary.expensesByCategory().isEmpty());
+        else {
+            assertEquals(1, summary.expensesByCategory().size());
+            assertMoney("10.25", summary.expensesByCategory().get(category));
+        }
+        assertReconciled(summary);
+        var flow = financialSummary.calculate(statement.transactions());
+        assertMoney("0", flow.totalIncome());
+        assertMoney("10.25", flow.totalExpenses());
+        assertMoney("-10.25", flow.netBalance());
     }
 
     private static void assertReconciled(CategorySummaryResponse summary) {

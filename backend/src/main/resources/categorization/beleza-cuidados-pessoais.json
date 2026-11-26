@@ -46,14 +46,17 @@
     {"id":"beleza-cuidados-pessoais.werner-coiffeur","aliases":["WERNER COIFFEUR"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"beleza-cuidados-pessoais.studio-w-cabeleireiros","aliases":["STUDIO W CABELEIREIROS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"beleza-cuidados-pessoais.jacques-janine","aliases":["JACQUES JANINE"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"beleza-cuidados-pessoais.salao-de-beleza","aliases":["SALAO DE BELEZA"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"beleza-cuidados-pessoais.barbearia","aliases":["BARBEARIA"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"beleza-cuidados-pessoais.salao-de-beleza","aliases":["SALAO DE BELEZA","SALOES DE BELEZA","SALAO BELEZA"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"beleza-cuidados-pessoais.barbearia","aliases":["BARBEARIA","BARBEARIAS"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"beleza-cuidados-pessoais.cabeleireiro","aliases":["CABELEIREIRO"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"beleza-cuidados-pessoais.cabeleireiros","aliases":["CABELEIREIROS"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"beleza-cuidados-pessoais.manicure","aliases":["MANICURE"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"beleza-cuidados-pessoais.pedicure","aliases":["PEDICURE"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"beleza-cuidados-pessoais.manicure","aliases":["MANICURE","MANICURES"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"beleza-cuidados-pessoais.pedicure","aliases":["PEDICURE","PEDICURES"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"beleza-cuidados-pessoais.depilacao","aliases":["DEPILACAO"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"beleza-cuidados-pessoais.esmalteria","aliases":["ESMALTERIA"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"beleza-cuidados-pessoais.perfumaria","aliases":["PERFUMARIA"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]}
+    {"id":"beleza-cuidados-pessoais.perfumaria","aliases":["PERFUMARIA","PERFUMARIAS"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"beleza-cuidados-pessoais.cosmeticos","aliases":["COSMETICO","COSMETICOS","COSMETICA","COSMETICAS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"beleza-cuidados-pessoais.maquiagem","aliases":["MAQUIAGEM","MAQUIAGENS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"beleza-cuidados-pessoais.estetica","aliases":["ESTETICA","CLINICA ESTETICA","CLINICA DE ESTETICA","CLINICAS DE ESTETICA","ESTETICAS","CLINICAS ESTETICAS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[],"refines":["saude.clinica"]}
   ]
 }

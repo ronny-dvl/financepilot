@@ -372,11 +372,11 @@ class StatementControllerTest {
                 .andExpect(jsonPath("$.length()").value(4))
                 .andExpect(jsonPath("$.holderName").value(nullValue()))
                 .andExpect(jsonPath("$.summary.length()").value(4))
-                .andExpect(jsonPath("$.summary.transactionCount").value(23))
-                .andExpect(jsonPath("$.transactions.length()").value(23))
+                .andExpect(jsonPath("$.summary.transactionCount").value(categories.length))
+                .andExpect(jsonPath("$.transactions.length()").value(categories.length))
                 .andExpect(jsonPath("$.categorySummary.length()").value(5))
-                .andExpect(jsonPath("$.categorySummary.totalOutflow").value(23))
-                .andExpect(jsonPath("$.categorySummary.uncategorizedOutflow").value(23))
+                .andExpect(jsonPath("$.categorySummary.totalOutflow").value(categories.length))
+                .andExpect(jsonPath("$.categorySummary.uncategorizedOutflow").value(categories.length))
                 .andExpect(jsonPath("$.categorySummary.categorizedExpenses").value(0))
                 .andExpect(jsonPath("$.categorySummary.expensesByCategory").isEmpty());
 

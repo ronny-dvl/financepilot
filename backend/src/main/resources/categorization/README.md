@@ -1,6 +1,6 @@
 # Categorização local — política prática
 
-22 catálogos, 23 categorias (OUTROS é fallback), 1.210 regras e 1.493 aliases
+23 catálogos, 25 categorias, 1.257 regras e 1.659 aliases
 normalizados distintos. Classificação determinística, indexada e imutável;
 sem rede, persistência de descrições ou novas dependências.
 
@@ -20,12 +20,25 @@ identificam uma categoria; um estabelecimento reconhecido junto deles pode.
 
 Em PIX ENVIADO/RECEBIDO/TRANSF, um nome antes do alias ou CPF explícito,
 sem contexto comercial, impedem usar um sobrenome como marca:
-PIX ENVIADO CARLOS FERRETTO fica em revisão; FERRETTO, PIX ENVIADO FERRETTO
+PIX ENVIADO CARLOS FERRETTO usa Transferências pessoais; FERRETTO, PIX ENVIADO FERRETTO
 e PIX MADERO são reconhecidos. Sufixos de cidade/filial, referências numéricas
 e intermediadores não são tratados como nomes. Indicadores comerciais ou de contas
 próprias preservam o contexto da operação. Não há lista de nomes de pessoas.
 Essa heurística não comprova identidade: uma pessoa com nome exatamente igual
 a uma marca pode ser indistinguível de um estabelecimento no texto disponível.
+
+Descritores claros de atividade (moda, cosméticos, armarinhos, comércio de
+alimentos etc.) são evidência comercial mesmo depois do nome do proprietário.
+Casa e utilidades usa CASA_UTILIDADES; VESTUARIO inclui acessórios. O alias
+SHPP BRASIL INSTITUIC foi informado pelo usuário como Shopee, sem alegação
+de verificação externa. IOF ADICIONAL é reconhecido com o período da cobrança.
+
+TRANSFERENCIAS_PESSOAIS é um fallback do serviço, sem nomes nos catálogos:
+contas próprias → comércio reconhecido → nome provável em Pix de saída → OUTROS.
+Nomes alfabéticos completos ou truncados são aceitos; marcadores corporativos,
+códigos, conflitos comerciais e Pix recebido não ativam esse fallback.
+SUPERMERCAD/SUPERMERC/MERCADINH usam palavras inteiras, e OKEO é um alias
+de supermercado informado pelo usuário, sem alegação de verificação externa.
 
 ## Conflitos e recursos preservados
 
@@ -57,6 +70,10 @@ históricos alimentacao.supermercado/mercadinho/atacadao pertencem a SUPERMERCAD
 ## Categoria e consumo
 
 Categoria comercial não determina sinal, natureza financeira ou consumo.
+Transferências pessoais mantêm natureza TRANSFER e aparecem no gráfico por
+política do produto: categorizedExpenses inclui essas saídas categorizadas,
+sem significar apenas compras. transferOutflow mantém somente contas próprias;
+uma saída não entra nos dois componentes. Entradas permanecem fora do gráfico.
 Serviços financeiros preservam entradas fora do consumo, investimentos no
 residual, transferências próprias separadas e gastos brutos por categoria.
 Devoluções negativas permanecem reconciliadas sem dupla contabilização.

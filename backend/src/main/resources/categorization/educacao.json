@@ -90,10 +90,13 @@
     {"id":"educacao.matricula-escolar","aliases":["MATRICULA ESCOLAR"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"educacao.material-escolar","aliases":["MATERIAL ESCOLAR"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"educacao.curso-de-ingles","aliases":["CURSO DE INGLES"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"educacao.curso-de-idiomas","aliases":["CURSO DE IDIOMAS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"educacao.curso-preparatorio","aliases":["CURSO PREPARATORIO"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"educacao.curso-tecnico","aliases":["CURSO TECNICO"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"educacao.curso-de-idiomas","aliases":["CURSO DE IDIOMAS","CURSOS DE IDIOMAS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"educacao.curso-preparatorio","aliases":["CURSO PREPARATORIO","CURSOS PREPARATORIOS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"educacao.curso-tecnico","aliases":["CURSO TECNICO","CURSOS TECNICOS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"educacao.curso-profissionalizante","aliases":["CURSO PROFISSIONALIZANTE"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"educacao.ferretto-cursos-online","aliases":["FERRETTO CURSOS ON LINE LTDA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]}
+    {"id":"educacao.ferretto-cursos-online","aliases":["FERRETTO CURSOS ON LINE LTDA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"educacao.escola","aliases":["ESCOLA","ESCOLAS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"educacao.faculdade","aliases":["FACULDADE","FACULDADES"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"educacao.universidade","aliases":["UNIVERSIDADE","UNIVERSIDADES"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]}
   ]
 }

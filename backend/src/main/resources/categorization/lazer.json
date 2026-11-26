@@ -50,6 +50,9 @@
     {"id":"lazer.ingresso-teatro","aliases":["INGRESSO TEATRO"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"lazer.ingresso-show","aliases":["INGRESSO SHOW"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"lazer.ingresso-museu","aliases":["INGRESSO MUSEU"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"lazer.ingresso-parque","aliases":["INGRESSO PARQUE"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]}
+    {"id":"lazer.ingresso-parque","aliases":["INGRESSO PARQUE"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"lazer.cinema","aliases":["CINEMA","CINEMAS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"lazer.teatro","aliases":["TEATRO","TEATROS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"lazer.museu","aliases":["MUSEU","MUSEUS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]}
   ]
 }
