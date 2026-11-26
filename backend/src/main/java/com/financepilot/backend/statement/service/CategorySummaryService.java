@@ -13,6 +13,21 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Gross categorized outflows are separate from cash flow: positive movements never offset them.
+ * Personal transfers are displayed in expensesByCategory by product policy, retaining TRANSFER
+ * nature. categorizedExpenses includes that displayed category; it does not mean purchase-only
+ * consumption. transferOutflow continues to contain own-account transfers, excluding these entries.
+ * Every negative movement belongs to exactly one existing component: categorizedExpenses,
+ * transferOutflow (confirmed own-account transfers), or uncategorizedOutflow (residual).
+ *
+ * Contract limitation: uncategorizedOutflow already includes investments and unresolved nature,
+ * even when a merchant/category is known. It also carries outgoing refunds conservatively:
+ * there is no refund-outflow component in the current API. This is not consumption, and processing
+ * flags negative refunds for review. No category is erased or new financial nature invented.
+ * Thus totalOutflow = categorizedExpenses + uncategorizedOutflow + transferOutflow, and
+ * categorizedExpenses = sum(expensesByCategory), using exact BigDecimal arithmetic.
+ */
 @Service
 public class CategorySummaryService {
 
@@ -44,21 +59,31 @@ public class CategorySummaryService {
             TransactionNature nature = transaction.nature();
             TransactionCategory category = transaction.category();
 
+            // Personal transfers are visible in the category chart but never relabeled as purchases.
+            // Put the amount in one component only; unresolved personal transfers stay residual.
+            if (category == TransactionCategory.TRANSFERENCIAS_PESSOAIS) {
+                if (nature == TransactionNature.TRANSFER && !transaction.requiresReview()) {
+                    categorizedExpenses = categorizedExpenses.add(amount);
+                    expensesByCategory.merge(category, amount, BigDecimal::add);
+                } else {
+                    uncategorizedOutflow = uncategorizedOutflow.add(amount);
+                }
+                continue;
+            }
+
             // 3. Transferências internas confirmadas
             if (nature == TransactionNature.TRANSFER) {
                 transferOutflow = transferOutflow.add(amount);
                 continue;
             }
 
-            // 4. Estornos não são tratados como despesas
-            if (nature == TransactionNature.REFUND) {
-                continue;
-            }
-
-            // 5. Operações sem classificação confiável
+            // 4. Residual: no confirmed consumption, including outgoing refunds without an API bucket.
             if (category == null
                     || category == TransactionCategory.OUTROS
+                    || category == TransactionCategory.INVESTIMENTOS
+                    || category == TransactionCategory.TRANSFERENCIAS
                     || transaction.requiresReview()
+                    || nature == TransactionNature.REFUND
                     || nature == TransactionNature.UNKNOWN) {
 
                 uncategorizedOutflow =

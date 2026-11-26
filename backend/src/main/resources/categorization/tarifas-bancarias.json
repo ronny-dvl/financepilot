@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "category": "TARIFAS_BANCARIAS",
+  "rules": [
+    {"id":"tarifas-bancarias.tarifa-manutencao-conta","aliases":["TARIFA MANUTENCAO CONTA","TAR MANUT CONTA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.tarifa-pacote-servicos","aliases":["TARIFA PACOTE SERVICOS","TAR PACOTE SERVICOS","TAR PAC SERV"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.tarifa-cesta-servicos","aliases":["TARIFA CESTA SERVICOS","TAR CESTA SERVICOS","TAR CESTA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.tarifa-saque","aliases":["TARIFA SAQUE","TAR SAQUE"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.tarifa-transferencia","aliases":["TARIFA TRANSFERENCIA","TAR TRANSFERENCIA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.tarifa-ted","aliases":["TARIFA TED","TAR TED"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.tarifa-doc","aliases":["TARIFA DOC","TAR DOC"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.tarifa-pix","aliases":["TARIFA PIX","TAR PIX"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.tarifa-emissao-boleto","aliases":["TARIFA EMISSAO BOLETO","TAR EMIS BOLETO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.tarifa-segunda-via-cartao","aliases":["TARIFA SEGUNDA VIA CARTAO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.tarifa-extrato","aliases":["TARIFA EXTRATO","TAR EXTRATO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.tarifa-avaliacao-credito","aliases":["TARIFA AVALIACAO CREDITO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.tarifa-adiantamento-depositante","aliases":["TARIFA ADIANTAMENTO DEPOSITANTE"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.tarifa-cadastro","aliases":["TARIFA CADASTRO","TAR CADASTRO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.tarifa-liquidacao-boleto","aliases":["TARIFA LIQUIDACAO BOLETO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.tarifa-de-cobranca","aliases":["TARIFA DE COBRANCA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.anuidade-cartao","aliases":["ANUIDADE CARTAO","ANUID CARTAO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.anuidade-diferenciada-cartao","aliases":["ANUIDADE DIFERENCIADA CARTAO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.mensalidade-cartao-de-credito","aliases":["MENSALIDADE CARTAO DE CREDITO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.cesta-de-servicos-bancarios","aliases":["CESTA DE SERVICOS BANCARIOS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.pacote-de-servicos-bancarios","aliases":["PACOTE DE SERVICOS BANCARIOS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"tarifas-bancarias.comissao-de-permanencia","aliases":["COMISSAO DE PERMANENCIA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]}
+  ]
+}

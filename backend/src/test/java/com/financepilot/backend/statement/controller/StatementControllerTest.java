@@ -16,12 +16,15 @@ import com.financepilot.backend.statement.service.CategorySummaryService;
 import com.financepilot.backend.statement.service.FinancialSummaryService;
 import com.financepilot.backend.statement.service.PdfExtractionService;
 import com.financepilot.backend.statement.service.TransactionProcessingService;
+import com.financepilot.backend.statement.service.RecipientSummaryService;
+import com.financepilot.backend.statement.service.PixRecipientExtractionService;
 import com.financepilot.backend.statement.service.TransactionProcessingService.ProcessedStatement;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.context.annotation.Import;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -30,6 +33,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.Arrays;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.hamcrest.Matchers.nullValue;
@@ -43,6 +47,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(StatementController.class)
+@Import({RecipientSummaryService.class, PixRecipientExtractionService.class})
 class StatementControllerTest {
 
     @Autowired
@@ -91,10 +96,10 @@ class StatementControllerTest {
 
         TransactionResponse transaction = new TransactionResponse(
                 LocalDate.of(2026, 10, 26),
-                "PIX QRS SUPERMERCAD",
+                "PIX QRS SUPERMERCADO",
                 new BigDecimal("-28.91"),
                 "EXPENSE",
-                TransactionCategory.ALIMENTACAO,
+                TransactionCategory.SUPERMERCADO,
                 CategorizationSource.KEYWORD_RULE,
                 false,
                 TransactionNature.EXPENSE,
@@ -110,13 +115,13 @@ class StatementControllerTest {
                 .andExpect(jsonPath("$[0].date")
                         .value("2026-10-26"))
                 .andExpect(jsonPath("$[0].description")
-                        .value("PIX QRS SUPERMERCAD"))
+                        .value("PIX QRS SUPERMERCADO"))
                 .andExpect(jsonPath("$[0].amount")
                         .value(-28.91))
                 .andExpect(jsonPath("$[0].type")
                         .value("EXPENSE"))
                 .andExpect(jsonPath("$[0].category")
-                        .value("ALIMENTACAO"))
+                        .value("SUPERMERCADO"))
                 .andExpect(jsonPath("$[0].source")
                         .value("KEYWORD_RULE"))
                 .andExpect(jsonPath("$[0].nature")
@@ -199,7 +204,7 @@ class StatementControllerTest {
                         "SUPERMERCADO",
                         new BigDecimal("-100.00"),
                         "EXPENSE",
-                        TransactionCategory.ALIMENTACAO,
+                        TransactionCategory.SUPERMERCADO,
                         CategorizationSource.KEYWORD_RULE,
                         false,
                         TransactionNature.UNKNOWN,
@@ -226,7 +231,7 @@ class StatementControllerTest {
                 Map.of(
                         TransactionCategory.TRANSPORTE,
                         new BigDecimal("25.00"),
-                        TransactionCategory.ALIMENTACAO,
+                        TransactionCategory.SUPERMERCADO,
                         new BigDecimal("100.00")
                 )
         );
@@ -252,7 +257,7 @@ class StatementControllerTest {
                         .value(50.00))
                 .andExpect(jsonPath("$.expensesByCategory.TRANSPORTE")
                         .value(25.00))
-                .andExpect(jsonPath("$.expensesByCategory.ALIMENTACAO")
+                .andExpect(jsonPath("$.expensesByCategory.SUPERMERCADO")
                         .value(100.00));
 
         verify(transactionProcessingService).process(any());
@@ -349,6 +354,82 @@ class StatementControllerTest {
                 .andExpect(status().isBadRequest());
         verifyNoInteractions(transactionProcessingService,
                 financialSummaryService, categorySummaryService);
+    }
+
+    @Test
+    void shouldExposeAllCategoriesWithoutChangingAnalysisContract() throws Exception {
+        TransactionCategory[] categories = TransactionCategory.values();
+        List<TransactionResponse> transactions = Arrays.stream(categories)
+                .map(category -> new TransactionResponse(LocalDate.of(2026, 10, 26),
+                        "EXEMPLO", new BigDecimal("-1.00"), "EXPENSE", category,
+                        CategorizationSource.UNKNOWN, true, TransactionNature.UNKNOWN, PaymentMethod.PIX))
+                .toList();
+        when(transactionProcessingService.processStatement(any()))
+                .thenReturn(new ProcessedStatement(transactions, null));
+        when(financialSummaryService.calculate(transactions))
+                .thenReturn(new FinancialSummaryService().calculate(transactions));
+        when(categorySummaryService.calculate(transactions))
+                .thenReturn(new CategorySummaryService().calculate(transactions));
+
+        var response = mockMvc.perform(multipart("/api/statements/analyze").file(createMockPdf()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(5))
+                .andExpect(jsonPath("$.holderName").value(nullValue()))
+                .andExpect(jsonPath("$.summary.length()").value(4))
+                .andExpect(jsonPath("$.summary.transactionCount").value(categories.length))
+                .andExpect(jsonPath("$.transactions.length()").value(categories.length))
+                .andExpect(jsonPath("$.categorySummary.length()").value(5))
+                .andExpect(jsonPath("$.categorySummary.totalOutflow").value(categories.length))
+                .andExpect(jsonPath("$.categorySummary.uncategorizedOutflow").value(categories.length))
+                .andExpect(jsonPath("$.categorySummary.categorizedExpenses").value(0))
+                .andExpect(jsonPath("$.categorySummary.expensesByCategory").isEmpty());
+
+        for (int index = 0; index < categories.length; index++) {
+            String path = "$.transactions[" + index + "]";
+            response.andExpect(jsonPath(path + ".length()").value(9))
+                    .andExpect(jsonPath(path + ".category").value(categories[index].name()))
+                    .andExpect(jsonPath(path + ".source").value("UNKNOWN"))
+                    .andExpect(jsonPath(path + ".requiresReview").value(true))
+                    .andExpect(jsonPath(path + ".nature").value("UNKNOWN"))
+                    .andExpect(jsonPath(path + ".paymentMethod").value("PIX"));
+        }
+        verify(transactionProcessingService, times(1)).processStatement(any());
+        verify(financialSummaryService).calculate(transactions);
+        verify(categorySummaryService).calculate(transactions);
+        verifyNoInteractions(pdfExtractionService);
+    }
+
+    @Test
+    void shouldIncludeRecipientDetailsInAnalysisWithoutProcessingThePdfAgain() throws Exception {
+        var transactions = List.of(
+                new TransactionResponse(LocalDate.of(2026, 11, 26), "PIX ENVIADO - JOÃO EXEMPLO",
+                        new BigDecimal("-10.10"), "EXPENSE", TransactionCategory.TRANSFERENCIAS_PESSOAIS,
+                        CategorizationSource.KEYWORD_RULE, false, TransactionNature.TRANSFER, PaymentMethod.PIX),
+                new TransactionResponse(LocalDate.of(2026, 11, 25), "PIX TRANSF joao exemplo",
+                        new BigDecimal("-5.20"), "EXPENSE", TransactionCategory.TRANSFERENCIAS_PESSOAIS,
+                        CategorizationSource.KEYWORD_RULE, false, TransactionNature.TRANSFER, PaymentMethod.PIX),
+                new TransactionResponse(LocalDate.of(2026, 11, 25), "PIX QRS SUPERMERCADO",
+                        new BigDecimal("-3.00"), "EXPENSE", TransactionCategory.SUPERMERCADO,
+                        CategorizationSource.KEYWORD_RULE, false, TransactionNature.EXPENSE, PaymentMethod.PIX));
+        when(transactionProcessingService.processStatement(any())).thenReturn(new ProcessedStatement(transactions, null));
+        when(financialSummaryService.calculate(transactions)).thenReturn(new FinancialSummaryService().calculate(transactions));
+        when(categorySummaryService.calculate(transactions)).thenReturn(new CategorySummaryService().calculate(transactions));
+
+        mockMvc.perform(multipart("/api/statements/analyze").file(createMockPdf()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.transactions.length()").value(3))
+                .andExpect(jsonPath("$.summary.totalExpenses").value(18.30))
+                .andExpect(jsonPath("$.categorySummary.totalOutflow").value(18.30))
+                .andExpect(jsonPath("$.recipientSummary.totalSent").value(15.30))
+                .andExpect(jsonPath("$.recipientSummary.recipientCount").value(1))
+                .andExpect(jsonPath("$.recipientSummary.transferCount").value(2))
+                .andExpect(jsonPath("$.recipientSummary.recipients[0].name").value("JOÃO EXEMPLO"))
+                .andExpect(jsonPath("$.recipientSummary.recipients[0].totalSent").value(15.30))
+                .andExpect(jsonPath("$.recipientSummary.recipients[0].transferCount").value(2))
+                .andExpect(jsonPath("$.recipientSummary.recipients[0].transactionIndexes[0]").value(0))
+                .andExpect(jsonPath("$.recipientSummary.recipients[0].transactionIndexes[1]").value(1));
+        verify(transactionProcessingService, times(1)).processStatement(any());
+        verifyNoInteractions(pdfExtractionService);
     }
 
     private MockMultipartFile createMockPdf() {

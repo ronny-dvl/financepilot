@@ -4,6 +4,14 @@ export const categoryLabels: Record<TransactionCategory, string> = {
   ALIMENTACAO: "Alimentação", TRANSPORTE: "Transporte", SAUDE: "Saúde",
   ASSINATURAS: "Assinaturas", MORADIA: "Moradia", EDUCACAO: "Educação",
   LAZER: "Lazer", COMPRAS: "Compras", TRANSFERENCIAS: "Transferências", OUTROS: "Outros",
+  SUPERMERCADO: "Supermercado", CONTAS_ESSENCIAIS: "Contas essenciais",
+  INTERNET_TELEFONIA: "Internet e telefonia", GAMES: "Jogos", TECNOLOGIA: "Tecnologia",
+  VESTUARIO: "Vestuário e acessórios", CASA_UTILIDADES: "Casa e utilidades",
+  ESPORTE_BEM_ESTAR: "Esporte e bem-estar",
+  BELEZA_CUIDADOS_PESSOAIS: "Beleza e cuidados pessoais", PETS: "Pets", VIAGENS: "Viagens",
+  INVESTIMENTOS: "Investimentos", TARIFAS_BANCARIAS: "Tarifas bancárias",
+  IMPOSTOS_TRIBUTOS: "Impostos e tributos",
+  TRANSFERENCIAS_PESSOAIS: "Transferências pessoais",
 };
 
 export const paymentLabels: Record<PaymentMethod, string> = {

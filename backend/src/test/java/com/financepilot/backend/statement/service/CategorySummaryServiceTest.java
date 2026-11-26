@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -183,6 +184,105 @@ class CategorySummaryServiceTest {
         assertAmount("0.00", result.transferOutflow());
 
         assertTrue(result.expensesByCategory().isEmpty());
+    }
+
+    @Test
+    void shouldKeepFoodAndSupermarketInSeparateTotals() {
+        CategorySummaryResponse result = service.calculate(List.of(
+                transaction("-25.00", TransactionCategory.ALIMENTACAO, TransactionNature.EXPENSE, false),
+                transaction("-100.00", TransactionCategory.SUPERMERCADO, TransactionNature.EXPENSE, false)
+        ));
+
+        assertAmount("125.00", result.totalOutflow());
+        assertAmount("125.00", result.categorizedExpenses());
+        assertEquals(2, result.expensesByCategory().size());
+        assertAmount("25.00", result.expensesByCategory().get(TransactionCategory.ALIMENTACAO));
+        assertAmount("100.00", result.expensesByCategory().get(TransactionCategory.SUPERMERCADO));
+    }
+
+    @Test
+    void shouldSupportAllConsumptionCategories() {
+        List<TransactionCategory> categories = Arrays.stream(TransactionCategory.values())
+                .filter(category -> category != TransactionCategory.OUTROS
+                        && category != TransactionCategory.TRANSFERENCIAS
+                        && category != TransactionCategory.TRANSFERENCIAS_PESSOAIS
+                        && category != TransactionCategory.INVESTIMENTOS)
+                .toList();
+        CategorySummaryResponse result = service.calculate(categories.stream()
+                .map(category -> transaction("-1.00", category, TransactionNature.EXPENSE, false))
+                .toList());
+
+        assertAmount(Integer.toString(categories.size()), result.totalOutflow());
+        assertAmount(Integer.toString(categories.size()), result.categorizedExpenses());
+        assertEquals(categories.size(), result.expensesByCategory().size());
+        categories.forEach(category -> assertAmount("1.00", result.expensesByCategory().get(category)));
+    }
+
+    @Test
+    void shouldKeepInvestmentsAndUnconfirmedTransfersOutOfConsumption() {
+        CategorySummaryResponse result = service.calculate(List.of(
+                transaction("-100.00", TransactionCategory.INVESTIMENTOS, TransactionNature.EXPENSE, false),
+                transaction("-50.00", TransactionCategory.TRANSFERENCIAS, TransactionNature.EXPENSE, false),
+                transaction("-25.00", TransactionCategory.TRANSFERENCIAS, TransactionNature.TRANSFER, false)
+        ));
+
+        assertAmount("175.00", result.totalOutflow());
+        assertAmount("0.00", result.categorizedExpenses());
+        assertAmount("150.00", result.uncategorizedOutflow());
+        assertAmount("25.00", result.transferOutflow());
+        assertTrue(result.expensesByCategory().isEmpty());
+    }
+
+    @Test
+    void shouldAccountForNegativeRefundExactlyOnceWithoutConsumption() {
+        var result = service.calculate(List.of(
+                transaction("-30.00", TransactionCategory.TRANSPORTE, TransactionNature.REFUND, false)));
+        assertAmount("30.00", result.totalOutflow());
+        assertAmount("30.00", result.uncategorizedOutflow());
+        assertAmount("0", result.categorizedExpenses());
+        assertAmount("0", result.transferOutflow());
+        assertTrue(result.expensesByCategory().isEmpty());
+    }
+
+    @Test
+    void shouldReconcileEveryOutflowUsingExactDecimalAmounts() {
+        var result = service.calculate(List.of(
+                transaction("-0.10", TransactionCategory.TRANSPORTE, TransactionNature.EXPENSE, false),
+                transaction("-0.20", TransactionCategory.TRANSPORTE, TransactionNature.EXPENSE, false),
+                transaction("-0.07", TransactionCategory.OUTROS, TransactionNature.UNKNOWN, true),
+                transaction("-0.11", TransactionCategory.TRANSFERENCIAS, TransactionNature.TRANSFER, false),
+                transaction("-0.13", TransactionCategory.TRANSPORTE, TransactionNature.REFUND, false),
+                transaction("0.05", TransactionCategory.TRANSPORTE, TransactionNature.REFUND, false),
+                transaction("100.00", TransactionCategory.TRANSPORTE, TransactionNature.EXPENSE, false)));
+        assertAmount("0.61", result.totalOutflow());
+        assertAmount("0.30", result.categorizedExpenses());
+        assertAmount("0.20", result.uncategorizedOutflow());
+        assertAmount("0.11", result.transferOutflow());
+        assertAmount("0.30", result.expensesByCategory().get(TransactionCategory.TRANSPORTE));
+        assertEquals(0, result.totalOutflow().compareTo(result.categorizedExpenses()
+                .add(result.uncategorizedOutflow()).add(result.transferOutflow())));
+        assertEquals(0, result.categorizedExpenses().compareTo(result.expensesByCategory().values()
+                .stream().reduce(BigDecimal.ZERO, BigDecimal::add)));
+    }
+
+    @Test
+    void shouldChartPersonalTransfersOnceWithoutTreatingThemAsPurchasesOrOwnAccountTransfers() {
+        var result = service.calculate(List.of(
+                transaction("-10.25", TransactionCategory.TRANSFERENCIAS_PESSOAIS, TransactionNature.TRANSFER, false),
+                transaction("-20.15", TransactionCategory.TRANSFERENCIAS, TransactionNature.TRANSFER, false),
+                transaction("-3.10", TransactionCategory.SUPERMERCADO, TransactionNature.EXPENSE, false),
+                transaction("-5.50", TransactionCategory.TRANSFERENCIAS_PESSOAIS, TransactionNature.UNKNOWN, true),
+                transaction("-2.00", TransactionCategory.TRANSFERENCIAS_PESSOAIS, TransactionNature.REFUND, true),
+                transaction("10.25", TransactionCategory.TRANSFERENCIAS_PESSOAIS, TransactionNature.TRANSFER, false)));
+        assertAmount("41.00", result.totalOutflow());
+        assertAmount("13.35", result.categorizedExpenses());
+        assertAmount("7.50", result.uncategorizedOutflow());
+        assertAmount("20.15", result.transferOutflow());
+        assertEquals(2, result.expensesByCategory().size());
+        assertAmount("10.25", result.expensesByCategory().get(TransactionCategory.TRANSFERENCIAS_PESSOAIS));
+        assertAmount("3.10", result.expensesByCategory().get(TransactionCategory.SUPERMERCADO));
+        assertEquals(0, result.totalOutflow().compareTo(result.categorizedExpenses()
+                .add(result.uncategorizedOutflow()).add(result.transferOutflow())));
     }
 
     private TransactionResponse transaction(

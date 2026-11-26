@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "category": "TRANSFERENCIAS",
+  "rules": [
+    {"id":"transferencias.transferencia-entre-minhas-contas","aliases":["TRANSFERENCIA ENTRE MINHAS CONTAS"],"priority":450,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"transferencias.transferencia-entre-contas-proprias","aliases":["TRANSFERENCIA ENTRE CONTAS PROPRIAS"],"priority":450,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"transferencias.transferencia-mesma-titularidade","aliases":["TRANSFERENCIA MESMA TITULARIDADE"],"priority":450,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]}
+  ]
+}

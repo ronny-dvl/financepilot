@@ -1,7 +1,12 @@
 export type TransactionCategory =
   | "ALIMENTACAO" | "TRANSPORTE" | "SAUDE" | "ASSINATURAS"
   | "MORADIA" | "EDUCACAO" | "LAZER" | "COMPRAS"
-  | "TRANSFERENCIAS" | "OUTROS";
+  | "TRANSFERENCIAS" | "OUTROS"
+  | "SUPERMERCADO" | "CONTAS_ESSENCIAIS" | "INTERNET_TELEFONIA"
+  | "GAMES" | "TECNOLOGIA" | "VESTUARIO" | "ESPORTE_BEM_ESTAR"
+  | "BELEZA_CUIDADOS_PESSOAIS" | "PETS" | "VIAGENS"
+  | "INVESTIMENTOS" | "TARIFAS_BANCARIAS" | "IMPOSTOS_TRIBUTOS" | "CASA_UTILIDADES"
+  | "TRANSFERENCIAS_PESSOAIS";
 
 export type CategorizationSource =
   | "USER_RULE" | "MERCHANT_DATABASE" | "KEYWORD_RULE"
@@ -42,8 +47,23 @@ export type CategorySummaryResponse = {
 };
 
 export type StatementAnalysisResponse = {
+  recipientSummary?: RecipientSummaryResponse;
   holderName?: string | null;
   summary: FinancialSummaryResponse;
   transactions: TransactionResponse[];
   categorySummary: CategorySummaryResponse;
+};
+
+export type PixRecipient = {
+  name: string;
+  totalSent: number;
+  transferCount: number;
+  transactionIndexes: number[];
+};
+
+export type RecipientSummaryResponse = {
+  totalSent: number;
+  recipientCount: number;
+  transferCount: number;
+  recipients: PixRecipient[];
 };
