@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "category": "SUPERMERCADO",
+  "rules": [
+    { "id": "alimentacao.supermercado", "aliases": ["SUPERMERCADO"], "priority": 100, "matchType": "WORD", "specificity": "GENERIC", "include": [], "exclude": [] },
+    { "id": "alimentacao.mercadinho", "aliases": ["MERCADINHO"], "priority": 100, "matchType": "WORD", "specificity": "GENERIC", "include": [], "exclude": [] },
+    { "id": "alimentacao.atacadao", "aliases": ["ATACADAO"], "priority": 100, "matchType": "WORD", "specificity": "SPECIFIC", "include": [], "exclude": [] }
+  ]
+}

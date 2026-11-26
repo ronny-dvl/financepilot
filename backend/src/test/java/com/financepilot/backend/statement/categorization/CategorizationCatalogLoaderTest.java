@@ -1,8 +1,11 @@
 package com.financepilot.backend.statement.categorization;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.core.io.ClassPathResource;
+import com.financepilot.backend.statement.domain.TransactionCategory;
 import tools.jackson.databind.ObjectMapper;
 import java.util.List;
+import java.util.Map;
 import static com.financepilot.backend.statement.categorization.CatalogFixtures.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -12,8 +15,37 @@ class CategorizationCatalogLoaderTest {
     void shouldLoadExactlyTheFourteenMigratedRules() {
         CompiledCatalog catalog = new CategorizationCatalogLoader(new ObjectMapper(), new DescriptionNormalizer()).load();
         assertEquals(14, catalog.rules().size());
-        assertEquals(5, catalog.rules().stream().map(CompiledCatalog.CompiledRule::category).distinct().count());
+        assertEquals(6, catalog.rules().stream().map(CompiledCatalog.CompiledRule::category).distinct().count());
         assertTrue(catalog.rules().stream().allMatch(rule -> rule.include().isEmpty() && rule.exclude().isEmpty()));
+    }
+
+    @Test
+    void shouldPrepareNewCategoryCatalogsWithoutAddingMerchantRules() throws Exception {
+        Map<String, TransactionCategory> catalogs = Map.ofEntries(
+                Map.entry("supermercado", TransactionCategory.SUPERMERCADO),
+                Map.entry("contas-essenciais", TransactionCategory.CONTAS_ESSENCIAIS),
+                Map.entry("internet-telefonia", TransactionCategory.INTERNET_TELEFONIA),
+                Map.entry("games", TransactionCategory.GAMES),
+                Map.entry("tecnologia", TransactionCategory.TECNOLOGIA),
+                Map.entry("vestuario", TransactionCategory.VESTUARIO),
+                Map.entry("esporte-bem-estar", TransactionCategory.ESPORTE_BEM_ESTAR),
+                Map.entry("beleza-cuidados-pessoais", TransactionCategory.BELEZA_CUIDADOS_PESSOAIS),
+                Map.entry("pets", TransactionCategory.PETS),
+                Map.entry("viagens", TransactionCategory.VIAGENS),
+                Map.entry("investimentos", TransactionCategory.INVESTIMENTOS),
+                Map.entry("tarifas-bancarias", TransactionCategory.TARIFAS_BANCARIAS),
+                Map.entry("impostos-tributos", TransactionCategory.IMPOSTOS_TRIBUTOS)
+        );
+        ObjectMapper mapper = new ObjectMapper();
+        for (var entry : catalogs.entrySet()) {
+            try (var input = new ClassPathResource("categorization/" + entry.getKey() + ".json").getInputStream()) {
+                CategoryCatalog catalog = mapper.readValue(input, CategoryCatalog.class);
+                assertEquals(1, catalog.version());
+                assertEquals(entry.getValue(), catalog.category());
+                assertEquals(entry.getValue() == TransactionCategory.SUPERMERCADO ? 3 : 0,
+                        catalog.rules().size());
+            }
+        }
     }
 
     @Test

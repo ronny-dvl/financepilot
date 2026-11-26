@@ -124,7 +124,7 @@ class TransactionNatureServiceTest {
                 TransactionNature.EXPENSE,
                 service.identify(
                         "Pix enviado - Supermercado Nova Eta",
-                        TransactionCategory.ALIMENTACAO
+                        TransactionCategory.SUPERMERCADO
                 )
         );
     }
@@ -160,6 +160,30 @@ class TransactionNatureServiceTest {
                         TransactionCategory.ALIMENTACAO
                 )
         );
+    }
+
+    @Test
+    void shouldNotInferConsumptionForInvestmentsOrTransfers() {
+        for (TransactionCategory category : new TransactionCategory[]{
+                TransactionCategory.INVESTIMENTOS, TransactionCategory.TRANSFERENCIAS}) {
+            for (String description : new String[]{"PIX ENVIADO EXEMPLO", "PIX TRANSF EXEMPLO",
+                    "PIX QRS EXEMPLO", "RSCSS EXEMPLO", "COMPRA EXEMPLO", "PAGAMENTO CARTAO EXEMPLO"}) {
+                assertEquals(TransactionNature.UNKNOWN, service.identify(description, category));
+            }
+        }
+    }
+
+    @Test
+    void shouldPreserveExplicitNaturesForNonConsumptionCategories() {
+        for (TransactionCategory category : new TransactionCategory[]{
+                TransactionCategory.INVESTIMENTOS, TransactionCategory.TRANSFERENCIAS}) {
+            assertEquals(TransactionNature.TRANSFER,
+                    service.identify("PIX ENVIADO ENTRE MINHAS CONTAS", category));
+            assertEquals(TransactionNature.REFUND,
+                    service.identify("ESTORNO EXEMPLO", category));
+            assertEquals(TransactionNature.INCOME,
+                    service.identify("CREDITO DE SALARIO EXEMPLO", category));
+        }
     }
 
     // ===== CASOS DESCONHECIDOS =====

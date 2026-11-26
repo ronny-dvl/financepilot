@@ -26,9 +26,9 @@ class TransactionCategorizationServiceTest {
                 Map.entry("IFOOD", TransactionCategory.ALIMENTACAO),
                 Map.entry("KEETA DELIVERY", TransactionCategory.ALIMENTACAO),
                 Map.entry("99 FOOD", TransactionCategory.ALIMENTACAO),
-                Map.entry("SUPERMERCADO", TransactionCategory.ALIMENTACAO),
-                Map.entry("MERCADINHO", TransactionCategory.ALIMENTACAO),
-                Map.entry("ATACADAO", TransactionCategory.ALIMENTACAO),
+                Map.entry("SUPERMERCADO", TransactionCategory.SUPERMERCADO),
+                Map.entry("MERCADINHO", TransactionCategory.SUPERMERCADO),
+                Map.entry("ATACADAO", TransactionCategory.SUPERMERCADO),
                 Map.entry("FARMACIA", TransactionCategory.SAUDE),
                 Map.entry("DROGARIA", TransactionCategory.SAUDE),
                 Map.entry("FARMA", TransactionCategory.SAUDE)
@@ -40,6 +40,18 @@ class TransactionCategorizationServiceTest {
             assertFalse(result.requiresReview());
             assertNotNull(service.categorizeWithDetails(description).ruleId());
         });
+    }
+
+    @Test
+    void shouldKeepSupermarketRuleIdentifiersStableAfterMigration() {
+        Map.of("SUPERMERCADO", "alimentacao.supermercado",
+                "MERCADINHO", "alimentacao.mercadinho",
+                "ATACADÃO", "alimentacao.atacadao")
+                .forEach((description, ruleId) -> {
+                    var decision = service.categorizeWithDetails(description);
+                    assertEquals(TransactionCategory.SUPERMERCADO, decision.result().category());
+                    assertEquals(ruleId, decision.ruleId());
+                });
     }
 
     @Test
@@ -64,12 +76,12 @@ class TransactionCategorizationServiceTest {
     }
 
     @Test
-    void shouldCategorizeSupermarketAsFood() {
+    void shouldCategorizeSupermarketSeparatelyFromFood() {
 
         CategorizationResult result =
                 service.categorize("PIX QRS SUPERMERCADO");
 
-        assertEquals(TransactionCategory.ALIMENTACAO, result.category());
+        assertEquals(TransactionCategory.SUPERMERCADO, result.category());
     }
 
     @Test
@@ -113,12 +125,12 @@ class TransactionCategorizationServiceTest {
     }
 
     @Test
-    void shouldCategorizeMercadinhoAsFood() {
+    void shouldCategorizeMercadinhoAsSupermarket() {
         CategorizationResult result = service.categorize(
                 "Pix enviado - Mercadinho Ilha Bela"
         );
 
-        assertEquals(TransactionCategory.ALIMENTACAO, result.category());
+        assertEquals(TransactionCategory.SUPERMERCADO, result.category());
         assertFalse(result.requiresReview());
     }
 

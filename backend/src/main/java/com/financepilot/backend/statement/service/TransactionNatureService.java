@@ -25,6 +25,8 @@ public class TransactionNatureService {
         }
 
         String normalized = normalize(description);
+        boolean consumptionCategory = category != TransactionCategory.INVESTIMENTOS
+                && category != TransactionCategory.TRANSFERENCIAS;
 
         // 1. Devoluções e estornos
         if (normalized.startsWith("DEV PIX")
@@ -43,10 +45,10 @@ public class TransactionNatureService {
         }
 
         // 3. Compras e pagamentos explícitos
-        if (normalized.startsWith("PIX QRS")
+        if (consumptionCategory && (normalized.startsWith("PIX QRS")
                 || normalized.startsWith("RSCSS")
                 || normalized.startsWith("COMPRA")
-                || normalized.startsWith("PAGAMENTO CARTAO")) {
+                || normalized.startsWith("PAGAMENTO CARTAO"))) {
 
             return TransactionNature.EXPENSE;
         }
@@ -64,6 +66,7 @@ public class TransactionNatureService {
         if ((normalized.startsWith("PIX ENVIADO")
                 || normalized.startsWith("PIX TRANSF"))
                 && category != null
+                && consumptionCategory
                 && category != TransactionCategory.OUTROS) {
 
             return TransactionNature.EXPENSE;

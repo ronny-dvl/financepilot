@@ -58,6 +58,8 @@ public class CategorySummaryService {
             // 5. Operações sem classificação confiável
             if (category == null
                     || category == TransactionCategory.OUTROS
+                    || category == TransactionCategory.INVESTIMENTOS
+                    || category == TransactionCategory.TRANSFERENCIAS
                     || transaction.requiresReview()
                     || nature == TransactionNature.UNKNOWN) {
 
