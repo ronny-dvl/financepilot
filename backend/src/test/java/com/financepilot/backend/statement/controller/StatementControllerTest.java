@@ -16,12 +16,15 @@ import com.financepilot.backend.statement.service.CategorySummaryService;
 import com.financepilot.backend.statement.service.FinancialSummaryService;
 import com.financepilot.backend.statement.service.PdfExtractionService;
 import com.financepilot.backend.statement.service.TransactionProcessingService;
+import com.financepilot.backend.statement.service.RecipientSummaryService;
+import com.financepilot.backend.statement.service.PixRecipientExtractionService;
 import com.financepilot.backend.statement.service.TransactionProcessingService.ProcessedStatement;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.context.annotation.Import;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -44,6 +47,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(StatementController.class)
+@Import({RecipientSummaryService.class, PixRecipientExtractionService.class})
 class StatementControllerTest {
 
     @Autowired
@@ -369,7 +373,7 @@ class StatementControllerTest {
 
         var response = mockMvc.perform(multipart("/api/statements/analyze").file(createMockPdf()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(4))
+                .andExpect(jsonPath("$.length()").value(5))
                 .andExpect(jsonPath("$.holderName").value(nullValue()))
                 .andExpect(jsonPath("$.summary.length()").value(4))
                 .andExpect(jsonPath("$.summary.transactionCount").value(categories.length))
@@ -392,6 +396,39 @@ class StatementControllerTest {
         verify(transactionProcessingService, times(1)).processStatement(any());
         verify(financialSummaryService).calculate(transactions);
         verify(categorySummaryService).calculate(transactions);
+        verifyNoInteractions(pdfExtractionService);
+    }
+
+    @Test
+    void shouldIncludeRecipientDetailsInAnalysisWithoutProcessingThePdfAgain() throws Exception {
+        var transactions = List.of(
+                new TransactionResponse(LocalDate.of(2026, 11, 26), "PIX ENVIADO - JOÃO EXEMPLO",
+                        new BigDecimal("-10.10"), "EXPENSE", TransactionCategory.TRANSFERENCIAS_PESSOAIS,
+                        CategorizationSource.KEYWORD_RULE, false, TransactionNature.TRANSFER, PaymentMethod.PIX),
+                new TransactionResponse(LocalDate.of(2026, 11, 25), "PIX TRANSF joao exemplo",
+                        new BigDecimal("-5.20"), "EXPENSE", TransactionCategory.TRANSFERENCIAS_PESSOAIS,
+                        CategorizationSource.KEYWORD_RULE, false, TransactionNature.TRANSFER, PaymentMethod.PIX),
+                new TransactionResponse(LocalDate.of(2026, 11, 25), "PIX QRS SUPERMERCADO",
+                        new BigDecimal("-3.00"), "EXPENSE", TransactionCategory.SUPERMERCADO,
+                        CategorizationSource.KEYWORD_RULE, false, TransactionNature.EXPENSE, PaymentMethod.PIX));
+        when(transactionProcessingService.processStatement(any())).thenReturn(new ProcessedStatement(transactions, null));
+        when(financialSummaryService.calculate(transactions)).thenReturn(new FinancialSummaryService().calculate(transactions));
+        when(categorySummaryService.calculate(transactions)).thenReturn(new CategorySummaryService().calculate(transactions));
+
+        mockMvc.perform(multipart("/api/statements/analyze").file(createMockPdf()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.transactions.length()").value(3))
+                .andExpect(jsonPath("$.summary.totalExpenses").value(18.30))
+                .andExpect(jsonPath("$.categorySummary.totalOutflow").value(18.30))
+                .andExpect(jsonPath("$.recipientSummary.totalSent").value(15.30))
+                .andExpect(jsonPath("$.recipientSummary.recipientCount").value(1))
+                .andExpect(jsonPath("$.recipientSummary.transferCount").value(2))
+                .andExpect(jsonPath("$.recipientSummary.recipients[0].name").value("JOÃO EXEMPLO"))
+                .andExpect(jsonPath("$.recipientSummary.recipients[0].totalSent").value(15.30))
+                .andExpect(jsonPath("$.recipientSummary.recipients[0].transferCount").value(2))
+                .andExpect(jsonPath("$.recipientSummary.recipients[0].transactionIndexes[0]").value(0))
+                .andExpect(jsonPath("$.recipientSummary.recipients[0].transactionIndexes[1]").value(1));
+        verify(transactionProcessingService, times(1)).processStatement(any());
         verifyNoInteractions(pdfExtractionService);
     }
 

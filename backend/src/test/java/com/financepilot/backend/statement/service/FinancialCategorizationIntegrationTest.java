@@ -169,6 +169,12 @@ class FinancialCategorizationIntegrationTest {
         assertMoney("200", summary.expensesByCategory().get(TransactionCategory.IMPOSTOS_TRIBUTOS));
         assertMoney("300", summary.expensesByCategory().get(TransactionCategory.EDUCACAO));
         assertMoney("40", summary.expensesByCategory().get(TransactionCategory.TRANSFERENCIAS_PESSOAIS));
+        var recipients = new RecipientSummaryService(new PixRecipientExtractionService()).calculate(statement.transactions());
+        assertMoney("40", recipients.totalSent());
+        assertEquals(1, recipients.recipientCount());
+        assertEquals(1, recipients.transferCount());
+        assertEquals("JOAO SILVA", recipients.recipients().getFirst().name());
+        assertEquals(List.of(8), recipients.recipients().getFirst().transactionIndexes());
         // The positive refund does not offset the original purchase: policy remains gross consumption.
         assertMoney("30", summary.expensesByCategory().get(TransactionCategory.TRANSPORTE));
         assertReconciled(summary);
@@ -213,6 +219,11 @@ class FinancialCategorizationIntegrationTest {
         assertMoney("0", summary.uncategorizedOutflow());
         assertMoney("0", summary.transferOutflow());
         assertMoney("30", summary.expensesByCategory().get(TransactionCategory.TRANSFERENCIAS_PESSOAIS));
+        var recipients = new RecipientSummaryService(new PixRecipientExtractionService()).calculate(statement.transactions());
+        assertMoney("30", recipients.totalSent());
+        assertEquals(1, recipients.recipientCount());
+        assertEquals("Carlos Ferretto", recipients.recipients().getFirst().name());
+        assertEquals(List.of(0), recipients.recipients().getFirst().transactionIndexes());
         assertReconciled(summary);
     }
 

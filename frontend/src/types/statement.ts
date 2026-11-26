@@ -47,8 +47,23 @@ export type CategorySummaryResponse = {
 };
 
 export type StatementAnalysisResponse = {
+  recipientSummary?: RecipientSummaryResponse;
   holderName?: string | null;
   summary: FinancialSummaryResponse;
   transactions: TransactionResponse[];
   categorySummary: CategorySummaryResponse;
+};
+
+export type PixRecipient = {
+  name: string;
+  totalSent: number;
+  transferCount: number;
+  transactionIndexes: number[];
+};
+
+export type RecipientSummaryResponse = {
+  totalSent: number;
+  recipientCount: number;
+  transferCount: number;
+  recipients: PixRecipient[];
 };

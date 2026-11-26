@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   ArrowDownLeft, ArrowUpRight, ArrowRight, ArrowLeft, Wallet,
-  ListFilter, Search, CalendarDays, ChartColumn, Layers, Users, FileText, Plus,
+  ListFilter, Search, CalendarDays, ChartColumn, Layers, FileText, Plus, ChevronRight,
 } from "lucide-react";
 import { useStatement } from "../contexts/StatementContext";
 import {
@@ -13,14 +13,16 @@ import {
 import type { TransactionCategory } from "../types/statement";
 import logo from "../assets/logo.svg";
 import ThemeSelector from "../components/ThemeSelector/ThemeSelector";
+import CategoryDetailsModal from "../components/CategoryDetailsModal/CategoryDetailsModal";
+import PixRecipientsCard from "../components/PixRecipientsCard/PixRecipientsCard";
 import styles from "./Dashboard.module.css";
 
-function Panel({ id, children }: { id: string; children: ReactNode }) {
+function Panel({ id, children, className = "" }: { id: string; children: ReactNode; className?: string }) {
   const reducedMotion = useReducedMotion();
   return (
     <motion.section
       aria-labelledby={id}
-      className={styles.panel}
+      className={`${styles.panel} ${className}`}
       initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.05 }}
@@ -42,6 +44,9 @@ export default function Dashboard() {
   const [category, setCategory] = useState("");
   const [type, setType] = useState("");
   const [payment, setPayment] = useState("");
+  const [detailsCategory, setDetailsCategory] = useState<TransactionCategory | null>(null);
+  const detailsTrigger = useRef<HTMLButtonElement | null>(null);
+  const closeCategoryDetails = useCallback(() => setDetailsCategory(null), []);
   const invalidPeriod = Boolean(startDate && endDate && startDate > endDate);
   const hasFilters = Boolean(query || startDate || endDate || category || type || payment);
 
@@ -141,7 +146,7 @@ export default function Dashboard() {
             <Panel id="categories-heading">
               <div className={styles.panelHeading}>
                 <div className={styles.titleGroup}><span className={styles.sectionIcon}><Layers size={21} aria-hidden="true" /></span>
-                  <div><h2 id="categories-heading">Gastos por categoria</h2></div>
+                  <div><h2 id="categories-heading">Gastos por categoria</h2><p>Clique em uma categoria para ver os detalhes</p></div>
                 </div>
                 <div className={styles.headingTotal}><span>Despesas categorizadas</span><strong>{currency(analysis.categorySummary.categorizedExpenses)}</strong></div>
               </div>
@@ -151,8 +156,15 @@ export default function Dashboard() {
                 <ol className={styles.categoryList} aria-label="Categorias por valor gasto">
                   {categories.map(([key, amount]) => (
                     <li key={key} className={styles.categoryRow}>
-                      <div className={styles.categoryLabel}><span>{categoryLabels[key as TransactionCategory] ?? key}</span><strong>{currency(amount)}</strong></div>
-                      <div className={styles.track} aria-hidden="true"><div className={styles.categoryBar} style={{ width: `${amount / categoryMax * 100}%` }} /></div>
+                      <button type="button" className={styles.categoryButton} aria-haspopup="dialog"
+                        aria-expanded={detailsCategory === key}
+                        aria-label={`Ver detalhes de ${categoryLabels[key as TransactionCategory] ?? key}: ${currency(amount)}`}
+                        onClick={event => { detailsTrigger.current = event.currentTarget; setDetailsCategory(key as TransactionCategory); }}>
+                        <span className={styles.categoryLabel}><span>{categoryLabels[key as TransactionCategory] ?? key}</span>
+                          <span className={styles.categoryValue}><strong>{currency(amount)}</strong><ChevronRight size={17} aria-hidden="true" /></span>
+                        </span>
+                        <span className={styles.track} aria-hidden="true"><span className={styles.categoryBar} style={{ width: `${amount / categoryMax * 100}%` }} /></span>
+                      </button>
                     </li>
                   ))}
                 </ol>
@@ -163,18 +175,8 @@ export default function Dashboard() {
               </div>
             </Panel>
 
-            <Panel id="pix-heading">
-              <div className={styles.panelHeading}><div className={styles.titleGroup}>
-                <span className={styles.sectionIcon}><Users size={21} aria-hidden="true" /></span>
-                <div><h2 id="pix-heading">Destinatários PIX</h2><p>Envios organizados por destinatário confirmado.</p></div>
-              </div><span className={styles.badge}>Identificação indisponível</span></div>
-              <div className={styles.pixEmpty}>
-                <span className={styles.emptyIcon}><Users size={28} aria-hidden="true" /></span>
-                <div><h3>Os destinatários ainda não estão identificados</h3>
-                  <p>O extrato analisado não fornece destinatários PIX estruturados e confirmados. Por isso, o ranking, a quantidade por destinatário e os detalhes individuais não estão disponíveis.</p>
-                  <a className={styles.textLink} href="#transactions-heading" onClick={() => { clearFilters(); setPayment("PIX"); }}>Consultar os PIX no extrato completo <ArrowRight size={16} aria-hidden="true" /></a>
-                </div>
-              </div>
+            <Panel id="pix-heading" className={styles.recipientsPanel}>
+              <PixRecipientsCard headingId="pix-heading" summary={analysis.recipientSummary} transactions={analysis.transactions} />
             </Panel>
 
             <Panel id="cashflow-heading">
@@ -252,6 +254,13 @@ export default function Dashboard() {
         )}
         <Link to="/" className={styles.backLink}><ArrowLeft size={16} aria-hidden="true" /> Voltar ao início</Link>
       </motion.main>
+      <AnimatePresence>
+        {analysis && detailsCategory && (
+          <CategoryDetailsModal key={detailsCategory} category={detailsCategory}
+            total={analysis.categorySummary.expensesByCategory[detailsCategory] ?? 0}
+            transactions={analysis.transactions} onClose={closeCategoryDetails} returnFocusTo={detailsTrigger.current} />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

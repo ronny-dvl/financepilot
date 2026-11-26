@@ -6,8 +6,14 @@ public record StatementAnalysisResponse(
         FinancialSummaryResponse summary,
         List<TransactionResponse> transactions,
         CategorySummaryResponse categorySummary,
-        String holderName
+        String holderName,
+        RecipientSummaryResponse recipientSummary
 ) {
+    public StatementAnalysisResponse(FinancialSummaryResponse summary,
+            List<TransactionResponse> transactions, CategorySummaryResponse categorySummary, String holderName) {
+        this(summary, transactions, categorySummary, holderName, RecipientSummaryResponse.empty());
+    }
+
     public StatementAnalysisResponse(FinancialSummaryResponse summary,
             List<TransactionResponse> transactions, CategorySummaryResponse categorySummary) {
         this(summary, transactions, categorySummary, null);

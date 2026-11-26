@@ -11,6 +11,7 @@ import com.financepilot.backend.statement.service.CategorySummaryService;
 import com.financepilot.backend.statement.service.FinancialSummaryService;
 import com.financepilot.backend.statement.service.PdfExtractionService;
 import com.financepilot.backend.statement.service.TransactionProcessingService;
+import com.financepilot.backend.statement.service.RecipientSummaryService;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,17 +28,20 @@ public class StatementController {
     private final TransactionProcessingService transactionProcessingService;
     private final FinancialSummaryService financialSummaryService;
     private final CategorySummaryService categorySummaryService;
+    private final RecipientSummaryService recipientSummaryService;
 
     public StatementController(
             PdfExtractionService pdfExtractionService,
             TransactionProcessingService transactionProcessingService,
             FinancialSummaryService financialSummaryService,
-            CategorySummaryService categorySummaryService
+            CategorySummaryService categorySummaryService,
+            RecipientSummaryService recipientSummaryService
     ) {
         this.pdfExtractionService = pdfExtractionService;
         this.transactionProcessingService = transactionProcessingService;
         this.financialSummaryService = financialSummaryService;
         this.categorySummaryService = categorySummaryService;
+        this.recipientSummaryService = recipientSummaryService;
     }
 
     @PostMapping(
@@ -54,7 +58,8 @@ public class StatementController {
                 financialSummaryService.calculate(transactions),
                 transactions,
                 categorySummaryService.calculate(transactions),
-                statement.holderName()
+                statement.holderName(),
+                recipientSummaryService.calculate(transactions)
         ));
     }
 
