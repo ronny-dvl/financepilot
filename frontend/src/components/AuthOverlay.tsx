@@ -110,13 +110,12 @@ export default function AuthOverlay({ open, onClose }: Props) {
   const entrarComoConvidado = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const nome = form.nome.trim().replace(/\s+/g, " ");
-    const sobrenome = form.sobrenome.trim().replace(/\s+/g, " ");
-    if (!validName(nome) || !validName(sobrenome)) {
-      setGuestError("Informe nome e sobrenome válidos, com pelo menos duas letras, sem números ou símbolos.");
-      document.getElementById(!validName(nome) ? "guest-nome" : "guest-sobrenome")?.focus();
+    if (!validName(nome)) {
+      setGuestError("Informe um nome válido, com pelo menos duas letras, sem números ou símbolos.");
+      document.getElementById("guest-nome")?.focus();
       return;
     }
-    // Only the first name is kept in React memory; the surname is discarded.
+    // Only the first name is kept in React memory for the dashboard greeting.
     continuingToUpload.current = true;
     setGuestFirstName(nome.split(" ")[0]);
     setForm(emptyForm);
@@ -198,10 +197,7 @@ export default function AuthOverlay({ open, onClose }: Props) {
             </div>}
 
             {step === "guest" && <form className={styles.form} onSubmit={entrarComoConvidado}>
-              <div className={styles.nameRow}>
-                <div className={styles.field}><label htmlFor="guest-nome">Nome</label><input id="guest-nome" autoComplete="given-name" placeholder="Seu nome" value={form.nome} onChange={updateField("nome")} required minLength={2} maxLength={80} aria-invalid={!!guestError && !validName(form.nome.trim().replace(/\s+/g, " "))} aria-describedby={guestError ? "guest-error" : undefined} /></div>
-                <div className={styles.field}><label htmlFor="guest-sobrenome">Sobrenome</label><input id="guest-sobrenome" autoComplete="family-name" placeholder="Seu sobrenome" value={form.sobrenome} onChange={updateField("sobrenome")} required minLength={2} maxLength={80} aria-invalid={!!guestError && !validName(form.sobrenome.trim().replace(/\s+/g, " "))} aria-describedby={guestError ? "guest-error" : undefined} /></div>
-              </div>
+              <div className={styles.field}><label htmlFor="guest-nome">Nome</label><input id="guest-nome" autoComplete="given-name" placeholder="Digite seu nome" value={form.nome} onChange={updateField("nome")} required minLength={2} maxLength={80} aria-invalid={!!guestError && !validName(form.nome.trim().replace(/\s+/g, " "))} aria-describedby={guestError ? "guest-error" : undefined} /></div>
               {guestError && <p id="guest-error" className={styles.error} role="alert">{guestError}</p>}
               <button type="submit" className={styles.primary}>Continuar para o upload <span aria-hidden="true">→</span></button>
             </form>}
