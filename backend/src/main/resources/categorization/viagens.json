@@ -1,9 +1,8 @@
 {
-  "version": 1,
+  "version": 2,
   "category": "VIAGENS",
   "rules": [
-    {"id":"viagens.latam","aliases":["LATAM"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"viagens.latam-airlines","aliases":["LATAM AIRLINES"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"viagens.latam","aliases":["LATAM","LATAM AIRLINES"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"viagens.gol-linhas-aereas","aliases":["GOL LINHAS AEREAS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"viagens.gol-transportes-aereos","aliases":["GOL TRANSPORTES AEREOS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"viagens.azul-linhas-aereas","aliases":["AZUL LINHAS AEREAS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},

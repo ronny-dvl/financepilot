@@ -10,8 +10,17 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public final class RuleMatcher {
+    private static final Pattern NAMED_PIX = Pattern.compile("^PIX (?:ENVIADO|RECEBIDO|TRANSF) ");
+    private static final Pattern PAYEE_CONTEXT = Pattern.compile(
+            "\\b(?:CNPJ|LTDA|EIRELI|LOJAS?|SUPERMERCADOS?|MERCADINHO|ATACADISTA|RESTAURANTE|"
+                    + "LANCHONETE|FARMACIAS?|DROGARIAS?|HOSPITAL|LABORATORIO|CLINICA|CURSOS?|"
+                    + "ESCOLA|FACULDADE|UNIVERSIDADE|MENSALIDADES?|ASSINATURAS?|TELEFONIA|ENERGIA|"
+                    + "MESMA TITULARIDADE|ENTRE MINHAS CONTAS|CONTAS PROPRIAS)\\b");
+    private static final Pattern PAYMENT_PROCESSOR = Pattern.compile(
+            "\\b(?:MERCADO PAGO|MERCADOPAGO|PAGSEGURO|PAGBANK|PAYPAL|STRIPE|CIELO|GETNET|STONE)\\b");
     /** Offsets refer only to normalized text; no financial description is retained in diagnostics. */
     public record RuleMatch(CompiledRule rule, NormalizedPattern alias, int start, int end, boolean eligible) {
         public RuleMatch(CompiledRule rule, NormalizedPattern alias) {
@@ -59,7 +68,9 @@ public final class RuleMatcher {
                     || (!rule.includeAny().isEmpty() && rule.includeAny().stream().noneMatch(group ->
                         group.stream().allMatch(pattern -> matches(pattern, normalized, padded, words))))) continue;
             boolean eligible = rule.exclude().stream()
-                    .noneMatch(pattern -> matches(pattern, normalized, padded, words));
+                    .noneMatch(pattern -> matches(pattern, normalized, padded, words))
+                    && (!rule.conclusionRequired() || rule.concludeAny().stream().anyMatch(group ->
+                        group.stream().allMatch(pattern -> matches(pattern, normalized, padded, words))));
             // Keep vetoed alias evidence and every occurrence. Exclusions cannot erase competing
             // merchants, and a refinement at one occurrence cannot hide an unrelated occurrence.
             for (NormalizedPattern alias : rule.aliases()) {
@@ -81,7 +92,10 @@ public final class RuleMatcher {
                 int from = 0;
                 int index;
                 while ((index = padded.indexOf(alias.paddedValue(), from)) >= 0) {
-                    result.add(new RuleMatch(rule, alias, index, index + alias.value().length(), eligible));
+                    int end = index + alias.value().length();
+                    if (!isPersonalPixPayee(rule, normalized, index)) {
+                        result.add(new RuleMatch(rule, alias, index, end, eligible));
+                    }
                     from = index + 1;
                 }
             }
@@ -89,13 +103,34 @@ public final class RuleMatcher {
                 int offset = 0;
                 for (String word : words) {
                     if (word.startsWith(alias.value())) {
-                        result.add(new RuleMatch(rule, alias, offset, offset + word.length(), eligible));
+                        if (!isPersonalPixPayee(rule, normalized, offset)) {
+                            result.add(new RuleMatch(rule, alias, offset, offset + word.length(), eligible));
+                        }
                     }
                     offset += word.length() + 1;
                 }
             }
             case STARTS_WITH -> throw new IllegalArgumentException("STARTS_WITH não é modalidade de alias.");
         }
+    }
+
+    // Recognize the merchant without demanding a purchase marker. In an explicitly named Pix
+    // payee, a name before a merchant surname (or an explicit CPF) needs commercial evidence.
+    // Merchant suffixes such as city/branch and bank references remain valid; no name list is used.
+    private boolean isPersonalPixPayee(CompiledRule rule, String description, int start) {
+        switch (rule.category()) {
+            case INVESTIMENTOS, TRANSFERENCIAS, TARIFAS_BANCARIAS, IMPOSTOS_TRIBUTOS -> { return false; }
+            default -> { }
+        }
+        var prefix = NAMED_PIX.matcher(description);
+        if (!prefix.find() || start < prefix.end() || PAYEE_CONTEXT.matcher(description).find()) return false;
+        if ((" " + description + " ").contains(" CPF ")) return true;
+        String remainder = description.substring(prefix.end(), start);
+        remainder = PAYMENT_PROCESSOR.matcher(remainder).replaceAll(" ");
+        for (String word : remainder.trim().split(" +")) {
+            if (!word.isEmpty() && word.chars().allMatch(Character::isLetter)) return true;
+        }
+        return false;
     }
 
     private boolean matches(NormalizedPattern pattern, String normalized, String padded, List<String> words) {

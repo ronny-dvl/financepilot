@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "category": "TECNOLOGIA",
   "rules": [
     {"id":"tecnologia.amazon-web-services","aliases":["AMAZON WEB SERVICES","AMAZONWEBSERVICES","AWS"],"priority":400,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},

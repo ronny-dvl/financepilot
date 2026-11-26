@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "category": "MORADIA",
   "rules": [
     {"id":"moradia.quinto-andar","aliases":["QUINTO ANDAR","QUINTOANDAR"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},

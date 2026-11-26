@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "category": "ESPORTE_BEM_ESTAR",
   "rules": [
     {"id":"esporte-bem-estar.smart-fit","aliases":["SMART FIT","SMARTFIT"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
@@ -29,7 +29,7 @@
     {"id":"esporte-bem-estar.probiotica","aliases":["PROBIOTICA"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"esporte-bem-estar.mundo-verde","aliases":["MUNDO VERDE","MUNDOVERDE"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"esporte-bem-estar.nutrata","aliases":["NUTRATA"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"esporte-bem-estar.mensalidade-academia","aliases":["MENSALIDADE ACADEMIA"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"esporte-bem-estar.mensalidade-academia","aliases":["MENSALIDADE ACADEMIA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"esporte-bem-estar.academia-de-ginastica","aliases":["ACADEMIA DE GINASTICA"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"esporte-bem-estar.academia-fitness","aliases":["ACADEMIA FITNESS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"esporte-bem-estar.estudio-pilates","aliases":["ESTUDIO PILATES"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},

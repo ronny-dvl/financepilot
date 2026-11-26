@@ -66,8 +66,8 @@ public final class CategorizationCatalogLoader {
                 }
                 if (!ids.add(rule.id())) throw invalid("ID duplicado: " + rule.id());
                 if (Integer.valueOf(1).equals(catalog.version())
-                        && (rule.includeAny() != null || rule.refines() != null)) {
-                    throw invalid("includeAny e refines exigem catálogo versão 2: " + rule.id());
+                        && (rule.includeAny() != null || rule.refines() != null || rule.concludeAny() != null)) {
+                    throw invalid("includeAny, refines e concludeAny exigem catálogo versão 2: " + rule.id());
                 }
                 if (rule.priority() == null || rule.priority() < 0 || rule.specificity() == null
                         || rule.matchType() == null || rule.aliases() == null || rule.aliases().isEmpty()) {
@@ -87,6 +87,9 @@ public final class CategorizationCatalogLoader {
                 List<NormalizedPattern> include = compileConditions(rule.include());
                 List<NormalizedPattern> exclude = compileConditions(rule.exclude());
                 List<List<NormalizedPattern>> includeAny = compileAlternatives(rule.includeAny());
+                // Missing means legacy eligibility; explicit [] means review-only evidence.
+                boolean conclusionRequired = rule.concludeAny() != null;
+                List<List<NormalizedPattern>> concludeAny = compileAlternatives(rule.concludeAny());
                 if (Integer.valueOf(1).equals(catalog.version())
                         && java.util.stream.Stream.concat(include.stream(), exclude.stream())
                         .anyMatch(condition -> condition.mode() == MatchMode.STARTS_WITH)) {
@@ -97,7 +100,8 @@ public final class CategorizationCatalogLoader {
                 if (exclude.stream().anyMatch(condition -> required.contains(condition.collisionKey()))) {
                     throw invalid("Condições de inclusão e exclusão contraditórias: " + rule.id());
                 }
-                for (List<NormalizedPattern> group : includeAny) {
+                for (List<NormalizedPattern> group : java.util.stream.Stream.concat(
+                        includeAny.stream(), concludeAny.stream()).toList()) {
                     if (group.stream().anyMatch(condition -> exclude.stream().anyMatch(veto ->
                             veto.collisionKey().equals(condition.collisionKey())))) {
                         throw invalid("Alternativa contraditória com exclusão: " + rule.id());
@@ -112,7 +116,8 @@ public final class CategorizationCatalogLoader {
                     }
                 }
                 compiled.add(new CompiledRule(rule.id(), catalog.category(), rule.priority(),
-                        rule.specificity(), patterns, include, exclude, includeAny, refines));
+                        rule.specificity(), patterns, include, exclude, includeAny, refines,
+                        conclusionRequired, concludeAny));
             }
         }
         if (compiled.isEmpty()) throw invalid("Catálogo sem regras.");
@@ -123,7 +128,7 @@ public final class CategorizationCatalogLoader {
         for (CompiledRule rule : compiled) collectAncestors(rule.id(), byId, ancestors, new HashSet<>());
         return new CompiledCatalog(compiled.stream().map(rule -> new CompiledRule(rule.id(), rule.category(),
                 rule.priority(), rule.specificity(), rule.aliases(), rule.include(), rule.exclude(),
-                rule.includeAny(), ancestors.get(rule.id()))).toList());
+                rule.includeAny(), ancestors.get(rule.id()), rule.conclusionRequired(), rule.concludeAny())).toList());
     }
 
     private List<String> collectAncestors(String id, Map<String, CompiledRule> rules,

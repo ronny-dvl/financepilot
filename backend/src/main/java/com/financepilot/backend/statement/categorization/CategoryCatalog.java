@@ -11,8 +11,11 @@ public record CategoryCatalog(Integer version, TransactionCategory category, Lis
     public record RuleDefinition(String id, List<String> aliases, Integer priority,
             MatchMode matchType, Specificity specificity,
             List<Condition> include, List<Condition> exclude,
-            List<List<Condition>> includeAny, List<String> refines) { }
+            List<List<Condition>> includeAny, List<String> refines,
+            List<List<Condition>> concludeAny) { }
 
-    /** include is AND; includeAny is OR of nonempty AND groups; any exclude vetoes eligibility. */
+    /** include/includeAny identify the entity; concludeAny gates purpose without erasing evidence.
+     * Missing concludeAny preserves legacy behavior; [] retains review-only identity evidence.
+     * Alternatives are OR of nonempty AND groups; any exclude vetoes eligibility. */
     public record Condition(MatchMode matchType, String value) { }
 }

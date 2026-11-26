@@ -48,13 +48,18 @@ class ConflictResolutionRegressionTest {
             UBERTRIP | TRANSPORTE
             99 FOOD | ALIMENTACAO
             99FOOD | ALIMENTACAO
-            99 APP | TRANSPORTE
-            99APP | TRANSPORTE
+            COMPRA 99 APP | TRANSPORTE
+            COMPRA 99APP | TRANSPORTE
             AMAZON WEB SERVICES | TECNOLOGIA
             AMAZONWEBSERVICES | TECNOLOGIA
+            COMPRA AWS | TECNOLOGIA
             AWS | TECNOLOGIA
             AMZN MKTP | COMPRAS
             AMAZONMARKETPLACE | COMPRAS
+            PIX RENNER | VESTUARIO
+            PIX ENVIADO HIROTA FOOD | SUPERMERCADO
+            COMPRAZ RENNER | VESTUARIO
+            PIX QRSX RENNER | VESTUARIO
             AMAZON PRIME | ASSINATURAS
             AMAZONPRIME | ASSINATURAS
             UBER ONE | ASSINATURAS
@@ -66,11 +71,12 @@ class ConflictResolutionRegressionTest {
             RSCSS HIROTA | SUPERMERCADO
             SUPER DUOLINGO | ASSINATURAS
             DUOLINGO PLUS | ASSINATURAS
-            CASA RIACHUELO | COMPRAS
+            COMPRA CASA RIACHUELO | COMPRAS
             NETFLIX GAMES | GAMES
             COPEL TELECOM | INTERNET_TELEFONIA
             PLANO DE SAUDE PET | PETS
             """)
+    // Merchant defaults need no purchase marker; contextual refinements still resolve related services.
     void shouldRecognizeAliasesAndDeclaredRefinements(String description, TransactionCategory expected) {
         var result = SERVICE.categorize(description);
         assertEquals(expected, result.category());
@@ -79,9 +85,8 @@ class ConflictResolutionRegressionTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"PIX ENVIADO CARLOS RENNER", "PIX RECEBIDO CARLOS RENNER", "PIX RENNER",
-            "PIX ENVIADO COMPRA RENNER", "PIX RECEBIDO RSCSS RENNER", "COMPRAZ RENNER",
-            "PIX QRSX RENNER", "PIX ENVIADO HIROTA FOOD", "UBERABA", "UBERLANDIA SHOPPING"})
+    @ValueSource(strings = {"PIX ENVIADO CARLOS RENNER", "PIX RECEBIDO CARLOS RENNER",
+            "PIX ENVIADO COMPRA RENNER", "PIX RECEBIDO RSCSS RENNER", "UBERABA", "UBERLANDIA SHOPPING"})
     void shouldPreservePersonalNameGuardsAndTokenBoundaries(String description) {
         var result = SERVICE.categorize(description);
         assertEquals(TransactionCategory.OUTROS, result.category());

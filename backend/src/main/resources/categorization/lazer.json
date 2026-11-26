@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "category": "LAZER",
   "rules": [
     {"id":"lazer.cinemark","aliases":["CINEMARK"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
@@ -8,7 +8,7 @@
     {"id":"lazer.kinoplex","aliases":["KINOPLEX"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"lazer.cinesystem","aliases":["CINESYSTEM"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"lazer.moviecom","aliases":["MOVIECOM"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"lazer.cinemas-multiplex","aliases":["CINEMAS MULTIPLEX"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"lazer.cinemas-multiplex","aliases":["CINEMAS MULTIPLEX"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"lazer.playarte","aliases":["PLAYARTE"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"lazer.itau-cinemas","aliases":["ITAU CINEMAS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"lazer.itau-cinema","aliases":["ITAU CINEMA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},

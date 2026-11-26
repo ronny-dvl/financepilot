@@ -77,15 +77,15 @@
     {"id":"transporte.unidas-locadora","aliases":["UNIDAS LOCADORA","UNIDAS ALUGUEL"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"transporte.foco-aluguel-de-carros","aliases":["FOCO ALUGUEL DE CARROS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"transporte.rentcars","aliases":["RENTCARS","RENT CARS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"transporte.hertz","aliases":["HERTZ"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[],"includeAny":[[{"matchType":"STARTS_WITH","value":"COMPRA"}],[{"matchType":"STARTS_WITH","value":"RSCSS"}],[{"matchType":"STARTS_WITH","value":"PIX QRS"}]]},
+    {"id":"transporte.hertz","aliases":["HERTZ"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"transporte.avis-rent-a-car","aliases":["AVIS RENT A CAR"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"transporte.posto-de-combustivel","aliases":["POSTO DE COMBUSTIVEL"],"priority":60,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"transporte.posto-de-gasolina","aliases":["POSTO DE GASOLINA"],"priority":60,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"transporte.abastecimento-combustivel","aliases":["ABASTECIMENTO COMBUSTIVEL"],"priority":60,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"transporte.recarga-bilhete-unico","aliases":["RECARGA BILHETE UNICO"],"priority":60,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"transporte.recarga-transporte","aliases":["RECARGA TRANSPORTE"],"priority":60,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"transporte.pagamento-pedagio","aliases":["PAGAMENTO PEDAGIO"],"priority":60,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"transporte.corrida-taxi","aliases":["CORRIDA TAXI"],"priority":60,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"transporte.estacionament","aliases":["ESTACIONAMENT"],"priority":60,"matchType":"PREFIX","specificity":"GENERIC","include":[],"exclude":[]}
+    {"id":"transporte.posto-de-combustivel","aliases":["POSTO DE COMBUSTIVEL"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"transporte.posto-de-gasolina","aliases":["POSTO DE GASOLINA"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"transporte.abastecimento-combustivel","aliases":["ABASTECIMENTO COMBUSTIVEL"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"transporte.recarga-bilhete-unico","aliases":["RECARGA BILHETE UNICO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"transporte.recarga-transporte","aliases":["RECARGA TRANSPORTE"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"transporte.pagamento-pedagio","aliases":["PAGAMENTO PEDAGIO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"transporte.corrida-taxi","aliases":["CORRIDA TAXI"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"transporte.estacionament","aliases":["ESTACIONAMENTO","ESTACIONAMENTOS"],"priority":65,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]}
   ]
 }

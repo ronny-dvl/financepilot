@@ -47,8 +47,8 @@ class FinancialCategorizationIntegrationTest {
             COMPRA UBER | -30.00 | TRANSPORTE | EXPENSE | false | 30 | 30 | 0 | 0
             PIX QRS UBER MESMA TITULARIDADE | -50.00 | TRANSPORTE | TRANSFER | false | 50 | 0 | 0 | 50
             PIX QRS UBER MESMA TITULARIDADE | 50.00 | TRANSPORTE | TRANSFER | false | 0 | 0 | 0 | 0
-            PIX DEVOLVIDO UBER | -30.00 | TRANSPORTE | REFUND | true | 30 | 0 | 30 | 0
-            PIX DEVOLVIDO UBER | 30.00 | TRANSPORTE | REFUND | false | 0 | 0 | 0 | 0
+            PIX DEVOLVIDO UBER TRIP | -30.00 | TRANSPORTE | REFUND | true | 30 | 0 | 30 | 0
+            PIX DEVOLVIDO UBER TRIP | 30.00 | TRANSPORTE | REFUND | false | 0 | 0 | 0 | 0
             APLIC CDB | -1000.00 | INVESTIMENTOS | UNKNOWN | true | 1000 | 0 | 1000 | 0
             COMPRA DE ACOES AWS | -1000.00 | OUTROS | UNKNOWN | true | 1000 | 0 | 1000 | 0
             COMPRA ASUS DROGASIL | -30.00 | OUTROS | EXPENSE | true | 30 | 0 | 30 | 0
@@ -68,6 +68,29 @@ class FinancialCategorizationIntegrationTest {
             BOLETO SABESP AGENDADO | -100.00 | CONTAS_ESSENCIAIS | UNKNOWN | true | 100 | 0 | 100 | 0
             PIX ENVIADO JOAO SILVA | -40.00 | OUTROS | UNKNOWN | true | 40 | 0 | 40 | 0
             COMPRA CLIENTE TESTE | -15.00 | OUTROS | EXPENSE | true | 15 | 0 | 15 | 0
+            PIX ENVIADO CARLOS FERRETTO | -30 | OUTROS | UNKNOWN | true | 30 | 0 | 30 | 0
+            PIX ENVIADO JOAO FUJIOKA | -30 | OUTROS | UNKNOWN | true | 30 | 0 | 30 | 0
+            PAGAMENTO FERRETTO CURSOS ON LINE LTDA | -30 | EDUCACAO | EXPENSE | false | 30 | 30 | 0 | 0
+            COMPRA FUJIOKA | -30 | TECNOLOGIA | EXPENSE | false | 30 | 30 | 0 | 0
+            COMPRA FUJIOKA NOTEBOOK | -30 | TECNOLOGIA | EXPENSE | false | 30 | 30 | 0 | 0
+            COMPRA APPLE.COM/BILL | -30 | ASSINATURAS | EXPENSE | false | 30 | 30 | 0 | 0
+            COMPRA APPLE.COM/BILL ASSINATURA | -30 | ASSINATURAS | EXPENSE | false | 30 | 30 | 0 | 0
+            COMPRA APPLE.COM/BILL ASSINATURA | 30 | ASSINATURAS | UNKNOWN | true | 0 | 0 | 0 | 0
+            COMPRA CARREFOUR | -30 | SUPERMERCADO | EXPENSE | false | 30 | 30 | 0 | 0
+            COMPRA CARREFOUR ALIMENTOS | -30 | SUPERMERCADO | EXPENSE | false | 30 | 30 | 0 | 0
+            COMPRA SAMSUNG GELADEIRA | -30 | TECNOLOGIA | EXPENSE | false | 30 | 30 | 0 | 0
+            COMPRA POSTO SHELL | -30 | TRANSPORTE | EXPENSE | false | 30 | 30 | 0 | 0
+            COMPRA POSTO SHELL GASOLINA | -30 | TRANSPORTE | EXPENSE | false | 30 | 30 | 0 | 0
+            PIX DEVOLVIDO UBER | -30 | TRANSPORTE | REFUND | true | 30 | 0 | 30 | 0
+            PIX DEVOLVIDO UBER | 30 | TRANSPORTE | REFUND | false | 0 | 0 | 0 | 0
+            PIX QRS APPLE.COM/BILL MESMA TITULARIDADE | -30 | ASSINATURAS | TRANSFER | false | 30 | 0 | 0 | 30
+            PIX ENVIADO FERRETTO | -30 | EDUCACAO | EXPENSE | false | 30 | 30 | 0 | 0
+            PIX ENVIADO UBER | 30 | TRANSPORTE | UNKNOWN | true | 0 | 0 | 0 | 0
+            PIX ENVIADO UBER MESMA TITULARIDADE | -30 | TRANSPORTE | TRANSFER | false | 30 | 0 | 0 | 30
+            PIX RECEBIDO CARREFOUR | 30 | SUPERMERCADO | UNKNOWN | true | 0 | 0 | 0 | 0
+            PIX ENVIADO NETFLIX | -30 | ASSINATURAS | EXPENSE | false | 30 | 30 | 0 | 0
+            PIX ENVIADO MERCADO LIVRE | -30 | COMPRAS | EXPENSE | false | 30 | 30 | 0 | 0
+            PIX ENVIADO PETZ | -30.15 | PETS | EXPENSE | false | 30.15 | 30.15 | 0 | 0
             """)
     void shouldReconcileRealProcessingWithExplicitFinancialExpectations(String description, BigDecimal amount,
             TransactionCategory category, TransactionNature nature, boolean requiresReview,
@@ -97,6 +120,7 @@ class FinancialCategorizationIntegrationTest {
         }
     }
 
+    // Commercial defaults change categories, not the gross-consumption and cash-flow invariants.
     @Test
     void shouldSeparateCashFlowFromGrossConsumptionWithoutDoubleCounting() throws IOException {
         var statement = processing.processStatement(itauPdf(
@@ -106,10 +130,10 @@ class FinancialCategorizationIntegrationTest {
                 "26/11/2026 MENSALIDADE ESCOLAR -300,00",
                 "26/11/2026 COMPRA UBER -30,00",
                 "26/11/2026 PIX QRS UBER MESMA TITULARIDADE -50,00",
-                "26/11/2026 PIX DEVOLVIDO UBER -30,00",
+                "26/11/2026 PIX DEVOLVIDO UBER TRIP -30,00",
                 "26/11/2026 APLIC CDB -1000,00",
                 "26/11/2026 PIX ENVIADO JOAO SILVA -40,00",
-                "26/11/2026 PIX DEVOLVIDO UBER 30,00",
+                "26/11/2026 PIX DEVOLVIDO UBER TRIP 30,00",
                 "26/11/2026 CREDITO DE SALARIO EMPRESA 2000,00",
                 "26/11/2026 COMPRA UBER 15,00"));
         CategorySummaryResponse summary = categorySummary.calculate(statement.transactions());
@@ -137,9 +161,9 @@ class FinancialCategorizationIntegrationTest {
     void shouldPreserveSantanderPixPurchasesAndReconcileRefundsWithRealParser() throws IOException {
         var statement = processing.processStatement(pdf(List.of(
                 "SANTANDER", "DETALHE DOS MOVIMENTOS", "DATA DESCRIÇÃO VALOR SALDO",
-                "Pix enviado", "26/11/2026 -R$ 30,00 R$ 100,00", "Uber",
-                "Pix devolvido", "26/11/2026 -R$ 10,00 R$ 90,00", "Uber",
-                "Pix devolvido", "26/11/2026 R$ 5,00 R$ 95,00", "Uber")));
+                "Pix enviado", "26/11/2026 -R$ 30,00 R$ 100,00", "Uber Trip",
+                "Pix devolvido", "26/11/2026 -R$ 10,00 R$ 90,00", "Uber Trip",
+                "Pix devolvido", "26/11/2026 R$ 5,00 R$ 95,00", "Uber Trip")));
         var transactions = statement.transactions();
         assertEquals(3, transactions.size());
         assertEquals(TransactionCategory.TRANSPORTE, transactions.getFirst().category());
@@ -153,6 +177,23 @@ class FinancialCategorizationIntegrationTest {
         assertMoney("40", summary.totalOutflow());
         assertMoney("30", summary.categorizedExpenses());
         assertMoney("10", summary.uncategorizedOutflow());
+        assertMoney("0", summary.transferOutflow());
+        assertReconciled(summary);
+    }
+
+    @Test
+    void shouldKeepSantanderPixToUnqualifiedPersonalNameInResidualOutflow() throws IOException {
+        var statement = processing.processStatement(pdf(List.of(
+                "SANTANDER", "DETALHE DOS MOVIMENTOS", "DATA DESCRIÇÃO VALOR SALDO",
+                "Pix enviado", "26/11/2026 -R$ 30,00 R$ 100,00", "Carlos Ferretto")));
+        var transaction = statement.transactions().getFirst();
+        assertEquals(TransactionCategory.OUTROS, transaction.category());
+        assertEquals(TransactionNature.UNKNOWN, transaction.nature());
+        assertTrue(transaction.requiresReview());
+        var summary = categorySummary.calculate(statement.transactions());
+        assertMoney("30", summary.totalOutflow());
+        assertMoney("0", summary.categorizedExpenses());
+        assertMoney("30", summary.uncategorizedOutflow());
         assertMoney("0", summary.transferOutflow());
         assertReconciled(summary);
     }
@@ -174,7 +215,7 @@ class FinancialCategorizationIntegrationTest {
     }
 
     private static String movement(String description, BigDecimal amount) {
-        return "26/11/2026 " + description + " " + amount.toPlainString().replace('.', ',');
+        return "26/11/2026 " + description + " " + amount.setScale(2).toPlainString().replace('.', ',');
     }
 
     private static MockMultipartFile itauPdf(String... movements) throws IOException {

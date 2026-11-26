@@ -16,7 +16,7 @@ class TransactionCategorizationServiceTest {
             new TransactionCategorizationService(new ObjectMapper());
 
     @Test
-    void shouldPreserveAllFourteenMigratedRuleResults() {
+    void shouldRecognizeTheFourteenLegacyDefaults() {
         Map<String, TransactionCategory> cases = Map.ofEntries(
                 Map.entry("MERCADO LIVRE", TransactionCategory.COMPRAS),
                 Map.entry("UBER", TransactionCategory.TRANSPORTE),
@@ -34,7 +34,7 @@ class TransactionCategorizationServiceTest {
                 Map.entry("FARMA", TransactionCategory.SAUDE)
         );
         cases.forEach((description, category) -> {
-            CategorizationResult result = service.categorize("PIX ENVIADO - " + description);
+            CategorizationResult result = service.categorize(description);
             assertEquals(category, result.category());
             assertEquals(CategorizationSource.KEYWORD_RULE, result.source());
             assertFalse(result.requiresReview());
@@ -44,9 +44,9 @@ class TransactionCategorizationServiceTest {
 
     @Test
     void shouldKeepSupermarketRuleIdentifiersStableAfterMigration() {
-        Map.of("SUPERMERCADO", "alimentacao.supermercado",
-                "MERCADINHO", "alimentacao.mercadinho",
-                "ATACADÃO", "alimentacao.atacadao")
+        Map.of("COMPRA SUPERMERCADO", "alimentacao.supermercado",
+                "COMPRA MERCADINHO", "alimentacao.mercadinho",
+                "COMPRA ATACADÃO ALIMENTOS", "alimentacao.atacadao")
                 .forEach((description, ruleId) -> {
                     var decision = service.categorizeWithDetails(description);
                     assertEquals(TransactionCategory.SUPERMERCADO, decision.result().category());
@@ -88,7 +88,7 @@ class TransactionCategorizationServiceTest {
     void shouldNormalizeAccents() {
 
         CategorizationResult result =
-                service.categorize("Farmácia São João");
+                service.categorize("COMPRA Farmácia São João MEDICAMENTO");
 
         assertEquals(TransactionCategory.SAUDE, result.category());
     }
@@ -127,7 +127,7 @@ class TransactionCategorizationServiceTest {
     @Test
     void shouldCategorizeMercadinhoAsSupermarket() {
         CategorizationResult result = service.categorize(
-                "Pix enviado - Mercadinho Ilha Bela"
+                "COMPRA Mercadinho Ilha Bela"
         );
 
         assertEquals(TransactionCategory.SUPERMERCADO, result.category());
@@ -135,12 +135,14 @@ class TransactionCategorizationServiceTest {
     }
 
     @Test
-    void shouldPrioritizeMercadoLivreAsShopping() {
+    void shouldUseMarketplacePredominantActivity() {
         CategorizationResult result = service.categorize(
                 "Pix enviado - Mercado Livre"
         );
 
         assertEquals(TransactionCategory.COMPRAS, result.category());
+        assertEquals(CategorizationSource.KEYWORD_RULE, result.source());
+        assertFalse(result.requiresReview());
     }
 
     @Test

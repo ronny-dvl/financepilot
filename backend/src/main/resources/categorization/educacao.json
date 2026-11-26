@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "category": "EDUCACAO",
   "rules": [
     {"id":"educacao.alura","aliases":["ALURA"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
@@ -85,14 +85,15 @@
     {"id":"educacao.universidade-positivo","aliases":["UNIVERSIDADE POSITIVO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"educacao.centro-universitario-senac","aliases":["CENTRO UNIVERSITARIO SENAC"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"educacao.faculdade-senac","aliases":["FACULDADE SENAC"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"educacao.mensalidade-escolar","aliases":["MENSALIDADE ESCOLAR"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"educacao.mensalidade-faculdade","aliases":["MENSALIDADE FACULDADE"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"educacao.mensalidade-escolar","aliases":["MENSALIDADE ESCOLAR"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"educacao.mensalidade-faculdade","aliases":["MENSALIDADE FACULDADE"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"educacao.matricula-escolar","aliases":["MATRICULA ESCOLAR"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"educacao.material-escolar","aliases":["MATERIAL ESCOLAR"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"educacao.curso-de-ingles","aliases":["CURSO DE INGLES"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"educacao.curso-de-idiomas","aliases":["CURSO DE IDIOMAS"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"educacao.curso-preparatorio","aliases":["CURSO PREPARATORIO"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
     {"id":"educacao.curso-tecnico","aliases":["CURSO TECNICO"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
-    {"id":"educacao.curso-profissionalizante","aliases":["CURSO PROFISSIONALIZANTE"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]}
+    {"id":"educacao.curso-profissionalizante","aliases":["CURSO PROFISSIONALIZANTE"],"priority":65,"matchType":"PHRASE","specificity":"GENERIC","include":[],"exclude":[]},
+    {"id":"educacao.ferretto-cursos-online","aliases":["FERRETTO CURSOS ON LINE LTDA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]}
   ]
 }

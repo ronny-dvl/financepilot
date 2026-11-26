@@ -62,7 +62,7 @@
     {"id":"compras.life-by-vivara","aliases":["LIFE BY VIVARA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"compras.monte-carlo-joias","aliases":["MONTE CARLO JOIAS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"compras.rommanel","aliases":["ROMMANEL"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"compras.morana","aliases":["MORANA"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[],"includeAny":[[{"matchType":"STARTS_WITH","value":"COMPRA"}],[{"matchType":"STARTS_WITH","value":"RSCSS"}],[{"matchType":"STARTS_WITH","value":"PIX QRS"}]]},
+    {"id":"compras.morana","aliases":["MORANA"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"compras.pandora-joias","aliases":["PANDORA JOIAS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"compras.swarovski","aliases":["SWAROVSKI"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"compras.chilli-beans","aliases":["CHILLI BEANS","CHILLIBEANS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
@@ -71,7 +71,6 @@
     {"id":"compras.oticas-gassi","aliases":["OTICAS GASSI"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"compras.oticas-wanny","aliases":["OTICAS WANNY"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"compras.zeiss-vision-center","aliases":["ZEISS VISION CENTER"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"compras.fototica","aliases":["FOTOTICA"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"compras.extra","aliases":["EXTRA"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[{"matchType":"WORD","value":"ELETRO"}],"exclude":[]}
+    {"id":"compras.fototica","aliases":["FOTOTICA"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]}
   ]
 }

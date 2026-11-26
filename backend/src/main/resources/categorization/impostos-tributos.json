@@ -8,7 +8,6 @@
     {"id":"impostos-tributos.pagamento-ipva","aliases":["PAGAMENTO IPVA","PGTO IPVA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"impostos-tributos.das-mei","aliases":["DAS MEI","DASMEI"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"impostos-tributos.das-simples-nacional","aliases":["DAS SIMPLES NACIONAL"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"impostos-tributos.dar-simples-nacional","aliases":["DAR SIMPLES NACIONAL"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"impostos-tributos.das-simei","aliases":["DAS SIMEI"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"impostos-tributos.gps-inss","aliases":["GPS INSS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"impostos-tributos.guia-previdencia-social","aliases":["GUIA PREVIDENCIA SOCIAL"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
