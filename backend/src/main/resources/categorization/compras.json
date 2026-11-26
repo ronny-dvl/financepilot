@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "category": "COMPRAS",
+  "rules": [
+    { "id": "compras.mercado-livre", "aliases": ["MERCADO LIVRE"], "priority": 200, "matchType": "PHRASE", "specificity": "SPECIFIC", "include": [], "exclude": [] }
+  ]
+}

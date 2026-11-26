@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "category": "ASSINATURAS",
+  "rules": [
+    { "id": "assinaturas.netflix", "aliases": ["NETFLIX"], "priority": 100, "matchType": "WORD", "specificity": "SPECIFIC", "include": [], "exclude": [] },
+    { "id": "assinaturas.spotify", "aliases": ["SPOTIFY"], "priority": 100, "matchType": "WORD", "specificity": "SPECIFIC", "include": [], "exclude": [] }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "category": "SAUDE",
+  "rules": [
+    { "id": "saude.farmacia", "aliases": ["FARMACIA"], "priority": 100, "matchType": "WORD", "specificity": "GENERIC", "include": [], "exclude": [] },
+    { "id": "saude.drogaria", "aliases": ["DROGARIA"], "priority": 100, "matchType": "WORD", "specificity": "GENERIC", "include": [], "exclude": [] },
+    { "id": "saude.farma", "aliases": ["FARMA"], "priority": 90, "matchType": "WORD", "specificity": "GENERIC", "include": [], "exclude": [] }
+  ]
+}

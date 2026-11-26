@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "category": "ALIMENTACAO",
+  "rules": [
+    { "id": "alimentacao.ifood", "aliases": ["IFOOD"], "priority": 100, "matchType": "WORD", "specificity": "SPECIFIC", "include": [], "exclude": [] },
+    { "id": "alimentacao.keeta-delivery", "aliases": ["KEETA DELIVERY"], "priority": 100, "matchType": "PHRASE", "specificity": "SPECIFIC", "include": [], "exclude": [] },
+    { "id": "alimentacao.99-food", "aliases": ["99 FOOD"], "priority": 100, "matchType": "PHRASE", "specificity": "SPECIFIC", "include": [], "exclude": [] },
+    { "id": "alimentacao.supermercado", "aliases": ["SUPERMERCADO"], "priority": 100, "matchType": "WORD", "specificity": "GENERIC", "include": [], "exclude": [] },
+    { "id": "alimentacao.mercadinho", "aliases": ["MERCADINHO"], "priority": 100, "matchType": "WORD", "specificity": "GENERIC", "include": [], "exclude": [] },
+    { "id": "alimentacao.atacadao", "aliases": ["ATACADAO"], "priority": 100, "matchType": "WORD", "specificity": "SPECIFIC", "include": [], "exclude": [] }
+  ]
+}

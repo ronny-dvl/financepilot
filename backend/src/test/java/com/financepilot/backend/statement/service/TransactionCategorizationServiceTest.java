@@ -6,6 +6,7 @@ import com.financepilot.backend.statement.domain.TransactionCategory;
 import com.financepilot.backend.statement.dto.CategorizationResult;
 import org.junit.jupiter.api.Test;
 import tools.jackson.databind.ObjectMapper;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,6 +14,33 @@ class TransactionCategorizationServiceTest {
 
     private final TransactionCategorizationService service =
             new TransactionCategorizationService(new ObjectMapper());
+
+    @Test
+    void shouldPreserveAllFourteenMigratedRuleResults() {
+        Map<String, TransactionCategory> cases = Map.ofEntries(
+                Map.entry("MERCADO LIVRE", TransactionCategory.COMPRAS),
+                Map.entry("UBER", TransactionCategory.TRANSPORTE),
+                Map.entry("99APP", TransactionCategory.TRANSPORTE),
+                Map.entry("NETFLIX", TransactionCategory.ASSINATURAS),
+                Map.entry("SPOTIFY", TransactionCategory.ASSINATURAS),
+                Map.entry("IFOOD", TransactionCategory.ALIMENTACAO),
+                Map.entry("KEETA DELIVERY", TransactionCategory.ALIMENTACAO),
+                Map.entry("99 FOOD", TransactionCategory.ALIMENTACAO),
+                Map.entry("SUPERMERCADO", TransactionCategory.ALIMENTACAO),
+                Map.entry("MERCADINHO", TransactionCategory.ALIMENTACAO),
+                Map.entry("ATACADAO", TransactionCategory.ALIMENTACAO),
+                Map.entry("FARMACIA", TransactionCategory.SAUDE),
+                Map.entry("DROGARIA", TransactionCategory.SAUDE),
+                Map.entry("FARMA", TransactionCategory.SAUDE)
+        );
+        cases.forEach((description, category) -> {
+            CategorizationResult result = service.categorize("PIX ENVIADO - " + description);
+            assertEquals(category, result.category());
+            assertEquals(CategorizationSource.KEYWORD_RULE, result.source());
+            assertFalse(result.requiresReview());
+            assertNotNull(service.categorizeWithDetails(description).ruleId());
+        });
+    }
 
     @Test
     void shouldCategorizeUberAsTransport() {

@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "category": "TRANSPORTE",
+  "rules": [
+    { "id": "transporte.uber", "aliases": ["UBER"], "priority": 100, "matchType": "WORD", "specificity": "SPECIFIC", "include": [], "exclude": [] },
+    { "id": "transporte.99app", "aliases": ["99APP"], "priority": 100, "matchType": "WORD", "specificity": "SPECIFIC", "include": [], "exclude": [] }
+  ]
+}
