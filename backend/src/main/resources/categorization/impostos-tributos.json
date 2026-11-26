@@ -1,5 +1,35 @@
 {
   "version": 1,
   "category": "IMPOSTOS_TRIBUTOS",
-  "rules": []
+  "rules": [
+    {"id":"impostos-tributos.pagamento-darf","aliases":["PAGAMENTO DARF","PGTO DARF","PG DARF"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.darf-receita-federal","aliases":["DARF RECEITA FEDERAL"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.pagamento-iptu","aliases":["PAGAMENTO IPTU","PGTO IPTU"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.pagamento-ipva","aliases":["PAGAMENTO IPVA","PGTO IPVA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.das-mei","aliases":["DAS MEI","DASMEI"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.das-simples-nacional","aliases":["DAS SIMPLES NACIONAL"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.dar-simples-nacional","aliases":["DAR SIMPLES NACIONAL"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.das-simei","aliases":["DAS SIMEI"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.gps-inss","aliases":["GPS INSS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.guia-previdencia-social","aliases":["GUIA PREVIDENCIA SOCIAL"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.pagamento-itcmd","aliases":["PAGAMENTO ITCMD","PGTO ITCMD"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.pagamento-itbi","aliases":["PAGAMENTO ITBI","PGTO ITBI"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.pagamento-iss","aliases":["PAGAMENTO ISS","PGTO ISS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.issqn","aliases":["ISSQN"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.pagamento-icms","aliases":["PAGAMENTO ICMS","PGTO ICMS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.pagamento-itr","aliases":["PAGAMENTO ITR","PGTO ITR"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.iof-cambio","aliases":["IOF CAMBIO","IOF SOBRE CAMBIO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.iof-credito","aliases":["IOF CREDITO","IOF SOBRE CREDITO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.iof-cartao","aliases":["IOF CARTAO","IOF SOBRE CARTAO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.iof-operacoes-financeiras","aliases":["IOF OPERACOES FINANCEIRAS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.licenciamento-detran","aliases":["LICENCIAMENTO DETRAN"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.taxa-licenciamento-veiculo","aliases":["TAXA LICENCIAMENTO VEICULO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.taxa-coleta-lixo","aliases":["TAXA COLETA LIXO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.taxa-emissao-passaporte","aliases":["TAXA EMISSAO PASSAPORTE"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.guia-recolhimento-uniao","aliases":["GUIA RECOLHIMENTO UNIAO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.iof-standalone","aliases":["IOF"],"priority":250,"matchType":"EXACT","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.iptu-standalone","aliases":["IPTU"],"priority":250,"matchType":"EXACT","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.ipva-standalone","aliases":["IPVA"],"priority":250,"matchType":"EXACT","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"impostos-tributos.darf-standalone","aliases":["DARF"],"priority":250,"matchType":"EXACT","specificity":"SPECIFIC","include":[],"exclude":[]}
+  ]
 }

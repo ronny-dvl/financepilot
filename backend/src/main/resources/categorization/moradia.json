@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "category": "MORADIA",
+  "rules": [
+    {"id":"moradia.quinto-andar","aliases":["QUINTO ANDAR","QUINTOANDAR"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"moradia.loft-imoveis","aliases":["LOFT IMOVEIS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"moradia.luggo","aliases":["LUGGO"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"moradia.aluguel-residencial","aliases":["ALUGUEL RESIDENCIAL"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"moradia.aluguel-de-imovel","aliases":["ALUGUEL DE IMOVEL"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"moradia.aluguel-apartamento","aliases":["ALUGUEL APARTAMENTO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"moradia.pagamento-condominio","aliases":["PAGAMENTO CONDOMINIO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"moradia.taxa-condominial","aliases":["TAXA CONDOMINIAL"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"moradia.cota-condominial","aliases":["COTA CONDOMINIAL"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"moradia.cota-condominio","aliases":["COTA CONDOMINIO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"moradia.cotas-condominiais","aliases":["COTAS CONDOMINIAIS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"moradia.condominio-residencial","aliases":["CONDOMINIO RESIDENCIAL"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"moradia.financiamento-imobiliario","aliases":["FINANCIAMENTO IMOBILIARIO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"moradia.prestacao-habitacional","aliases":["PRESTACAO HABITACIONAL"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"moradia.seguro-residencial","aliases":["SEGURO RESIDENCIAL"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"moradia.seguro-aluguel","aliases":["SEGURO ALUGUEL"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"moradia.fundo-de-reserva-condominio","aliases":["FUNDO DE RESERVA CONDOMINIO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]}
+  ]
+}

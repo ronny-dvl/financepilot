@@ -6,21 +6,26 @@ import com.financepilot.backend.statement.domain.TransactionCategory;
 import tools.jackson.databind.ObjectMapper;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 import static com.financepilot.backend.statement.categorization.CatalogFixtures.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class CategorizationCatalogLoaderTest {
     @Test
-    void shouldLoadExactlyTheFourteenMigratedRules() {
+    void shouldPreserveAllFourteenMigratedRuleIdentifiers() {
         CompiledCatalog catalog = new CategorizationCatalogLoader(new ObjectMapper(), new DescriptionNormalizer()).load();
-        assertEquals(14, catalog.rules().size());
-        assertEquals(6, catalog.rules().stream().map(CompiledCatalog.CompiledRule::category).distinct().count());
-        assertTrue(catalog.rules().stream().allMatch(rule -> rule.include().isEmpty() && rule.exclude().isEmpty()));
+        Set<String> ids = catalog.rules().stream().map(CompiledCatalog.CompiledRule::id).collect(Collectors.toSet());
+        assertTrue(ids.containsAll(Set.of(
+                "alimentacao.ifood", "alimentacao.keeta-delivery", "alimentacao.99-food",
+                "alimentacao.supermercado", "alimentacao.mercadinho", "alimentacao.atacadao",
+                "transporte.uber", "transporte.99app", "saude.farmacia", "saude.drogaria",
+                "saude.farma", "assinaturas.netflix", "assinaturas.spotify", "compras.mercado-livre")));
     }
 
     @Test
-    void shouldPrepareNewCategoryCatalogsWithoutAddingMerchantRules() throws Exception {
+    void shouldPopulateNewCategoryCatalogsWithoutChangingTheirIdentifiers() throws Exception {
         Map<String, TransactionCategory> catalogs = Map.ofEntries(
                 Map.entry("supermercado", TransactionCategory.SUPERMERCADO),
                 Map.entry("contas-essenciais", TransactionCategory.CONTAS_ESSENCIAIS),
@@ -42,8 +47,7 @@ class CategorizationCatalogLoaderTest {
                 CategoryCatalog catalog = mapper.readValue(input, CategoryCatalog.class);
                 assertEquals(1, catalog.version());
                 assertEquals(entry.getValue(), catalog.category());
-                assertEquals(entry.getValue() == TransactionCategory.SUPERMERCADO ? 3 : 0,
-                        catalog.rules().size());
+                assertFalse(catalog.rules().isEmpty());
             }
         }
     }

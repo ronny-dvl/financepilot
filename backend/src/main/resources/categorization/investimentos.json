@@ -1,5 +1,31 @@
 {
   "version": 1,
   "category": "INVESTIMENTOS",
-  "rules": []
+  "rules": [
+    {"id":"investimentos.aplicacao-cdb","aliases":["APLICACAO CDB","APLIC CDB","APLICACAO EM CDB"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.resgate-cdb","aliases":["RESGATE CDB","RESG CDB","RESGATE DE CDB"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.aplicacao-rdb","aliases":["APLICACAO RDB","APLIC RDB","APLICACAO EM RDB"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.resgate-rdb","aliases":["RESGATE RDB","RESG RDB"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.aplicacao-lci","aliases":["APLICACAO LCI","APLIC LCI"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.resgate-lci","aliases":["RESGATE LCI","RESG LCI"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.aplicacao-lca","aliases":["APLICACAO LCA","APLIC LCA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.resgate-lca","aliases":["RESGATE LCA","RESG LCA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.aplicacao-renda-fixa","aliases":["APLICACAO RENDA FIXA","APLIC RENDA FIXA","APLIC RF"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.resgate-renda-fixa","aliases":["RESGATE RENDA FIXA","RESG RF"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.aplicacao-tesouro-direto","aliases":["APLICACAO TESOURO DIRETO","COMPRA TESOURO DIRETO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.resgate-tesouro-direto","aliases":["RESGATE TESOURO DIRETO","VENDA TESOURO DIRETO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.aplicacao-tesouro-selic","aliases":["APLICACAO TESOURO SELIC","COMPRA TESOURO SELIC"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.resgate-tesouro-selic","aliases":["RESGATE TESOURO SELIC"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.aplicacao-fundo-investimento","aliases":["APLICACAO FUNDO INVESTIMENTO","APLICACAO EM FUNDOS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.resgate-fundo-investimento","aliases":["RESGATE FUNDO INVESTIMENTO","RESGATE DE FUNDOS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.aplicacao-poupanca","aliases":["APLICACAO POUPANCA","APLIC POUPANCA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.resgate-poupanca","aliases":["RESGATE POUPANCA","RESG POUPANCA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.aplicacao-automatica","aliases":["APLICACAO AUTOMATICA","APLIC AUTOMATICA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.resgate-automatico","aliases":["RESGATE AUTOMATICO","RESG AUTOMATICO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.compra-de-acoes","aliases":["COMPRA DE ACOES"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.venda-de-acoes","aliases":["VENDA DE ACOES"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.compra-de-etf","aliases":["COMPRA DE ETF"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.compra-de-fundos-imobiliarios","aliases":["COMPRA DE FUNDOS IMOBILIARIOS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"investimentos.integralizacao-cotas-fundo","aliases":["INTEGRALIZACAO COTAS FUNDO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]}
+  ]
 }
