@@ -36,6 +36,8 @@ class FinancialCategorizationIntegrationTest {
     private final CategorySummaryService categorySummary = new CategorySummaryService();
     private final FinancialSummaryService financialSummary = new FinancialSummaryService();
 
+    // Phase 4.2 deliberately changes COMPRA DE ACOES AWS from TECNOLOGIA to OUTROS:
+    // independent investment/AWS evidence conflicts; all phase 4.1 monetary expectations stay unchanged.
     @ParameterizedTest(name = "{0}, {1}: {2}/{3}")
     @CsvSource(delimiter = '|', textBlock = """
             TAR TED | -5.00 | TARIFAS_BANCARIAS | EXPENSE | false | 5 | 5 | 0 | 0
@@ -48,7 +50,19 @@ class FinancialCategorizationIntegrationTest {
             PIX DEVOLVIDO UBER | -30.00 | TRANSPORTE | REFUND | true | 30 | 0 | 30 | 0
             PIX DEVOLVIDO UBER | 30.00 | TRANSPORTE | REFUND | false | 0 | 0 | 0 | 0
             APLIC CDB | -1000.00 | INVESTIMENTOS | UNKNOWN | true | 1000 | 0 | 1000 | 0
-            COMPRA DE ACOES AWS | -1000.00 | TECNOLOGIA | UNKNOWN | true | 1000 | 0 | 1000 | 0
+            COMPRA DE ACOES AWS | -1000.00 | OUTROS | UNKNOWN | true | 1000 | 0 | 1000 | 0
+            COMPRA ASUS DROGASIL | -30.00 | OUTROS | EXPENSE | true | 30 | 0 | 30 | 0
+            COMPRA ASUS PETZ | -30.00 | OUTROS | EXPENSE | true | 30 | 0 | 30 | 0
+            PIX QRS UBER MESMA TITULARIDADE ASUS | -50.00 | OUTROS | TRANSFER | true | 50 | 0 | 0 | 50
+            COMPRA 99 FOOD NIKE | -30.00 | OUTROS | EXPENSE | true | 30 | 0 | 30 | 0
+            COMPRA 99FOOD NIKE | -30.00 | OUTROS | EXPENSE | true | 30 | 0 | 30 | 0
+            COMPRA AMAZONMARKETPLACE AWS | -30.00 | OUTROS | EXPENSE | true | 30 | 0 | 30 | 0
+            COMPRA AMAZON MARKETPLACE AMAZONWEBSERVICES | -30.00 | OUTROS | EXPENSE | true | 30 | 0 | 30 | 0
+            RSCSS RENNER | -30.00 | VESTUARIO | EXPENSE | false | 30 | 30 | 0 | 0
+            PIX QRS HIROTA FOOD | -30.00 | SUPERMERCADO | EXPENSE | false | 30 | 30 | 0 | 0
+            RSCSS RENNER | 30.00 | VESTUARIO | UNKNOWN | true | 0 | 0 | 0 | 0
+            RSCSS RENNER AGENDADO | -30.00 | VESTUARIO | UNKNOWN | true | 30 | 0 | 30 | 0
+            PIX ENVIADO CARLOS RENNER | -30.00 | OUTROS | UNKNOWN | true | 30 | 0 | 30 | 0
             COMPRA UBER | 30.00 | TRANSPORTE | UNKNOWN | true | 0 | 0 | 0 | 0
             UBER | -30.00 | TRANSPORTE | UNKNOWN | true | 30 | 0 | 30 | 0
             BOLETO SABESP AGENDADO | -100.00 | CONTAS_ESSENCIAIS | UNKNOWN | true | 100 | 0 | 100 | 0

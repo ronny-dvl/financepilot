@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "category": "GAMES",
   "rules": [
     {"id":"games.steam","aliases":["STEAM"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
@@ -36,7 +36,7 @@
     {"id":"games.green-man-gaming","aliases":["GREEN MAN GAMING"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"games.gog-com","aliases":["GOG COM"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"games.humble-bundle","aliases":["HUMBLE BUNDLE","HUMBLEBUNDLE"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"games.netflix-games","aliases":["NETFLIX GAMES"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"games.netflix-games","aliases":["NETFLIX GAMES"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[],"refines":["assinaturas.netflix"]},
     {"id":"games.google-play-games","aliases":["GOOGLE PLAY GAMES"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]}
   ]
 }

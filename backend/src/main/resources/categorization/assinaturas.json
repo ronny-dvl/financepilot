@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "category": "ASSINATURAS",
   "rules": [
     {"id":"assinaturas.netflix","aliases":["NETFLIX"],"priority":100,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
@@ -46,8 +46,8 @@
     {"id":"assinaturas.chatgpt","aliases":["CHATGPT","OPENAI CHATGPT"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"assinaturas.anthropic-claude","aliases":["ANTHROPIC CLAUDE"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"assinaturas.perplexity-pro","aliases":["PERPLEXITY PRO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"assinaturas.duolingo-plus","aliases":["DUOLINGO PLUS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"assinaturas.super-duolingo","aliases":["SUPER DUOLINGO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"assinaturas.duolingo-plus","aliases":["DUOLINGO PLUS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[],"refines":["educacao.duolingo"]},
+    {"id":"assinaturas.super-duolingo","aliases":["SUPER DUOLINGO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[],"refines":["educacao.duolingo"]},
     {"id":"assinaturas.scribd","aliases":["SCRIBD"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"assinaturas.storytel","aliases":["STORYTEL"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"assinaturas.skeelo","aliases":["SKEELO"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
@@ -57,6 +57,6 @@
     {"id":"assinaturas.o-globo-assinatura","aliases":["O GLOBO ASSINATURA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"assinaturas.clube-tag-livros","aliases":["CLUBE TAG LIVROS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"assinaturas.twitch","aliases":["TWITCH"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"assinaturas.uber-one","aliases":["UBER ONE","UBERONE"],"priority":350,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]}
+    {"id":"assinaturas.uber-one","aliases":["UBER ONE","UBERONE"],"priority":350,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[],"refines":["transporte.uber"]}
   ]
 }

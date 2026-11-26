@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "category": "SAUDE",
   "rules": [
     {"id":"saude.farmacia","aliases":["FARMACIA"],"priority":100,"matchType":"WORD","specificity":"GENERIC","include":[],"exclude":[]},
@@ -32,7 +32,7 @@
     {"id":"saude.drogaria-globo","aliases":["DROGARIA GLOBO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"saude.drogaria-tamoio","aliases":["DROGARIA TAMOIO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"saude.farmacia-permanente","aliases":["FARMACIA PERMANENTE"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"saude.fleury","aliases":["FLEURY"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[{"matchType":"WORD","value":"COMPRA"}],"exclude":[]},
+    {"id":"saude.fleury","aliases":["FLEURY"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[],"includeAny":[[{"matchType":"STARTS_WITH","value":"COMPRA"}],[{"matchType":"STARTS_WITH","value":"RSCSS"}],[{"matchType":"STARTS_WITH","value":"PIX QRS"}]]},
     {"id":"saude.laboratorio-delboni","aliases":["LABORATORIO DELBONI","DELBONI AURIEMO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"saude.laboratorio-lavoisier","aliases":["LABORATORIO LAVOISIER"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"saude.laboratorio-alvaro","aliases":["LABORATORIO ALVARO"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
@@ -42,7 +42,7 @@
     {"id":"saude.laboratorio-lamina","aliases":["LABORATORIO LAMINA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"saude.salomao-zoppi","aliases":["SALOMAO ZOPPI","SALOMAOZOPPI"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"saude.alta-diagnosticos","aliases":["ALTA DIAGNOSTICOS"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"saude.richet","aliases":["RICHET"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[{"matchType":"WORD","value":"COMPRA"}],"exclude":[]},
+    {"id":"saude.richet","aliases":["RICHET"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[],"includeAny":[[{"matchType":"STARTS_WITH","value":"COMPRA"}],[{"matchType":"STARTS_WITH","value":"RSCSS"}],[{"matchType":"STARTS_WITH","value":"PIX QRS"}]]},
     {"id":"saude.cedimagem","aliases":["CEDIMAGEM"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"saude.cdb-medicina-diagnostica","aliases":["CDB MEDICINA DIAGNOSTICA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"saude.dr-consulta","aliases":["DR CONSULTA","DRCONSULTA"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},

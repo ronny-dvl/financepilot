@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import tools.jackson.databind.ObjectMapper;
 
 import java.util.EnumSet;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -41,8 +42,15 @@ class ExpandedCategorizationCatalogTest {
             String description = alias.mode() == CategoryCatalog.MatchMode.PREFIX
                     ? alias.value() + "O" : alias.value();
             if (alias.mode() != CategoryCatalog.MatchMode.EXACT) {
-                description = "COMPRA " + description;
-                for (var condition : rule.include()) description += " " + condition.value();
+                var conditions = new ArrayList<>(rule.include());
+                if (!rule.includeAny().isEmpty()) conditions.addAll(rule.includeAny().getFirst());
+                String prefix = conditions.stream().filter(condition ->
+                        condition.mode() == CategoryCatalog.MatchMode.STARTS_WITH)
+                        .map(CompiledCatalog.NormalizedPattern::value).findFirst().orElse("COMPRA");
+                description = prefix + " " + description;
+                for (var condition : conditions) {
+                    if (condition.mode() != CategoryCatalog.MatchMode.STARTS_WITH) description += " " + condition.value();
+                }
             }
             return Arguments.of(rule.id(), description, rule.category());
         }));
@@ -58,7 +66,7 @@ class ExpandedCategorizationCatalogTest {
     }
 
     private static Stream<String> guardedAliases() {
-        return CATALOG.rules().stream().filter(rule -> !rule.include().isEmpty())
+        return CATALOG.rules().stream().filter(rule -> !rule.include().isEmpty() || !rule.includeAny().isEmpty())
                 .flatMap(rule -> rule.aliases().stream())
                 .map(alias -> "PIX ENVIADO CLIENTE TESTE " + alias.value());
     }

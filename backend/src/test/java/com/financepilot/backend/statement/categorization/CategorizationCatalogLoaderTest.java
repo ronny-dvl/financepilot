@@ -45,7 +45,7 @@ class CategorizationCatalogLoaderTest {
         for (var entry : catalogs.entrySet()) {
             try (var input = new ClassPathResource("categorization/" + entry.getKey() + ".json").getInputStream()) {
                 CategoryCatalog catalog = mapper.readValue(input, CategoryCatalog.class);
-                assertEquals(1, catalog.version());
+                assertTrue(catalog.version() == 1 || catalog.version() == 2);
                 assertEquals(entry.getValue(), catalog.category());
                 assertFalse(catalog.rules().isEmpty());
             }
@@ -115,7 +115,7 @@ class CategorizationCatalogLoaderTest {
         }
         assertThrows(IllegalArgumentException.class, () -> load(catalog("NEW_CATEGORY")));
         assertThrows(IllegalArgumentException.class, () -> load(catalog("SAUDE")));
-        assertThrows(IllegalArgumentException.class, () -> load("{\"version\":2,\"category\":\"SAUDE\",\"rules\":[]}"));
+        assertThrows(IllegalArgumentException.class, () -> load("{\"version\":3,\"category\":\"SAUDE\",\"rules\":[]}"));
         assertThrows(IllegalArgumentException.class, () -> load("{\"version\":1,\"category\":\"SAUDE\",\"rules\":null}"));
         assertThrows(IllegalArgumentException.class, () -> load("not json"));
     }

@@ -85,17 +85,21 @@ class RuleMatcherAndResolverTest {
     }
 
     @Test
-    void shouldApplyPriorityWithinTheSameSpecificity() {
+    void shouldRequireReviewForIndependentSpecificRulesRegardlessOfPriority() {
         CompiledCatalog catalog = load(
                 catalog("COMPRAS", rule("compras.alfa", "\"ALFA\"", "WORD", "SPECIFIC", 200)),
                 catalog("SAUDE", rule("saude.longa", "\"ESTABELECIMENTO\"", "WORD", "SPECIFIC", 100)));
-        assertEquals("compras.alfa", decide(catalog, "ALFA ESTABELECIMENTO").ruleId());
+        // Phase 4.2: priority is not semantic evidence between independent categories.
+        assertTrue(decide(catalog, "ALFA ESTABELECIMENTO").result().requiresReview());
     }
 
     @Test
-    void shouldPreferLongerPhraseWhenScopeAndPriorityAreEqual() {
+    void shouldPreferDeclaredRefinementAtTheSameOccurrence() {
         CompiledCatalog catalog = load(
-                catalog("COMPRAS", rule("compras.alfa", "\"LOJA ALFA\"", "PHRASE", "SPECIFIC", 100)),
+                catalog("COMPRAS", """
+                        {"id":"compras.alfa","aliases":["LOJA ALFA"],"matchType":"PHRASE",
+                         "specificity":"SPECIFIC","priority":100,"refines":["saude.alfa"]}
+                        """).replace("\"version\":1", "\"version\":2"),
                 catalog("SAUDE", rule("saude.alfa", "\"ALFA\"", "WORD", "SPECIFIC", 100)));
         assertEquals("compras.alfa", decide(catalog, "PIX LOJA ALFA").ruleId());
     }

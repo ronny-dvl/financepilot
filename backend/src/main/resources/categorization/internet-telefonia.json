@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "category": "INTERNET_TELEFONIA",
   "rules": [
     {"id":"internet-telefonia.telefonica-brasil","aliases":["TELEFONICA BRASIL"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
@@ -25,7 +25,7 @@
     {"id":"internet-telefonia.algar-telecom","aliases":["ALGAR TELECOM"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"internet-telefonia.ctbc-telecom","aliases":["CTBC TELECOM"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"internet-telefonia.ligga-telecom","aliases":["LIGGA TELECOM"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
-    {"id":"internet-telefonia.copel-telecom","aliases":["COPEL TELECOM"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
+    {"id":"internet-telefonia.copel-telecom","aliases":["COPEL TELECOM"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[],"refines":["contas-essenciais.copel"]},
     {"id":"internet-telefonia.sercomtel","aliases":["SERCOMTEL"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"internet-telefonia.brisanet","aliases":["BRISANET"],"priority":250,"matchType":"WORD","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"internet-telefonia.desktop-internet","aliases":["DESKTOP INTERNET"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},

@@ -2,7 +2,7 @@
   "version": 1,
   "category": "TECNOLOGIA",
   "rules": [
-    {"id":"tecnologia.amazon-web-services","aliases":["AMAZON WEB SERVICES","AMAZONWEBSERVICES","AWS"],"priority":400,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[{"matchType":"WORD","value":"MARKETPLACE"},{"matchType":"PHRASE","value":"AMZN MKTP"}]},
+    {"id":"tecnologia.amazon-web-services","aliases":["AMAZON WEB SERVICES","AMAZONWEBSERVICES","AWS"],"priority":400,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"tecnologia.microsoft-azure","aliases":["MICROSOFT AZURE","MS AZURE"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"tecnologia.google-cloud","aliases":["GOOGLE CLOUD","GOOGLECLOUD"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
     {"id":"tecnologia.digitalocean","aliases":["DIGITALOCEAN","DIGITAL OCEAN"],"priority":250,"matchType":"PHRASE","specificity":"SPECIFIC","include":[],"exclude":[]},
