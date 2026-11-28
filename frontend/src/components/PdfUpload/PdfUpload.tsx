@@ -29,6 +29,7 @@ import {
 
 import { analyzeStatement } from "../../services/statementApi";
 import { useStatement } from "../../contexts/StatementContext";
+import { useBackendReadiness } from "../../contexts/BackendReadinessContext";
 import AnalysisTransition, { type AnalysisStep } from "../AnalysisTransition/AnalysisTransition";
 
 import styles from "./PdfUpload.module.css";
@@ -44,6 +45,7 @@ type AnimationPhase = "idle" | "sucking" | "selected";
 export default function PdfUpload() {
   const navigate = useNavigate();
   const { setAnalysis } = useStatement();
+  const { status: backendStatus, waitUntilReady } = useBackendReadiness();
 
   const [file, setFile] = useState<File | null>(null);
 
@@ -56,6 +58,10 @@ export default function PdfUpload() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const reduceMotion = useReducedMotion();
   const [analysisStep, setAnalysisStep] = useState<AnalysisStep | null>(null);
+  const [progress, setProgress] = useState(0);
+  const progressRef = useRef(0);
+  const completedRef = useRef(false);
+  const [waitingForBackend, setWaitingForBackend] = useState(false);
   const requestRef = useRef<AbortController | null>(null);
   const mountedRef = useRef(false);
   const navigatedRef = useRef(false);
@@ -72,14 +78,29 @@ export default function PdfUpload() {
   }, []);
 
   useEffect(() => {
-    if (analysisStep !== 2 && analysisStep !== 3) return;
-    if (reduceMotion) { goToDashboard(); return; }
-    const timer = setTimeout(() => {
-      if (analysisStep === 2) setAnalysisStep(3);
-      else goToDashboard();
-    }, analysisStep === 2 ? 650 : 750);
+    if (analysisStep !== 3) return;
+    const timer = setTimeout(goToDashboard, reduceMotion ? 0 : 650);
     return () => clearTimeout(timer);
   }, [analysisStep, reduceMotion, goToDashboard]);
+
+  useEffect(() => {
+    if (!isAnalyzing) return;
+    // This is a visual estimate. The successful API response is the only gate to 100%.
+    const timer = setInterval(() => {
+      if (!requestRef.current || requestRef.current.signal.aborted) return;
+      const current = progressRef.current;
+      const target = waitingForBackend ? 24 : current < 25 ? 25 : current < 60 ? 60
+        : current < 99 ? 99 : completedRef.current ? 100 : 99;
+      const increment = waitingForBackend ? 0.12 : completedRef.current ? (reduceMotion ? 100 : 3)
+        : current < 25 ? 0.35 : current < 60 ? 0.25 : Math.max(0.015, (99 - current) * 0.007);
+      const next = Math.min(target, current + increment);
+      if (next <= current) return;
+      progressRef.current = next;
+      setProgress(next);
+      setAnalysisStep(next === 100 ? 3 : next >= 60 ? 2 : next >= 25 ? 1 : 0);
+    }, 50);
+    return () => clearInterval(timer);
+  }, [isAnalyzing, waitingForBackend, reduceMotion]);
 
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -115,6 +136,9 @@ export default function PdfUpload() {
 
       setError("");
       setAnalysisStep(null);
+      progressRef.current = 0;
+      completedRef.current = false;
+      setProgress(0);
 
       if (reduceMotion) {
 
@@ -255,70 +279,70 @@ export default function PdfUpload() {
   };
 
   const handleAnalyze = useCallback(async () => {
-
     if (!file || isAnalyzing || requestRef.current) return;
 
     const controller = new AbortController();
     requestRef.current = controller;
-    const timeout = setTimeout(() => controller.abort(), ANALYSIS_TIMEOUT_MS);
+    let timeout: ReturnType<typeof setTimeout> | undefined;
+    let succeeded = false;
     navigatedRef.current = false;
-    setAnalysisStep(1);
-
+    progressRef.current = 0;
+    completedRef.current = false;
+    setProgress(0);
+    setAnalysisStep(0);
+    setWaitingForBackend(true);
     setIsAnalyzing(true);
-
     setError("");
 
     try {
-
+      await waitUntilReady(controller.signal);
+      if (!mountedRef.current || requestRef.current !== controller || controller.signal.aborted) return;
+      setWaitingForBackend(false);
+      timeout = setTimeout(() => controller.abort(), ANALYSIS_TIMEOUT_MS);
       const analysis = await analyzeStatement(file, controller.signal);
-
-      if (!mountedRef.current || requestRef.current !== controller) return;
+      if (!mountedRef.current || requestRef.current !== controller || controller.signal.aborted) return;
 
       setAnalysis(analysis);
-      setAnalysisStep(2);
-
+      succeeded = true;
+      completedRef.current = true;
+      if (reduceMotion) {
+        progressRef.current = 100;
+        setProgress(100);
+        setAnalysisStep(3);
+      }
     } catch (err) {
       if (!mountedRef.current || requestRef.current !== controller) return;
       setAnalysisStep(null);
-
-      setError(
-
-        controller.signal.aborted
-
-          ? "A análise demorou mais que o esperado. Tente novamente."
-
-          : err instanceof Error
-
-          ? err.message
-
-          : "Ocorreu um erro inesperado ao analisar o extrato."
-
-      );
-
-      setShake((value) => value + 1);
-
+      setError(controller.signal.aborted
+        ? "A análise demorou mais que o esperado. Tente novamente."
+        : err instanceof Error ? err.message : "Ocorreu um erro inesperado ao analisar o extrato.");
+      setShake(value => value + 1);
     } finally {
       clearTimeout(timeout);
       if (mountedRef.current && requestRef.current === controller) {
-        requestRef.current = null;
-        setIsAnalyzing(false);
+        setWaitingForBackend(false);
+        // Keep the attempt locked until the success animation finishes or the user cancels.
+        if (!succeeded) {
+          requestRef.current = null;
+          setIsAnalyzing(false);
+        }
       }
-
     }
-
-  }, [file, isAnalyzing, setAnalysis]);
+  }, [file, isAnalyzing, setAnalysis, waitUntilReady, reduceMotion]);
 
   useEffect(() => {
-    if (analysisStep !== 0 || !file) return;
+    if (analysisStep !== 0 || !file || isAnalyzing || requestRef.current) return;
     const timer = setTimeout(() => { void handleAnalyze(); }, reduceMotion ? 0 : 450);
     return () => clearTimeout(timer);
-  }, [analysisStep, file, handleAnalyze, reduceMotion]);
+  }, [analysisStep, file, handleAnalyze, reduceMotion, isAnalyzing]);
 
   const isSucking = phase === "sucking";
 
   const returnToUpload = () => {
     requestRef.current?.abort();
     requestRef.current = null;
+    completedRef.current = false;
+    setWaitingForBackend(false);
     setIsAnalyzing(false);
     setAnalysisStep(null);
   };
@@ -327,8 +351,8 @@ export default function PdfUpload() {
 
     <div className={styles.container}>
       {analysisStep !== null && (
-        <AnalysisTransition step={analysisStep}
-          onBack={analysisStep >= 2 ? goToDashboard : returnToUpload} />
+        <AnalysisTransition step={analysisStep} progress={progress}
+          waitingForServer={waitingForBackend && backendStatus === "waiting"} onCancel={returnToUpload} />
       )}
 
       <motion.div

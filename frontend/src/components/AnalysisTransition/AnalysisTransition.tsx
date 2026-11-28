@@ -1,24 +1,26 @@
 import { useEffect, useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { FileText, ScanLine, CheckCircle2, LayoutDashboard } from "lucide-react";
+import { FileSearch, ScanLine, ChartNoAxesCombined, CircleCheck } from "lucide-react";
 import ThemeSelector from "../ThemeSelector/ThemeSelector";
 import logo from "../../assets/logo.svg";
 import styles from "./AnalysisTransition.module.css";
 
 export type AnalysisStep = 0 | 1 | 2 | 3;
 const steps = [
-  { icon: FileText, title: "Extrato enviado", subtitle: "Seu PDF está pronto para análise." },
+  { icon: FileSearch, title: "Analisando seu extrato", subtitle: "Extraindo as informações do seu extrato." },
   { icon: ScanLine, title: "Organizando suas movimentações", subtitle: "Identificando entradas, saídas e categorias." },
-  { icon: CheckCircle2, title: "Análise concluída", subtitle: "Seu painel financeiro está pronto." },
-  { icon: LayoutDashboard, title: "Bem-vindo ao seu dashboard", subtitle: "Seus dados financeiros, organizados para você." },
+  { icon: ChartNoAxesCombined, title: "Preparando seu dashboard", subtitle: "Organizando suas informações financeiras." },
+  { icon: CircleCheck, title: "Bem-vindo ao dashboard", subtitle: "Sua análise está pronta." },
 ];
 
 type Props = {
   step: AnalysisStep;
-  onBack: () => void;
+  progress: number;
+  waitingForServer: boolean;
+  onCancel: () => void;
 };
 
-export default function AnalysisTransition({ step, onBack }: Props) {
+export default function AnalysisTransition({ step, progress, waitingForServer, onCancel }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const reducedMotion = useReducedMotion();
   const { icon: Icon, title, subtitle } = steps[step];
@@ -38,7 +40,7 @@ export default function AnalysisTransition({ step, onBack }: Props) {
 
   return (
     <dialog ref={dialogRef} className={styles.screen} aria-labelledby="analysis-title"
-      aria-describedby="analysis-subtitle" onCancel={event => { event.preventDefault(); onBack(); }}>
+      aria-describedby="analysis-subtitle" onCancel={event => { event.preventDefault(); if (progress < 100) onCancel(); }}>
       <div className={styles.topbar}><img src={logo} alt="FinancePilot" /><ThemeSelector /></div>
       <div className={styles.center}>
         <div className={styles.messages} role="status" aria-live="polite" aria-atomic="true">
@@ -58,17 +60,26 @@ export default function AnalysisTransition({ step, onBack }: Props) {
             </motion.div>
           </AnimatePresence>
         </div>
-        <ol className={styles.steps} aria-label="Etapas da análise">
-          {steps.map((item, index) => (
-            <li key={item.title} aria-current={index === step ? "step" : undefined}
-              className={index <= step ? styles.active : undefined}>
-              <span aria-hidden="true" />
-              <span className={styles.srOnly}>{item.title}{index < step ? ": concluída" : index === step ? ": etapa atual" : ": próxima etapa"}</span>
-            </li>
-          ))}
-        </ol>
+        <div className={styles.progress}>
+          <div className={styles.percentage} aria-hidden="true">{Math.floor(progress)}%</div>
+          <div className={styles.track} role="progressbar" aria-label="Progresso estimado da análise"
+            aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.floor(progress)}>
+            <motion.div className={styles.fill} initial={false} animate={{ width: `${progress}%` }}
+              transition={{ duration: reducedMotion ? 0 : 0.1, ease: "linear" }} />
+          </div>
+        </div>
+        <div className={styles.serverMessage} role="status" aria-live="polite">
+          <AnimatePresence initial={false}>
+            {waitingForServer && <motion.p key="server" initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }} transition={{ duration: reducedMotion ? 0 : 0.2 }}>
+              Estamos iniciando o servidor...
+            </motion.p>}
+          </AnimatePresence>
+        </div>
         <div className={styles.actions}>
-          {step < 2 && <button type="button" onClick={onBack} className={styles.secondary}>{step === 1 ? "Cancelar análise" : "Voltar ao arquivo selecionado"}</button>}
+          {progress < 100
+            ? <button type="button" onClick={onCancel} className={styles.secondary}>Cancelar análise</button>
+            : <span className={styles.completed} role="status">Análise concluída</span>}
         </div>
       </div>
     </dialog>

@@ -11,7 +11,6 @@
   margin: 0 auto;
 }
 .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.waitingArea { display: grid; place-items: center; min-height: calc(100dvh - 160px); padding-block: 32px; }
 
 .back {
   display: inline-flex;
